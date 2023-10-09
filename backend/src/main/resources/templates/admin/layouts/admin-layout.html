@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en" th:fragment="mainLayoutAdmin(css, content, script)">
+
+<head>
+	<div th:replace="~{/admin/fragments/components/header :: admin-head}"></div>
+	<th:block th:replace="${css}" />
+</head>
+
+<body>
+	<div class="container-scroller">
+
+		<!-- partial:partials/_navbar.html -->
+		<div th:replace="~{/admin/fragments/components/header :: admin-header}"></div>
+		<!-- partial -->
+		<div class="container-fluid page-body-wrapper">
+			<!-- partial:partials/_sidebar.html -->
+			<div th:replace="~{/admin/fragments/components/header :: admin-sidebar}"></div>
+			<!-- partial -->
+			<th:block th:replace="${content}" />
+			<!-- main-panel ends -->
+		</div>
+		<!-- page-body-wrapper ends -->
+	</div>
+	<!-- container-scroller -->
+	<div th:replace="~{/admin/fragments/components/footer :: admin-script}"></div>
+	<th:block th:replace="${script}" />
+</body>
+
+</html>

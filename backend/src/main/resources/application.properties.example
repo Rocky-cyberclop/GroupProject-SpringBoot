@@ -1,0 +1,8 @@
+spring.datasource.url=jdbc:mysql://${spring.datasource.username}:${spring.datasource.password}@meow.mysql.database.azure.com:3306/teenboutique?createDatabaseIfNotExist=true
+
+spring.datasource.username=admin12345
+spring.datasource.password=madin%4012345
+
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
