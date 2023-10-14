@@ -24,4 +24,32 @@ public class ProductImage {
 	@JoinColumn(name = "product_id")
 	private Product product;
 
+	public ProductImage() {
+		super();
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public boolean isAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(boolean avatar) {
+		this.avatar = avatar;
+	}
+	
 }
