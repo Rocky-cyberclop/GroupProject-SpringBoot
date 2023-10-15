@@ -39,4 +39,72 @@ public class Product {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "product", orphanRemoval = true)
 	private List<ProductDetail> product_details = new ArrayList<>();
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public boolean isStop_sale() {
+		return stop_sale;
+	}
+
+	public void setStop_sale(boolean stop_sale) {
+		this.stop_sale = stop_sale;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public long getPrice() {
+		return price;
+	}
+
+	public void setPrice(long price) {
+		this.price = price;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
+	public List<ProductImage> getImages() {
+		return images;
+	}
+
+	public void setImages(List<ProductImage> images) {
+		this.images = images;
+	}
+
+	public List<ProductDetail> getProduct_details() {
+		return product_details;
+	}
+
+	public void setProduct_details(List<ProductDetail> product_details) {
+		this.product_details = product_details;
+	}
+
+	public Product() {
+		super();
+	}
+
 }
