@@ -22,4 +22,32 @@ public class Size {
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "size", orphanRemoval = true)
 	private List<ProductDetail> product_details = new ArrayList<>();
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public List<ProductDetail> getProduct_details() {
+		return product_details;
+	}
+
+	public void setProduct_details(List<ProductDetail> product_details) {
+		this.product_details = product_details;
+	}
+
+	public Size() {
+		super();
+	}
 }

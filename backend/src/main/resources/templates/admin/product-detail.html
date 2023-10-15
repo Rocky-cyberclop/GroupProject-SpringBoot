@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en"
+	th:replace="~{admin/layouts/admin-layout :: mainLayoutAdmin(~{::link.css-admin}, ~{::div.main-admin}, ~{::script.admin-js})}">
+
+<head>
+	<link class="css-admin" rel="stylesheet" th:href="@{/admin/css/admin-product-detail.css}">
+</head>
+
+<body>
+	<div class="container-scroller">
+
+		< <div class="container-fluid page-body-wrapper">
+
+			<!-- partial -->
+			<div class="main-panel main-admin">
+				<div class="content-wrapper">
+					<div class="page-header">
+						<h3 class="page-title">Chi tiết sản phẩm</h3>
+					</div>
+					<div class="row">
+						<div class="col-md-12 grid-margin stretch-card">
+
+							<div class="card">
+								<div class="card-body">
+									<form th:action="@{/admin/management/product/edit/{id}(id=${product.id})}"
+										th:method="get" th:object="${product}" class="forms-sample">
+										<div class="form-group">
+											<label>Mã sản phẩm</label>
+											<input type="text" class="form-control" th:field="*{id}"
+												placeholder="Username" disabled>
+										</div>
+										<div class="form-group">
+											<label>Tên sản phẩm</label>
+											<textarea class="form-control" th:field="*{name}" disabled></textarea>
+										</div>
+										<div class="form-group">
+											<label>Loại sản phẩm</label>
+											<input class="form-control" th:field="*{category.name}" disabled />
+										</div>
+										<div class="form-group">
+											<label>Giá bán</label>
+											<input type="text" class="form-control" th:field="*{price}"
+												placeholder="Email" disabled>
+										</div>
+										<div class="form-group">
+											<label>Mô tả</label>
+											<textarea class="form-control" th:field="*{description}"
+												placeholder="Description" id="description" disabled></textarea>
+										</div>
+										<div class="form-group" th:if="${localPic}">
+											<img class="form-control admin-product-img-first" th:src="*{images[0].url}"
+												width="200" />
+										</div>
+										<div class="form-group" th:if="${!localPic}">
+											<img class="form-control admin-product-img-first" th:src="'/uploads/images/'+*{images[0].url}"
+												width="200" />
+										</div>
+
+
+										<button type="submit" class="btn btn-gradient-primary me-2">Chỉnh sửa</button>
+
+									</form>
+								</div>
+								<div class="card-body">
+									
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-12 grid-margin stretch-card">
+							<div class="card">
+								<div class="card-body">
+									<div class="page-header">
+										<h3 class="page-title">Quản lý tồn kho</h3>
+									</div>
+									<a th:href="@{/admin/management/product_detail/create/{id}(id=${product.id})}"
+										class="btn btn-gradient-primary me-2 mb-5">Thêm size bán</a>
+									<table class="table table-hover">
+										<thead>
+											<tr>
+												<th>Loại size</th>
+												<th>Số lượng tồn</th>
+												<th>Action</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="product_detail: ${product.product_details}">
+												<td th:text="${product_detail.size.name}"></td>
+												<td th:text="${product_detail.inventory}"></td>
+												<td>
+													<a
+														th:href="${'/admin/management/product_detail/import/'+{product.id}+'/'+{product_detail.size.id}}"><button
+															class="btn btn-outline-secondary" href=""><i
+																class="mdi mdi-database-plus text-primary"></i>Nhập
+															kho</button></a>
+													<a
+														th:href="${'/admin/management/product_detail/export/'+{product.id}+'/'+{product_detail.size.id}}"><button
+															class="btn btn-outline-secondary"><i
+																class="mdi mdi-database-minus text-danger"></i>Xuất
+															kho</button></a>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+
+									<!-- modal -->
+
+								</div>
+							</div>
+						</div>
+
+
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+
+	<!-- partial -->
+	</div>
+	<!-- main-panel ends -->
+	</div>
+	<!-- page-body-wrapper ends -->
+	</div>
+	<!-- container-scroller -->
+	<script class="admin-js" src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script>
+	<script class="admin-js" th:src="@{/admin/js/admin-product-detail.js}"></script>
+</body>
+
+</html>
