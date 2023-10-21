@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<!--
+ // WEBSITE: https://themefisher.com
+ // TWITTER: https://twitter.com/themefisher
+ // FACEBOOK: https://www.facebook.com/themefisher
+ // GITHUB: https://github.com/themefisher/
+-->
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en"
+	th:fragment="mainLayout(css, content, script)">
+	
+<head>
+	
+	<div th:replace="~{fragments/auth-components/auth :: meta}"></div>
+	
+	<div th:replace="~{fragments/auth-components/auth :: css}"></div>
+
+	<div th:replace="~{fragments/auth-components/auth :: sundry-css}"></div>
+
+	<div th:replace="~{fragments/auth-components/auth :: style-css}"></div>
+	
+	<th:block th:replace="${css}" />
+	
+</head>
+
+<body id="body">
+	
+	<th:block th:replace="${content}" />
+	
+	<div th:replace="~{fragments/components/footer :: script}"></div>
+
+	<th:block th:replace="${script}" />
+	
+</body>
+</html>
