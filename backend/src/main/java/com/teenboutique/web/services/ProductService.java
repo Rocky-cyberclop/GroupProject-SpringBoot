@@ -30,6 +30,7 @@ import com.teenboutique.web.repositories.ProductRepository;
 public class ProductService {
 	@Autowired
 	private ProductRepository proRepo;
+	@Autowired
 	private ProductImageRepository proImgRepo;
 	
 	public List<Product> getAll(){
