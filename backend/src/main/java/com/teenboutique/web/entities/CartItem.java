@@ -21,7 +21,7 @@ public class CartItem {
 	private CartItemId id;
 	
 	//extra column
-	@Min(value = 1, message = "Quantity must be at least 1")
+	@Min(value = 1, message = "Số lượng phải lớn hơn 1")
 	private int quantity;
 	
 	@ManyToOne(fetch = FetchType.LAZY)

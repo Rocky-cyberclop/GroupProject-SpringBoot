@@ -24,29 +24,28 @@ public class Customer {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotBlank(message="Name is required")
+	@NotBlank(message="Tên không được để trống")
 	private String name;
 	
-	@Email(message="Email is required")
+	@Email(message="Email không hợp lệ")
 	private String email;
 	
-	@NotBlank(message="Phone is required")
+	@NotBlank(message="Số điện thoại không được để trống")
 	private String phone;
 	
-	@NotBlank(message="Addeess is required")
+	@NotBlank(message="Địa chỉ không được để trống")
 	private String address;
 	
-	@Past(message = "Date of birth must be in the past")
+	@Past(message = "Ngày sinh phải nhỏ hơn hôm nay")
 	private LocalDate dob;
 	
-	@AssertTrue(message = "Gender must be true (Male) or false (Female)")
+	@AssertTrue(message = "Giới tính phải là nam hoặc nữ")
 	private boolean gender;
 	
-	@NotBlank(message = "Password is required")
-	@Size(min = 8, message = "Password must be at least 8 characters long")
+	@NotBlank(message = "Mật khẩu không được để trống")
+	@Size(min = 8, message = "Mật khẩu phải có ít nhất 8 ký tự")
 	private String password;
 	
-	@Size(max = 255, message = "Avatar URL is too long")
 	private String avatar;
 	private boolean locked;
 	

@@ -23,7 +23,6 @@ public class ProductDetail {
 	private ProductDetailId id;
 	
 	//extra column
-	@Positive(message = "Inventory must be a positive value")
 	private int inventory;
 
 	@ManyToOne(fetch = FetchType.LAZY)

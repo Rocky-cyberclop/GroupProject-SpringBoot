@@ -19,7 +19,7 @@ public class Category {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotBlank(message="Name is required")
+	@NotBlank(message="Tên không được để trống")
 	private String name;
 	
 	@OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "category", orphanRemoval = true)
