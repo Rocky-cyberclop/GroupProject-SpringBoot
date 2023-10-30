@@ -16,6 +16,9 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "CustomerOrder")
@@ -24,10 +27,18 @@ public class CustomerOrder {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotBlank(message = "Payment code is required")
+    @Size(max = 255, message = "Payment code is too long")
 	private String payment_code;
+	
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private LocalDate date;
+	
+	@Positive(message = "Total must be a positive value")
 	private long total;
+	
+	@NotBlank(message = "Status is required")
+    @Size(max = 255, message = "Status is too long")
 	private String status;
 	
 	@ManyToOne(fetch = FetchType.LAZY)

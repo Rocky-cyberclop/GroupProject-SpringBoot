@@ -16,6 +16,10 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "Employee")
@@ -24,15 +28,28 @@ public class Employee {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotBlank(message = "Name is required")
 	private String name;
+	
+	@Email(message = "Invalid email format")
 	private String email;
+	
+	@NotBlank(message = "Phone is required")
+    @Pattern(regexp = "^[0-9]*$", message = "Invalid phone number")
 	private String phone;
+	
+	@NotBlank(message = "Address is required")
 	private String address;
+	
+	@Size(max = 255, message = "Image URL is too long")
 	private String img;
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private LocalDate dob;
 	private boolean gender;
+	
+	@Size(min = 8, message = "Password must be at least 8 characters long")
 	private String password;
+	
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private LocalDate starting_date;
 	@DateTimeFormat(pattern="yyyy-MM-dd")

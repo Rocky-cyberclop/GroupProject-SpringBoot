@@ -10,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "Size")
@@ -18,6 +19,7 @@ public class Size {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotBlank(message = "Name is required")
 	private String name;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "size", orphanRemoval = true)

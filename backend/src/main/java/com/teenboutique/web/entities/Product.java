@@ -14,6 +14,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
 
 @Entity
 @Table(name = "Product")
@@ -23,10 +25,13 @@ public class Product {
 	private Long id;
 	
 	@Column(length = 2000)
+	@NotBlank(message = "Name is required")
 	private String name;
 	private boolean stop_sale;
 	@Column(columnDefinition="LONGTEXT")
 	private String description;
+	
+	@Positive(message = "Price must be a positive value")
 	private long price;
 	
 	@ManyToOne(fetch = FetchType.LAZY)

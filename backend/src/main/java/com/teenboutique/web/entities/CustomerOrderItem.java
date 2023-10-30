@@ -16,6 +16,7 @@ import jakarta.persistence.JoinColumns;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Positive;
 
 @Entity
 @Table(name = "CustomerOrderItem")
@@ -24,12 +25,17 @@ public class CustomerOrderItem {
 	private CustomerOrderItemId id;
 	
 	//extra column
+	@Positive(message = "Quantity must be a positive value")
 	private int quantity;
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private LocalDate rate_date;
 	@Column(length = 5000)
 	private String rate_content;
+	
+	@Positive(message = "Point must be a positive value")
 	private int point;
+	
+	@Positive(message = "Price must be a positive value")
 	private long price;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
