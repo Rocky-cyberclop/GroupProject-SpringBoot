@@ -25,17 +25,17 @@ public class CustomerOrderItem {
 	private CustomerOrderItemId id;
 	
 	//extra column
-	@Positive(message = "Quantity must be a positive value")
+	@Positive(message = "Số lượng phải là số dương")
 	private int quantity;
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private LocalDate rate_date;
 	@Column(length = 5000)
 	private String rate_content;
 	
-	@Positive(message = "Point must be a positive value")
+	@Positive(message = "Điểm phải là số dương")
 	private int point;
 	
-	@Positive(message = "Price must be a positive value")
+	@Positive(message = "Giá tiền phải là số dương")
 	private long price;
 	
 	@ManyToOne(fetch = FetchType.LAZY)

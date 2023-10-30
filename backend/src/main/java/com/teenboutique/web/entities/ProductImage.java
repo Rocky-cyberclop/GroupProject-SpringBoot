@@ -17,7 +17,6 @@ public class ProductImage {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotBlank(message = "URL is required")
 	private String url;
 	
 	private boolean avatar;

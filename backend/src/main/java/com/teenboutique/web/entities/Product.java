@@ -25,13 +25,13 @@ public class Product {
 	private Long id;
 	
 	@Column(length = 2000)
-	@NotBlank(message = "Name is required")
+	@NotBlank(message = "Tên không được trống")
 	private String name;
 	private boolean stop_sale;
 	@Column(columnDefinition="LONGTEXT")
 	private String description;
 	
-	@Positive(message = "Price must be a positive value")
+	@Positive(message = "Giá phải là số dương")
 	private long price;
 	
 	@ManyToOne(fetch = FetchType.LAZY)

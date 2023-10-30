@@ -27,18 +27,14 @@ public class CustomerOrder {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotBlank(message = "Payment code is required")
-    @Size(max = 255, message = "Payment code is too long")
 	private String payment_code;
 	
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private LocalDate date;
 	
-	@Positive(message = "Total must be a positive value")
+	@Positive(message = "Tổng tiền phải là số dương")
 	private long total;
 	
-	@NotBlank(message = "Status is required")
-    @Size(max = 255, message = "Status is too long")
 	private String status;
 	
 	@ManyToOne(fetch = FetchType.LAZY)

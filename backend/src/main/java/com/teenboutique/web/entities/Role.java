@@ -19,7 +19,7 @@ public class Role {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotBlank(message = "Name is required")
+	@NotBlank(message = "Tên không được trống")
 	private String name;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "role", orphanRemoval = true)
