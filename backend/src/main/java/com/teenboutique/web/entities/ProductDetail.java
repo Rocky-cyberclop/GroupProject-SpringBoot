@@ -14,6 +14,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Positive;
 
 @Entity
 @Table(name = "ProductDetail")
@@ -22,8 +23,9 @@ public class ProductDetail {
 	private ProductDetailId id;
 	
 	//extra column
+	@Positive(message = "Inventory must be a positive value")
 	private int inventory;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 //	@MapsId("product_id")
 	@JoinColumn(name = "product_id", insertable=false, updatable=false)

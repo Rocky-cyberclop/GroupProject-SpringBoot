@@ -11,6 +11,11 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.AssertTrue;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "Customer")
@@ -19,13 +24,29 @@ public class Customer {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotBlank(message="Name is required")
 	private String name;
+	
+	@Email(message="Email is required")
 	private String email;
+	
+	@NotBlank(message="Phone is required")
 	private String phone;
+	
+	@NotBlank(message="Addeess is required")
 	private String address;
+	
+	@Past(message = "Date of birth must be in the past")
 	private LocalDate dob;
+	
+	@AssertTrue(message = "Gender must be true (Male) or false (Female)")
 	private boolean gender;
+	
+	@NotBlank(message = "Password is required")
+	@Size(min = 8, message = "Password must be at least 8 characters long")
 	private String password;
+	
+	@Size(max = 255, message = "Avatar URL is too long")
 	private String avatar;
 	private boolean locked;
 	
