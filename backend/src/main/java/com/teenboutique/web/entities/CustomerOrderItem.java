@@ -43,11 +43,27 @@ public class CustomerOrderItem {
 	})
 	private ProductDetail product_detail;
 	
+	
 	@Embeddable
 	public static class CustomerOrderItemId {
 		private ProductDetailId product_detail_id;
 		private Long customer_order_id;
+		public ProductDetailId getProduct_detail_id() {
+			return product_detail_id;
+		}
+		public void setProduct_detail_id(ProductDetailId product_detail_id) {
+			this.product_detail_id = product_detail_id;
+		}
+		public Long getCustomer_order_id() {
+			return customer_order_id;
+		}
+		public void setCustomer_order_id(Long customer_order_id) {
+			this.customer_order_id = customer_order_id;
+		}
+		
+		
 	}
+
 
 	public CustomerOrderItemId getId() {
 		return id;
