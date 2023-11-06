@@ -145,16 +145,16 @@ public class AccountController {
 
 		List<CustomerOrderItem> customerOrderItems = customerOderItemRepository.findByCustomerOrderId(id);
 		List<TemporaryClass> list = new ArrayList<>();
-		float sum=0;
+		float sum = 0;
 		for (CustomerOrderItem customerOrderItem : customerOrderItems) {
 			TemporaryClass class1 = new TemporaryClass();
-			class1.setProductName(productRepository
-					.findById(customerOrderItem.getId().getProduct_detail_id().getProduct_id()).orElse(null).getName());
+			long product_id = customerOrderItem.getId().getProduct_detail_id().getProduct_id();
+			class1.setProductName(productRepository.findById(product_id).orElse(null).getName());
 			class1.setProductQuantity(customerOrderItem.getQuantity());
 			class1.setPrice(customerOrderItem.getPrice());
-			sum+=(customerOrderItem.getPrice()*customerOrderItem.getQuantity());
-			class1.setSize(sizeRepository.findById(customerOrderItem.getId().getProduct_detail_id().getSize_id())
-					.orElse(null).getName());
+			sum += (customerOrderItem.getPrice() * customerOrderItem.getQuantity());
+			long size_id = customerOrderItem.getId().getProduct_detail_id().getSize_id();
+			class1.setSize(sizeRepository.findById(size_id).orElse(null).getName());
 			list.add(class1);
 
 		}
