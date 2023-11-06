@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -14,6 +16,9 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "CustomerOrder")
@@ -23,8 +28,13 @@ public class CustomerOrder {
 	private Long id;
 	
 	private String payment_code;
+	
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private LocalDate date;
+	
+	@Positive(message = "Tổng tiền phải là số dương")
 	private long total;
+	
 	private String status;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -37,12 +47,7 @@ public class CustomerOrder {
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "customer_order", orphanRemoval = true)
 	private List<CustomerOrderItem> order_items = new ArrayList<>();
-
-	
-	
-	
-	
-	
+  
 	public Long getId() {
 		return id;
 	}
@@ -107,7 +112,8 @@ public class CustomerOrder {
 		this.order_items = order_items;
 	}
 
-	
-	
-	
+	public CustomerOrder() {
+		super();
+	}
+
 }

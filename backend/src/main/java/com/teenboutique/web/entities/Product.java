@@ -14,6 +14,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
 
 @Entity
 @Table(name = "Product")
@@ -23,10 +25,13 @@ public class Product {
 	private Long id;
 	
 	@Column(length = 2000)
+	@NotBlank(message = "Tên không được trống")
 	private String name;
 	private boolean stop_sale;
 	@Column(columnDefinition="LONGTEXT")
 	private String description;
+	
+	@Positive(message = "Giá phải là số dương")
 	private long price;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -38,6 +43,15 @@ public class Product {
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "product", orphanRemoval = true)
 	private List<ProductDetail> product_details = new ArrayList<>();
+
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getName() {
 		return name;
@@ -95,11 +109,9 @@ public class Product {
 		this.product_details = product_details;
 	}
 
-	public Long getId() {
-		return id;
+
+	public Product() {
+		super();
 	}
 
-	
-	
-	
 }

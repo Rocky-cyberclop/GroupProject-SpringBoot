@@ -11,6 +11,11 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.AssertTrue;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "Customer")
@@ -19,13 +24,28 @@ public class Customer {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotBlank(message="Tên không được để trống")
 	private String name;
+	
+	@Email(message="Email không hợp lệ")
 	private String email;
+	
+	@NotBlank(message="Số điện thoại không được để trống")
 	private String phone;
+	
+	@NotBlank(message="Địa chỉ không được để trống")
 	private String address;
+	
+	@Past(message = "Ngày sinh phải nhỏ hơn hôm nay")
 	private LocalDate dob;
+	
+	@AssertTrue(message = "Giới tính phải là nam hoặc nữ")
 	private boolean gender;
+	
+	@NotBlank(message = "Mật khẩu không được để trống")
+	@Size(min = 8, message = "Mật khẩu phải có ít nhất 8 ký tự")
 	private String password;
+	
 	private String avatar;
 	private boolean locked;
 	
@@ -131,7 +151,8 @@ public class Customer {
 		this.cart_items = cart_items;
 	}
 
-	
-	
-	
+	public Customer() {
+		super();
+	}
+
 }
