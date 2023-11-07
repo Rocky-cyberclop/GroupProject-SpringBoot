@@ -64,6 +64,63 @@ public class ProductDetail {
 		}
 		private Long product_id;
 		private Long size_id;
+		public Long getProduct_id() {
+			return product_id;
+		}
+		public void setProduct_id(Long product_id) {
+			this.product_id = product_id;
+		}
+		public Long getSize_id() {
+			return size_id;
+		}
+		public void setSize_id(Long size_id) {
+			this.size_id = size_id;
+		}
+		
+	}
+
+	public int getInventory() {
+		return inventory;
+	}
+
+	public void setInventory(int inventory) {
+		this.inventory = inventory;
+	}
+
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+
+	public Size getSize() {
+		return size;
+	}
+
+	public void setSize(Size size) {
+		this.size = size;
+	}
+
+	public List<CartItem> getCart_items() {
+		return cart_items;
+	}
+
+	public void setCart_items(List<CartItem> cart_items) {
+		this.cart_items = cart_items;
+	}
+
+	public List<CustomerOrderItem> getOrder_items() {
+		return order_items;
+	}
+
+	public void setOrder_items(List<CustomerOrderItem> order_items) {
+		this.order_items = order_items;
+	}
+
+	public ProductDetailId getId() {
+		return id;
 	}
 
 	public ProductDetailId getId() {

@@ -52,10 +52,90 @@ public class CustomerOrderItem {
 	})
 	private ProductDetail product_detail;
 	
+	
 	@Embeddable
 	public static class CustomerOrderItemId {
 		private ProductDetailId product_detail_id;
 		private Long customer_order_id;
+		public ProductDetailId getProduct_detail_id() {
+			return product_detail_id;
+		}
+		public void setProduct_detail_id(ProductDetailId product_detail_id) {
+			this.product_detail_id = product_detail_id;
+		}
+		public Long getCustomer_order_id() {
+			return customer_order_id;
+		}
+		public void setCustomer_order_id(Long customer_order_id) {
+			this.customer_order_id = customer_order_id;
+		}
+		
+		
+	}
+
+
+	public CustomerOrderItemId getId() {
+		return id;
+	}
+
+	public void setId(CustomerOrderItemId id) {
+		this.id = id;
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
+	public LocalDate getRate_date() {
+		return rate_date;
+	}
+
+	public void setRate_date(LocalDate rate_date) {
+		this.rate_date = rate_date;
+	}
+
+	public String getRate_content() {
+		return rate_content;
+	}
+
+	public void setRate_content(String rate_content) {
+		this.rate_content = rate_content;
+	}
+
+	public int getPoint() {
+		return point;
+	}
+
+	public void setPoint(int point) {
+		this.point = point;
+	}
+
+	public long getPrice() {
+		return price;
+	}
+
+	public void setPrice(long price) {
+		this.price = price;
+	}
+
+	public CustomerOrder getCustomer_order() {
+		return customer_order;
+	}
+
+	public void setCustomer_order(CustomerOrder customer_order) {
+		this.customer_order = customer_order;
+	}
+
+	public ProductDetail getProduct_detail() {
+		return product_detail;
+	}
+
+	public void setProduct_detail(ProductDetail product_detail) {
+		this.product_detail = product_detail;
 	}
 
 	public CustomerOrderItemId getId() {
