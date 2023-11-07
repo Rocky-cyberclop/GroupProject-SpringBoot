@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en"
+	th:replace="~{admin/layouts/admin-layout :: mainLayoutAdmin(~{::link.css-admin}, ~{::div.main-admin}, ~{::script.admin-js})}">
+
+<head>
+	<link class="css-admin" rel="stylesheet" th:href="@{/admin/css/management-employee.css}">
+</head>
+
+<body>
+	<div class="container-scroller">
+
+		< <div class="container-fluid page-body-wrapper">
+
+			<!-- partial -->
+			<div class="main-panel main-admin">
+				<div class="content-wrapper">
+					<div class="content-wrapper">
+						<div class="page-header">
+							<h3 class="page-title">Danh sách mặc hàng</h3>
+						</div>
+						<div class="col-lg-12 grid-margin stretch-card">
+							<div class="card">
+								<div class="card-body">
+									<table class="table table-hover">
+										<thead>
+											<tr>
+												<th>Mã hàng</th>
+												<th>Size</th>
+												<th>Số lượng</th>
+												<th>Giá</th>
+												<th>Điểm nhận xét</th>
+												<th>Ngày nhận xét</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="order_detail: ${order_details}">
+												<td th:text="${order_detail.product_detail.product.id}"></td>
+												<td th:text="${order_detail.product_detail.size.id}"></td>
+												<td th:text="${order_detail.quantity}"></td>
+												<td th:text="${order_detail.price}"></td>
+												<td th:text="${order_detail.point}"></td>
+												<td th:text="${order_detail.rate_date}"></td>
+											</tr>
+										</tbody>
+									</table>
+									<a th:href="@{/admin/receipt/taked/{id}(id=${order_id})}"
+										class="btn btn-gradient-primary mt-5">Nhận đơn</a>
+								</div>
+							</div>
+						</div>
+
+
+					</div>
+				</div>
+			</div>
+	</div>
+
+	<!-- partial -->
+	</div>
+	<!-- main-panel ends -->
+	</div>
+
+	</div>
+
+	<script class="admin-js" th:src="@{/admin/js/admin.js}"></script>
+</body>
+
+</html>

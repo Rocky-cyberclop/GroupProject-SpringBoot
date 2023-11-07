@@ -49,6 +49,8 @@ public class Size {
 		this.product_details = product_details;
 	}
 
-	
+	public Size() {
+		super();
+	}
 
 }

@@ -30,7 +30,7 @@ public class Product {
 	private boolean stop_sale;
 	@Column(columnDefinition = "LONGTEXT")
 	private String description;
-
+  
 	@Positive(message = "Giá phải là số dương")
 	private long price;
 
