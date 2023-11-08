@@ -3,12 +3,11 @@ package com.teenboutique.web.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.teenboutique.web.entities.Customer;
 import com.teenboutique.web.repositories.CustomerRepository;
-
-
 
 //This is where I create all the logical action of the Customer
 //Service calls function from Repository. There are some funcs that created automatically
@@ -27,5 +26,16 @@ public class CustomerService {
 	
 	public Customer getCusByEmail(String email) {
 		return cusRepo.findByEmail(email);
+	}
+
+	public void registerCustomer(Customer customer) {
+		String plainTextPassword = customer.getPassword();
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		String hashedPassword = passwordEncoder.encode(plainTextPassword);
+		customer.setPassword(hashedPassword);
+		customer.setAvatar("0");
+		customer.setLocked(false);
+		
+		cusRepo.save(customer);
 	}
 }

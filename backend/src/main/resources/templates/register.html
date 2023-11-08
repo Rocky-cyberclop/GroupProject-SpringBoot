@@ -17,24 +17,28 @@
 			 <img th:src="@{/main/images/logo.png}" alt="Your Logo Alt Text">
 		  </a>
           <h2 class="text-center">Tạo Tài Khoản Mới</h2>
-          <form class="text-left clearfix" th:action="@{/register}" th:method="post">
+          <form class="text-left clearfix" th:action="@{/register}" th:object="${customer}" th:method="post">
             <div class="form-group">
-              <input type="text" class="form-control"  placeholder="Tên">
+              <input type="text" class="form-control" th:field="*{name}" placeholder="Tên">
             </div>
             <div class="form-group">
-              <input type="text" class="form-control"  placeholder="Địa Chỉ">
-            </div>
-             <div class="form-group">
-			    <input type="radio" id="nam" value="1">
-			    <label for="nam">Nam</label>&nbsp;&nbsp;&nbsp;
-			    <input type="radio" id="nu" value="0">
-			    <label for="nu">Nữ</label><br>
+              <input type="date" class="form-control" th:field="*{dob}" placeholder="Ngày Sinh">
             </div>
             <div class="form-group">
-              <input type="email" class="form-control"  placeholder="Email">
+              <input type="text" class="form-control" th:field="*{address}" placeholder="Địa Chỉ">
             </div>
             <div class="form-group">
-              <input type="password" class="form-control"  placeholder="Mật Khẩu">
+			  <label>Giới tính</label>
+			  <select class="form-control btn btn-outline-primary dropdown-toggle" th:field="*{gender}">
+				<option class="dropdown-item" th:value="true" th:text="Nam"></option>
+				<option class="dropdown-item" th:value="false" th:text="Nữ"></option>
+			  </select>
+			</div>
+            <div class="form-group">
+              <input type="email" class="form-control" th:field="*{email}" placeholder="Email">
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control" th:field="*{password}" placeholder="Mật Khẩu">
             </div>
             <div class="text-center">
               <button type="submit" class="btn btn-main text-center">Đăng Ký</button>
