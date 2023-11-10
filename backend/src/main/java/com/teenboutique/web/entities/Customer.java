@@ -12,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Pattern;
@@ -24,7 +25,7 @@ public class Customer {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotNull(message = "Tên Không Được Để Trống")
+	@NotBlank(message = "Tên Không Được Để Trống")
 	private String name;
 	@Email
 	@Size(min = 10, max = 50, message = "Email Phải Từ 10 Đến 50 Ký Tự")
