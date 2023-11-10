@@ -27,6 +27,10 @@ public class CustomerService {
 	public Customer getCusByEmail(String email) {
 		return cusRepo.findByEmail(email);
 	}
+	
+	public void save(Customer customer) {
+        cusRepo.save(customer);
+    }
 
 	public void registerCustomer(Customer customer) {
 		String plainTextPassword = customer.getPassword();

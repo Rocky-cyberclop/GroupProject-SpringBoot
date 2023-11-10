@@ -27,6 +27,12 @@
 		            <div class="text-center">
 		              <button type="submit" class="btn btn-main text-center">Đặt Lại Mật Khẩu</button>
 		            </div>
+		            <div th:if="${successMessage}" class="alert alert-success" role="alert">
+    					<p th:text="${successMessage}"></p>
+					</div>
+					<div th:if="${errorMessage}" class="alert alert-danger" role="alert">
+    					<p th:text="${errorMessage}"></p>
+					</div>
 		          </form>
 		          <p class="mt-20"><a th:href="@{/login}">Quay Trở Về Đăng Nhập</a></p>
 		        </div>
