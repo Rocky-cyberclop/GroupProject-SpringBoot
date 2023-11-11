@@ -22,8 +22,8 @@ public class WebApplication {
 	        mailSender.setHost("smtp.gmail.com");
 	        mailSender.setPort(587);
 
-	        mailSender.setUsername("anb2014637@student.ctu.edu.vn");
-	        mailSender.setPassword("NYS3Lv@C");
+	        mailSender.setUsername("");//Thay bằng mail của bạn
+	        mailSender.setPassword(""); //Thay bẰng mật khẩu của mail đó
 
 	        Properties props = mailSender.getJavaMailProperties();
 	        props.put("mail.transport.protocol", "smtp");
