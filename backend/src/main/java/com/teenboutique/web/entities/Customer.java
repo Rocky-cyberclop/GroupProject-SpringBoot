@@ -11,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Past;
@@ -24,14 +25,17 @@ public class Customer {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotBlank(message = "Tên Không Được Để Trống")
+	@NotBlank(message = "Tên không được để trống")
 	private String name;
-	@Email
+
+	@Email(message = "Email không hợp lệ")
 	@Size(min = 10, max = 50, message = "Email Phải Từ 10 Đến 50 Ký Tự")
 	private String email;
+
 	@Pattern(regexp = "^[0-9]{10}$", message = "Số Điện Thoại Phải Có 10 Số")
 	private String phone;
 	private String address;
+	
 	@Past(message = "Ngày Sinh Phải Ở Quá Khứ")
 	private LocalDate dob;
 	private boolean gender;
@@ -139,6 +143,10 @@ public class Customer {
 
 	public void setCart_items(List<CartItem> cart_items) {
 		this.cart_items = cart_items;
+	}
+
+	public Customer() {
+		super();
 	}
 
 	
