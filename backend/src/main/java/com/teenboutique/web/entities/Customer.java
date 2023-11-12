@@ -15,7 +15,9 @@ import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Past;
+
 import jakarta.validation.constraints.Pattern;
+
 import jakarta.validation.constraints.Size;
 
 @Entity
@@ -24,7 +26,7 @@ public class Customer {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@NotBlank(message = "Tên không được để trống")
 	private String name;
 
@@ -33,13 +35,26 @@ public class Customer {
 	private String email;
 
 	@Pattern(regexp = "^[0-9]{10}$", message = "Số Điện Thoại Phải Có 10 Số")
+
+
+
 	private String phone;
+	
+	@NotBlank(message="Địa chỉ không được để trống")
 	private String address;
 	
+
 	@Past(message = "Ngày Sinh Phải Ở Quá Khứ")
+
 	private LocalDate dob;
+	
+	//@AssertTrue(message = "Giới tính phải là nam hoặc nữ")
 	private boolean gender;
+	
+	@NotBlank(message = "Mật khẩu không được để trống")
+	@Size(min = 8, message = "Mật khẩu phải có ít nhất 8 ký tự")
 	private String password;
+	
 	private String avatar;
 	private boolean locked;
 	
@@ -149,5 +164,6 @@ public class Customer {
 		super();
 	}
 
-	
+
+
 }

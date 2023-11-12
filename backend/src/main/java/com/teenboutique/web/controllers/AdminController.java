@@ -22,9 +22,12 @@ import com.teenboutique.web.entities.Product;
 import com.teenboutique.web.entities.ProductDetail;
 import com.teenboutique.web.entities.Role;
 import com.teenboutique.web.entities.Size;
+import com.teenboutique.web.entities.CustomerOrder;
 import com.teenboutique.web.helpers.Helper;
 import com.teenboutique.web.services.CategoryService;
 import com.teenboutique.web.services.EmployeeService;
+import com.teenboutique.web.services.OrderDetailService;
+import com.teenboutique.web.services.OrderService;
 import com.teenboutique.web.services.ProductDetailService;
 import com.teenboutique.web.services.ProductService;
 import com.teenboutique.web.services.RoleService;
@@ -51,6 +54,12 @@ public class AdminController {
 
 	@Autowired
 	private SizeService sizeSer;
+	
+	@Autowired
+	private OrderService orSer;
+	
+	@Autowired
+	private OrderDetailService orDeSer;
 
 	@GetMapping
 	public String showMainPage() {
@@ -315,5 +324,70 @@ public class AdminController {
 		proSer.stopSell(p);
 		return "redirect:/admin/management/products";
 	}
+	
+//	**Receipt part
+	@GetMapping("/receipts")
+	public String showAllOrder(Model model) {
+		showAllOrderOnePage(model, 1);
+		return "admin/receipts";
+	}
+
+	@GetMapping("/management/receipts/{page}")
+	public String showAllOrderOnePage(Model model, @PathVariable("page") int currentPage) {
+		Page<CustomerOrder> page = orSer.findPage(currentPage);
+		int totalPages = page.getTotalPages();
+		List<CustomerOrder> ors = page.getContent();
+
+		model.addAttribute("totalPages", totalPages);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("orders", ors);
+
+		return "admin/receipts";
+	}
+	
+	@GetMapping("/receipt/take/{id}")
+	public String showOrderDetailForm(Model model, @PathVariable("id") Long id) {
+		model.addAttribute("order_details", orDeSer.findDetail(id));
+		model.addAttribute("order_id", id);
+		return "admin/receipt-detail";
+	}
+	
+	@GetMapping("/receipt/taked/{id}")
+	public String takeOrder(@PathVariable("id") Long id) {
+		orSer.take(id);
+		return "redirect:/admin/receipts";
+	}
+	
+//	**Statistic part
+	@GetMapping("/statistic/all")
+	public String statisticAll() {
+		return "admin/statistic-all";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }
