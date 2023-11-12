@@ -19,6 +19,8 @@
   <div th:replace="~{fragments/components/header :: sundry-css}"></div>
 
   <div th:replace="~{fragments/components/header :: style-css}"></div>
+
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css">
 </head>
 
 <body id="body">
@@ -52,8 +54,6 @@
             <div class="media">
               <div class="pull-left text-center" href="#!">
                 <img class="media-object user-img" th:src="@{/main/images/channels4_profile.jpg}" alt="Hình ảnh">
-
-                <a href="#x" class="btn btn-transparent mt-20">Thay đổi hình ảnh</a>
               </div>
               <div class="media-body">
                 <ul class="user-profile-list">
@@ -65,8 +65,31 @@
                     <span><b>Email:</b></span>
                     <p style="display: inline-block;" th:text="${user.email}"></p>
                   </li>
-                  <span><b>Số điện thoại::</b></span>
-                  <p style="display: inline-block;" th:text="${user.phone}"></p>
+                  <li>
+                    <span><b>Số điện thoại:</b></span>
+                    <p style="display: inline-block;" th:text="${user.phone}"></p>
+                  </li>
+
+                  <li>
+                    <span><b>Địa chỉ:</b></span>
+                    <p style="display: inline-block;" th:text="${user.address}"></p>
+                  </li>
+                  <li>
+                    <span><b>Ngày sinh:</b></span>
+                    <p style="display: inline-block;" th:text="${user.dob}"></p>
+                  </li>
+
+                  <li>
+                    <span><b>Giới tính:</b></span>
+                    <p style="display: inline-block;" th:if="${user.gender}">Nam</p>
+                    <p style="display: inline-block;" th:if="${user.gender==false}">Nữ</p>
+                  </li>
+                  <br>
+                  <li>
+                    <a th:href="@{/account/Update_personal_information/{id}(id=${user.id})}"> <i class="fa-solid fa-user-pen" style="color: #005eff;"></i>
+                      <p style="display: inline-block;" class="text-muted">Chỉnh sửa thông tin</p>
+                    </a>
+                 
                   </li>
 
                 </ul>
