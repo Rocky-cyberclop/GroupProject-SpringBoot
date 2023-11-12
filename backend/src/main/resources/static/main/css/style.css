@@ -949,11 +949,15 @@ input[type=email]:focus, input[type=password]:focus, input[type=text]:focus, inp
   margin-bottom: 30px;
 }
 .product-item .product-thumb {
-  position: relative;
+  position: relative;  
+  width: 300px;  
+  max-height: 300px;
+  display: flex;
+  justify-content: center;
 }
-.product-item .product-thumb img {
-  width: 100%;
-  height: auto;
+.product-item .product-thumb img {  
+  max-width: 100%;
+  max-height: inherit;
 }
 .product-item .product-thumb .bage {
   position: absolute;
@@ -1022,6 +1026,14 @@ input[type=email]:focus, input[type=password]:focus, input[type=text]:focus, inp
 }
 .product-item .product-content h4 a {
   color: #000;
+  display: -webkit-box;
+  max-height: 3.2rem;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  -webkit-line-clamp: 1;
+  line-height: 2rem;
 }
 
 .product-modal {

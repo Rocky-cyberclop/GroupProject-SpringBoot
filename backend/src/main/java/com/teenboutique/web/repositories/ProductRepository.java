@@ -9,7 +9,7 @@ import com.teenboutique.web.entities.Product;
 
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
-	@Query(value = "select * from product where length(name) < 40 limit 9;", nativeQuery=true)
+	@Query(value = "SELECT product.* FROM product inner join (select product_id from customer_order_item group by product_id order by sum(quantity) desc limit 9) my on product.id = my.product_id;", nativeQuery=true)
 	List<Product> findTrendyProduct();
 
 }
