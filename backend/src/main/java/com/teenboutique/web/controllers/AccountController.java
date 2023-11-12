@@ -1,13 +1,18 @@
 package com.teenboutique.web.controllers;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.teenboutique.web.entities.Customer;
 import com.teenboutique.web.entities.CustomerOrder;
@@ -162,6 +167,55 @@ public class AccountController {
 		model.addAttribute("lists", list);
 		model.addAttribute("id", id);
 		return "account/orderItemDetail";
+	}
+
+	@GetMapping("/Update_personal_information/{id}")
+	public String personal_information_edit(Model model, @PathVariable("id") Long id) {
+		Customer customer = new Customer();
+		customer = customerRepository.findById(id).orElse(null);
+		if (customer == null) {
+			return "account/err";
+		}
+
+		model.addAttribute("customer", customer);
+		return "account/updatePersonalInformation";
+
+	}
+
+	@PostMapping("/Update_personal_information/{id}")
+	public String Update_personal_information(Model model, @PathVariable("id") Long id,
+			@RequestParam(value = "hoTen", required = false) String hoTen,
+			@RequestParam(value = "email", required = true) String email,
+			@RequestParam(value = "soDienThoai", required = true) String soDienThoai,
+			@RequestParam(value = "ngayThang", required = true) String ngayThang,
+			@RequestParam(value = "diaChi", required = true) String diaChi,
+			@RequestParam(value = "gioiTinh", required = true) boolean gioiTinh) {
+		System.out.println(id);
+		System.out.println(hoTen);
+		System.out.println(email);
+		System.out.println(soDienThoai);
+		System.out.println(ngayThang);
+		System.out.println(diaChi);
+		System.out.println(gioiTinh);
+
+		
+		
+		Customer customer = new Customer();
+		customer = customerRepository.findById(id).orElse(customer);
+		customer.setAddress(diaChi);
+		customer.setEmail(email);
+		customer.setGender(gioiTinh);
+		customer.setName(hoTen);
+		customer.setPhone(soDienThoai);
+
+		// Định dạng ngày tháng
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		// Chuyển chuỗi sang LocalDate
+		LocalDate localDate = LocalDate.parse(ngayThang, formatter);
+		customer.setDob(localDate);
+		customerRepository.save(customer);
+		String path = "redirect:/account/profileDetails";
+		return path;
 	}
 
 }

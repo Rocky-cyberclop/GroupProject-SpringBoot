@@ -39,7 +39,7 @@ public class Customer {
 	@Past(message = "Ngày sinh phải nhỏ hơn hôm nay")
 	private LocalDate dob;
 	
-	@AssertTrue(message = "Giới tính phải là nam hoặc nữ")
+	//@AssertTrue(message = "Giới tính phải là nam hoặc nữ")
 	private boolean gender;
 	
 	@NotBlank(message = "Mật khẩu không được để trống")
