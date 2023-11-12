@@ -6,5 +6,4 @@ import com.teenboutique.web.entities.Size;
 
 public interface SizeRepository extends JpaRepository<Size, Long>{
 
-
 }

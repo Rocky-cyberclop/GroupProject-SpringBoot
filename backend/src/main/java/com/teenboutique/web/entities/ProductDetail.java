@@ -14,6 +14,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Positive;
 
 @Entity
 @Table(name = "ProductDetail")
@@ -23,7 +24,7 @@ public class ProductDetail {
 	
 	//extra column
 	private int inventory;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 //	@MapsId("product_id")
 	@JoinColumn(name = "product_id", insertable=false, updatable=false)
@@ -42,6 +43,13 @@ public class ProductDetail {
 	
 	@Embeddable
 	public static class ProductDetailId{
+		public ProductDetailId() {
+			
+		}
+		public ProductDetailId(Long product_id, Long size_id) {
+			this.product_id=product_id;
+			this.size_id=size_id;
+		}
 		private Long product_id;
 		private Long size_id;
 		public Long getProduct_id() {
@@ -57,6 +65,14 @@ public class ProductDetail {
 			this.size_id = size_id;
 		}
 		
+	}
+
+	public ProductDetailId getId() {
+		return id;
+	}
+
+	public void setId(Long product_id, Long size_id) {
+		this.id = new ProductDetailId(product_id, size_id);
 	}
 
 	public int getInventory() {
@@ -99,8 +115,8 @@ public class ProductDetail {
 		this.order_items = order_items;
 	}
 
-	public ProductDetailId getId() {
-		return id;
+	public ProductDetail() {
+		super();
 	}
 	
 

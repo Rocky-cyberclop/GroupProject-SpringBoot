@@ -12,6 +12,7 @@ import jakarta.persistence.JoinColumns;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Min;
 
 @Entity
 @Table(name = "CartItem")
@@ -20,6 +21,7 @@ public class CartItem {
 	private CartItemId id;
 	
 	//extra column
+	@Min(value = 1, message = "Số lượng phải lớn hơn 1")
 	private int quantity;
 	
 	@ManyToOne(fetch = FetchType.LAZY)

@@ -4,7 +4,7 @@ $(function () {
    * Data and config for chartjs
    */
   'use strict';
-  var data = {
+  /*var data = {
     labels: ["2013", "2014", "2014", "2015", "2016", "2017"],
     datasets: [{
       label: '# of Votes',
@@ -167,11 +167,11 @@ $(function () {
       animateScale: true,
       animateRotate: true
     }
-  };
+  };*/
   var areaData = {
     labels: ["2013", "2014", "2015", "2016", "2017"],
     datasets: [{
-      label: '# of Votes',
+      label: 'Doanh số',
       data: [12, 19, 3, 5, 2, 3],
       backgroundColor: [
         'rgba(255, 99, 132, 0.2)',
@@ -194,7 +194,7 @@ $(function () {
     }]
   };
 
-  var areaDataDark = {
+  /*var areaDataDark = {
     labels: ["2013", "2014", "2015", "2016", "2017"],
     datasets: [{
       label: '# of Votes',
@@ -525,7 +525,7 @@ $(function () {
       data: doughnutPieData,
       options: doughnutPieOptions
     });
-  }
+  }*/
 
   if ($("#areaChart").length) {
     var areaChartCanvas = $("#areaChart").get(0).getContext("2d");
@@ -536,7 +536,7 @@ $(function () {
     });
   }
 
-  if ($("#areaChartDark").length) {
+  /*if ($("#areaChartDark").length) {
     var areaChartCanvas = $("#areaChartDark").get(0).getContext("2d");
     var areaChart = new Chart(areaChartCanvas, {
       type: 'line',
@@ -570,5 +570,5 @@ $(function () {
       data: browserTrafficData,
       options: doughnutPieOptions
     });
-  }
+  }*/
 });

@@ -47,7 +47,7 @@ public class CustomerOrder {
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "customer_order", orphanRemoval = true)
 	private List<CustomerOrderItem> order_items = new ArrayList<>();
-  
+
 	public Long getId() {
 		return id;
 	}

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en"
+	th:replace="~{admin/layouts/admin-layout :: mainLayoutAdmin(~{::link.css-admin}, ~{::div.main-admin}, ~{::script.admin-js})}">
+
+<head>
+	<link class="css-admin" rel="stylesheet" th:href="@{/admin/css/admin-product-detail.css}">
+</head>
+
+<body>
+	<div class="container-scroller">
+
+		< <div class="container-fluid page-body-wrapper">
+
+			<!-- partial -->
+			<div class="main-panel main-admin">
+				<div class="content-wrapper">
+					<div class="page-header">
+						<h3 class="page-title">Tạo sản phẩm</h3>
+					</div>
+					<div class="row">
+						<div class="col-md-12 grid-margin stretch-card">
+
+							<div class="card">
+								<div class="card-body">
+									<form th:action="@{/admin/management/product/create}"
+										th:method="post" th:object="${product}" class="forms-sample" enctype="multipart/form-data">
+										<div class="form-group">
+											<label>Tên sản phẩm</label>
+											<textarea class="form-control" th:field="*{name}"></textarea>
+										</div>
+										<div class="form-group">
+											<label>Loại sản phẩm</label>
+											<select class="form-control btn btn-outline-primary dropdown-toggle"
+												th:field="*{category}">
+												<option class="dropdown-item" th:each="category: ${categories}"
+													th:value="${category.id}" th:text="${category.name}"></option>
+											</select>
+										</div>
+										<div class="form-group">
+											<label>Giá bán</label>
+											<input type="number" min="0" class="form-control" th:field="*{price}"
+												placeholder="Email">
+										</div>
+										<div class="form-group">
+											<label>Mô tả</label>
+											<textarea class="form-control" th:field="*{description}"
+												placeholder="Description" id="description"></textarea>
+										</div>
+										<div class="form-group">
+												<label>Hình đại diện: thêm ít nhất 1 hình</label>
+											<input class="form-control admin-product-img-first" type="file" name="avatar"/>
+										</div>
+										<div class="form-group">
+												<label>Hình phụ: thêm ít nhất 2 hình</label>
+											<input class="form-control admin-product-img-first" type="file" name="not_avatar" multiple="multiple"/>
+										</div>
+
+
+										<button type="submit" class="btn btn-gradient-primary me-2">Tạo sản phẩm</button>
+
+									</form>
+								</div>
+								<div class="card-body">
+					
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+	</div>
+	</div>
+
+	<!-- partial -->
+	</div>
+	<!-- main-panel ends -->
+	</div>
+	<!-- page-body-wrapper ends -->
+	</div>
+	<!-- container-scroller -->
+	<script class="admin-js" src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script>
+	<script class="admin-js" th:src="@{/admin/js/admin-product-detail.js}"></script>
+</body>
+
+</html>

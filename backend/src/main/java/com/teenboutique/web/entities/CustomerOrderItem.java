@@ -2,6 +2,8 @@ package com.teenboutique.web.entities;
 
 import java.time.LocalDate;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.teenboutique.web.entities.ProductDetail.ProductDetailId;
 
 import jakarta.persistence.Column;
@@ -14,6 +16,7 @@ import jakarta.persistence.JoinColumns;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Positive;
 
 @Entity
 @Table(name = "CustomerOrderItem")
@@ -22,11 +25,17 @@ public class CustomerOrderItem {
 	private CustomerOrderItemId id;
 	
 	//extra column
+	@Positive(message = "Số lượng phải là số dương")
 	private int quantity;
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private LocalDate rate_date;
 	@Column(length = 5000)
 	private String rate_content;
+	
+	@Positive(message = "Điểm phải là số dương")
 	private int point;
+	
+	@Positive(message = "Giá tiền phải là số dương")
 	private long price;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -63,7 +72,6 @@ public class CustomerOrderItem {
 		
 		
 	}
-
 
 	public CustomerOrderItemId getId() {
 		return id;
@@ -127,6 +135,10 @@ public class CustomerOrderItem {
 
 	public void setProduct_detail(ProductDetail product_detail) {
 		this.product_detail = product_detail;
+	}
+
+	public CustomerOrderItem() {
+		super();
 	}
 
 }
