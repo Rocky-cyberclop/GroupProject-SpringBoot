@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+
+<!--
+ // WEBSITE: https://themefisher.com
+ // TWITTER: https://twitter.com/themefisher
+ // FACEBOOK: https://www.facebook.com/themefisher
+ // GITHUB: https://github.com/themefisher/
+-->
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en"
+	th:replace="~{layouts/main-layout :: mainLayout(~{::link.main-main}, ~{::section.main-main}, ~{::script.main-main})}">
+
+<head>
+	<link class="main-main" rel="stylesheet" th:href="@{main/css/style.css}">
+</head>
+<section class="main-main" th:remove="tag">
+	<section class="single-product">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6">
+					<ol class="breadcrumb">
+						<li><a href="index.html">Home</a></li>
+						<li><a href="shop.html">Shop</a></li>
+						<li class="active">Single Product</li>
+					</ol>
+				</div>
+				<div class="col-md-6">
+					<ol class="product-pagination text-right">
+						<li><a href="blog-left-sidebar.html"><i class="tf-ion-ios-arrow-left"></i> Next </a></li>
+						<li><a href="blog-left-sidebar.html">Preview <i class="tf-ion-ios-arrow-right"></i></a></li>
+					</ol>
+				</div>
+			</div>
+			<div class="row mt-20">
+				<div class="col-md-5">
+					<div class="single-product-slider">
+						<div id='carousel-custom' class='carousel slide' data-ride='carousel'>
+							<div class='carousel-outer'>
+								<!-- me art lab slider -->
+								<div class='carousel-inner '>
+									<div class='item active' th:if="${!localPic}">
+										<img class="form-control admin-product-img-first"
+											th:src="'/uploads/images/'+*{product.images[0].url}" width="200"
+											height="200"
+											data-zoom-image="'/uploads/images/'+*{product.images[0].url}" />
+									</div>
+									<div class='item' th:if="${!localPic}">
+										<img class="form-control " th:src="'/uploads/images/'+*{product.images[1].url}"
+											width="200" height="200"
+											data-zoom-image="'/uploads/images/'+*{product.images[1].url}" />
+									</div>
+									<div class='item' th:if="${!localPic}">
+										<img class="form-control" th:src="'/uploads/images/'+*{product.images[2].url}"
+											width="200" height="200"
+											data-zoom-image="'/uploads/images/'+*{product.images[3].url}" />
+									</div>
+
+
+
+									<div class="item active" th:if="${localPic}">
+										<img class="form-control admin-product-img-first"
+											th:src="*{product.images[0].url}" width="200" height="200"
+											data-zoom-image="*{product.images[0].url}" />
+									</div>
+									<div class='item' th:if="${localPic}">
+										<img class="form-control " th:src="*{product.images[1].url}" width="200"
+											height="200" data-zoom-image="*{product.images[1].url}" />
+									</div>
+									<div class='item' th:if="${localPic}">
+										<img class="form-control " th:src="*{product.images[2].url}" width="200"
+											height="200" data-zoom-image="*{product.images[2].url}" />
+									</div>
+
+								</div>
+
+								<!-- sag sol -->
+								<a class='left carousel-control' href='#carousel-custom' data-slide='prev'>
+									<i class="tf-ion-ios-arrow-left"></i>
+								</a>
+								<a class='right carousel-control' href='#carousel-custom' data-slide='next'>
+									<i class="tf-ion-ios-arrow-right"></i>
+								</a>
+							</div>
+
+							<!-- thumb -->
+							<ol class='carousel-indicators mCustomScrollbar meartlab' th:if="${localPic}">
+								<li data-target='#carousel-custom' data-slide-to='0' class='active'>
+									<img class="form-control " th:src="*{product.images[0].url}" width="200" />
+
+								</li>
+								<li data-target='#carousel-custom' data-slide-to='1'>
+									<img class="form-control " th:src="*{product.images[1].url}" width="200" />
+
+								</li>
+								<li data-target='#carousel-custom' data-slide-to='2'>
+									<img class="form-control " th:src="*{product.images[2].url}" width="200" />
+
+								</li>
+								<li data-target='#carousel-custom' data-slide-to='3'>
+									<img class="form-control " th:src="*{product.images[3].url}" width="200" />
+
+								</li>
+								<li data-target='#carousel-custom' data-slide-to='4'>
+									<img class="form-control " th:src="*{product.images[4].url}" width="200" />
+
+								</li>
+
+
+							</ol>
+							<ol class='carousel-indicators mCustomScrollbar meartlab' th:if="${!localPic}">
+								<li data-target='#carousel-custom' data-slide-to='0' class='active'>
+									<img class="form-control " th:src="'/uploads/images/'+*{product.images[0].url}"
+										width="200" />
+
+								</li>
+								<li data-target='#carousel-custom' data-slide-to='1'>
+									<img class="form-control " th:src="'/uploads/images/'+*{product.images[1].url}"
+										width="200" />
+
+								</li>
+								<li data-target='#carousel-custom' data-slide-to='2'>
+									<img class="form-control " th:src="'/uploads/images/'+*{product.images[2].url}"
+										width="200" />
+
+								</li>
+								<li data-target='#carousel-custom' data-slide-to='3'>
+									<img class="form-control " th:src="'/uploads/images/'+*{product.images[3].url}"
+										width="200" />
+
+								</li>
+								<li data-target='#carousel-custom' data-slide-to='4'>
+									<img class="form-control " th:src="'/uploads/images/'+*{product.images[4].url}"
+										width="200" />
+
+								</li>
+
+
+							</ol>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-7">
+					<div class="single-product-details" th:object="${product}">
+						<h3 th:text="${product.name}"></h3>
+						<p class="product-price" th:text="${product.price}"></p>
+
+						<p class="product-description mt-20" th:text="${product.description}"></p>
+
+
+					
+
+
+						<div class="row">
+							<div class="col-md-12 grid-margin stretch-card">
+								<div class="card">
+									<div class="card-body">
+										<form th:action="@{/ProductDetail/AddToCart/{id}(id=${product.id})}"
+											th:method="get" class="forms-sample">
+											<div class="product-size">
+												<span>Size:</span>
+												<select class="form-control btn btn-outline-primary dropdown-toggle">
+													<option class="dropdown-item" th:each="size: ${sizes}"
+														th:value="${size.id}" th:text="${size.name}"></option>
+												</select>
+											</div>
+											<div class="form-group">
+												<label>Nhập số lượng</label>
+												<input type="number" class="form-control" placeholder="Số lượng"
+													name="quantity">
+											</div>
+											<button type="submit" class="btn btn-gradient-primary me-2">Thêm vào giỏ
+												hàng</button>
+
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="tabCommon mt-20">
+							<ul class="nav nav-tabs">
+								<li class="active"><a data-toggle="tab" href="#details" aria-expanded="true">Details</a>
+								</li>
+								<li class=""><a data-toggle="tab" href="#reviews" aria-expanded="false">Reviews (3)</a>
+								</li>
+							</ul>
+							<div class="tab-content patternbg">
+								<div id="details" class="tab-pane fade active in">
+									<h4>Product Description</h4>
+									<p th:text="${product.description}"></p>
+
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+	</section>
+
+</section>
+
+<body>
+	<script class="main-main" th:src="@{main/js/script.js}" }></script>
+
+</body>
+
+</html>
