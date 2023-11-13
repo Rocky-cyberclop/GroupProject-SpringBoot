@@ -18,6 +18,7 @@ import com.teenboutique.web.entities.ProductImage;
 import com.teenboutique.web.entities.Size;
 import com.teenboutique.web.helpers.Helper;
 import com.teenboutique.web.repositories.CartItemRepository;
+import com.teenboutique.web.repositories.CustomerRepository;
 import com.teenboutique.web.repositories.ProductDetailRepository;
 import com.teenboutique.web.repositories.ProductRepository;
 
@@ -25,54 +26,76 @@ import com.teenboutique.web.repositories.ProductRepository;
 public class ProductDetailService {
 	@Autowired
 	private ProductDetailRepository proDeRepo;
-	
+
 	@Autowired
 	private CartItemRepository cartRepo;
-	
+
+	@Autowired
+	private CustomerRepository cusRepo;
+
 	public ProductDetail add(ProductDetail pd) {
-		pd.setId(pd.getProduct().getId(), pd.getSize().getId());;
+		pd.setId(pd.getProduct().getId(), pd.getSize().getId());
+		;
 		return proDeRepo.save(pd);
 	}
-	
+
 	public ProductDetail findByIdAndSize(Long id, Long size) {
 		ProductDetail pd = proDeRepo.findByProductAndSize(id, size);
 		return pd;
 	}
-	
+
 	public ProductDetail importDetail(Long id, Long size, int quantity) {
 		ProductDetail pd = this.findByIdAndSize(id, size);
-		pd.setInventory(quantity+pd.getInventory());
+		pd.setInventory(quantity + pd.getInventory());
 		return proDeRepo.save(pd);
 	}
-	
+
 	public ProductDetail exportDetail(Long id, Long size, int quantity) {
 		ProductDetail pd = this.findByIdAndSize(id, size);
-		pd.setInventory(pd.getInventory()-quantity);
+		pd.setInventory(pd.getInventory() - quantity);
 		return proDeRepo.save(pd);
 	}
 	//////
-	
+
 	public CartItem findById(Long id, Long product, Long size) {
-		CartItem pd = cartRepo.findByIdAndProductAndSize(id, product,size );
+		CartItem pd = cartRepo.findByIdAndProductAndSize(id, product, size);
 		return pd;
 	}
-	
-	public CartItem addtoCart(Long customer_id, Long size, Long productid) {
+
+	public CartItem addtoCart(Long customer_id, Long size, Long productid, int quantity) {
 		CartItem pd = cartRepo.findByIdAndProductAndSize(customer_id, productid, size);
-		pd.setQuantity(pd.getQuantity()+1);
+		pd.setQuantity(pd.getQuantity() + quantity);
 		return cartRepo.save(pd);
 	}
-	
-	public CartItem add(CartItem s) {
-		s.setQuantity(s.getQuantity()+1);
-		return cartRepo.save(s);
+
+	public CartItem createCartItem(Long customer_id, Long size, Long productid, int quantity) {
+//		CartItem cartitem = new CartItem ();
+//		
+//		
+//		cartitem.setCustomer(cusRepo.findById(customer_id).get());
+//		System.out.println(cartitem.getCustomer().getId());
+//		
+//		cartitem.setQuantity(quantity);
+//		System.out.println(cartitem.getQuantity());
+//		
+//		cartitem.setProduct_detail(proDeRepo.findById(productid).get());	
+//		System.out.println(cartitem.getProduct_detail().getProduct().getId());
+//		
+//		cartitem.setProduct_detail(null);
+//		
+//		cartitem.setProduct_detail(proDeRepo.findById(size).get());		
+//		System.out.println(cartitem.getProduct_detail().getSize().getId()); 
+
+		cartRepo.createCartItem(customer_id, quantity, productid, size);
+
+		
+		return null;
+		
 	}
-	
-	
-	
+
 	/////
-	public List<ProductDetail> getAll (){
+	public List<ProductDetail> getAll() {
 		return proDeRepo.findAll();
 	}
-	
+
 }

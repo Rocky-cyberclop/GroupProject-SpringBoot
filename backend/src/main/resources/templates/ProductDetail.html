@@ -146,10 +146,6 @@
 
 						<p class="product-description mt-20" th:text="${product.description}"></p>
 
-
-					
-
-
 						<div class="row">
 							<div class="col-md-12 grid-margin stretch-card">
 								<div class="card">
@@ -158,7 +154,7 @@
 											th:method="get" class="forms-sample">
 											<div class="product-size">
 												<span>Size:</span>
-												<select class="form-control btn btn-outline-primary dropdown-toggle">
+												<select class="form-control btn btn-outline-primary dropdown-toggle" name="size">
 													<option class="dropdown-item" th:each="size: ${sizes}"
 														th:value="${size.id}" th:text="${size.name}"></option>
 												</select>
