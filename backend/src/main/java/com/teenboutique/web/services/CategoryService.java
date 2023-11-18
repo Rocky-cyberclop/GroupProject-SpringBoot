@@ -20,8 +20,9 @@ public class CategoryService {
 	public List<Category> findAll() {
 		return cateRepo.findAll();
 	}
-	
+
 	public List<Category> findAllCategory(){
 		return cateRepo.findAll();
 	}
+
 }

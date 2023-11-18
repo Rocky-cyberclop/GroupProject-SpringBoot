@@ -6,3 +6,5 @@ spring.datasource.password=1pjMlTpubncjoMtdzLtN
 spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 spring.jpa.hibernate.ddl-auto=update
 spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
+
+spring.servlet.multipart.max-file-size=100MB
