@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+<!--
+ // WEBSITE: https://themefisher.com
+ // TWITTER: https://twitter.com/themefisher
+ // FACEBOOK: https://www.facebook.com/themefisher
+ // GITHUB: https://github.com/themefisher/
+-->
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en"
+    th:fragment="mainLayout(css, content, script)">
+
+
+
+
+
+
+<head>
+
+    <div th:replace="~{fragments/components/header :: meta}"></div>
+
+    <div th:replace="~{fragments/components/header :: css}"></div>
+
+    <div th:replace="~{fragments/components/header :: sundry-css}"></div>
+
+    <div th:replace="~{fragments/components/header :: style-css}"></div>
+
+
+</head>
+
+<body id="body">
+
+    <div th:replace="~{fragments/components/header :: header}"></div>
+    <div th:replace="~{fragments/components/header :: menu}"></div>
+
+
+    <section class="page-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="content">
+                        <h1 class="page-name">Chi tiết đơn hàng <h1 th:text="@{'#'+${id}}"></h1>
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+
+
+    <section class="user-dashboard page-wrapper">
+        <div class="container-fluid">
+
+            <table class="table table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th>Tên hàng hóa</th>
+                        <th>Số lượng</th>
+                        <th style="width: 150px;">Giá tiền</th>
+                        <th>Kích cỡ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="list, viTri: ${lists}">
+                        <td th:text="${list.productName}"></td>
+                        <td th:text="${list.productQuantity}"></td>
+                        <td style="width: 150px;"
+                            th:text="${#numbers.formatDecimal(list.price, 0, 'COMMA', 0, 'POINT')+' VNĐ'}">
+                        </td>
+                        <td th:text="${list.size}"></td>
+                    </tr>
+                    
+                </tbody>
+            </table> <br> <h4 class="text-primary" th:text="@{'Tổng tiền: '+ ${#numbers.formatDecimal(sum, 0, 'COMMA', 0, 'POINT')+' VNĐ'}}"></h4>
+        </div>
+        </div>
+    </section>
+    <div th:replace="~{fragments/components/footer :: footer}"></div>
+    <div th:replace="~{fragments/components/footer :: script}"></div>
+</body>
+
+</html>

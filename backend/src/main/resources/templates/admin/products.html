@@ -3,7 +3,7 @@
 	th:replace="~{admin/layouts/admin-layout :: mainLayoutAdmin(~{::link.css-admin}, ~{::div.main-admin}, ~{::script.admin-js})}">
 
 <head>
-	<link class="css-admin" rel="stylesheet" th:href="@{/admin/css/management-employee.css}">
+	<link class="css-admin" rel="stylesheet" th:href="@{/admin/css/management-product.css}">
 </head>
 
 <body>
@@ -16,12 +16,14 @@
 				<div class="content-wrapper">
 					<div class="content-wrapper">
 						<div class="page-header">
-							<h3 class="page-title">Quản lý nhân viên</h3>
+							<h3 class="page-title">Quản lý sản phẩm</h3>
 						</div>
-						<a th:href="@{/admin/management/employee/create}"
-							class="btn btn-gradient-primary me-2 mb-5">Thêm nhân viên</a>
-						<a th:href="@{/admin/management/role/create}"
-							class="btn btn-gradient-primary me-2 mb-5">Thêm vai trò</a>
+						<a th:href="@{/admin/management/product/create}" class="btn btn-gradient-primary me-2 mb-5">Thêm Sản
+							phẩm</a>
+						<a th:href="@{/admin/management/category/create}"
+							class="btn btn-gradient-primary me-2 mb-5">Thêm Loại</a>
+						<a th:href="@{/admin/management/size/create}"
+							class="btn btn-gradient-primary me-2 mb-5">Thêm Size</a>
 						<div class="row">
 							<div class="col-lg-12 grid-margin stretch-card">
 								<div class="card">
@@ -30,39 +32,28 @@
 											<thead>
 												<tr>
 													<th>ID</th>
-													<th>Chức vụ</th>
 													<th>Tên</th>
-													<th>Địa chỉ</th>
-													<th>Năm sinh</th>
-													<th>Email</th>
-													<th>Giới tính</th>
-													<th>Điện thoại</th>
-													<th>Ngày vào làm</th>
-													<th>Ngày thôi việc</th>
+													<th>Giá bán</th>
+													<th>Loại</th>
+													
 													<th>Action</th>
 												</tr>
 											</thead>
 											<tbody>
-												<tr th:each="employee: ${emps}">
-													<td th:text="${employee.id}"></td>
-													<td th:text="${employee.role.name}"></td>
-													<td th:text="${employee.name}"></td>
-													<td th:text="${employee.address}"></td>
-													<td th:text="${employee.dob}"></td>
-													<td th:text="${employee.email}"></td>
-													<td th:if="${employee.gender}">Nam</td>
-													<td th:if="!${employee.gender}">Nữ</td>
-													<td th:text="${employee.phone}"></td>
-													<td th:text="${employee.starting_date}"></td>
-													<td th:text="${employee.resigning_date}"></td>
+												<tr th:each="product: ${products}">
+													<td th:text="${product.id}"></td>
+													<td class="product_name" th:text="${product.name}"></td>
+													<td th:text="${product.price}"></td>
+													<td th:text="${product.category.name}"></td>
+													
 													<td>
 														<a
-															th:href="@{/admin/management/employee/detail/{id}(id=${employee.id})}"><button
+															th:href="@{/admin/management/product/detail/{id}(id=${product.id})}"><button
 																class="btn btn-outline-secondary btn-rounded btn-icon"
 																href=""><i
 																	class="mdi mdi-information text-primary"></i></button></a>
 														<a
-															th:href="@{/admin/management/employee/delete/{id}(id=${employee.id})}"><button
+															th:href="@{/admin/management/product/delete/{id}(id=${product.id})}"><button
 																class="btn btn-outline-secondary btn-rounded btn-icon"><i
 																	class="mdi mdi-delete text-danger"></i></button></a>
 													</td>
@@ -70,18 +61,18 @@
 											</tbody>
 										</table>
 										<div class="btn-group mt-5" role="group" aria-label="Basic example">
-											<a href="/admin" type="button" th:href="@{/admin/management/employees/1}"
+											<a href="/admin" type="button" th:href="@{/admin/management/products/1}"
 												class="btn btn-outline-secondary">&#8592;&#8592;</a>
 											<a th:if="${currentPage}-1>0"
-												th:href="@{/admin/management/employees/{page}(page=${currentPage}-1)}"
+												th:href="@{/admin/management/products/{page}(page=${currentPage}-1)}"
 												class="btn btn-outline-secondary">&#8592;</a>
 											<a type="button" class="btn btn-outline-secondary"
 												th:text="${currentPage}"></a>
 											<a th:if="${currentPage}+1<=${totalPages}"
-												th:href="@{/admin/management/employees/{page}(page=${currentPage}+1)}"
+												th:href="@{/admin/management/products/{page}(page=${currentPage}+1)}"
 												type="button" class="btn btn-outline-secondary">&#8594;</a>
 											<a type="button"
-												th:href="@{/admin/management/employees/{page}(page=${totalPages})}"
+												th:href="@{/admin/management/products/{page}(page=${totalPages})}"
 												class="btn btn-outline-secondary">&#8594;&#8594;</a>
 										</div>
 										<!-- modal -->
