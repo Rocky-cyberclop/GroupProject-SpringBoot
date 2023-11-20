@@ -52,9 +52,9 @@ public class CustomerOrderItem {
 	})
 	private ProductDetail product_detail;
 	
-	
 	@Embeddable
 	public static class CustomerOrderItemId {
+		
 		private ProductDetailId product_detail_id;
 		private Long customer_order_id;
 		public ProductDetailId getProduct_detail_id() {
@@ -69,6 +69,15 @@ public class CustomerOrderItem {
 		public void setCustomer_order_id(Long customer_order_id) {
 			this.customer_order_id = customer_order_id;
 		}
+		public CustomerOrderItemId() {
+			super();
+		}
+		public CustomerOrderItemId(Long product_id, Long customer_order_id, Long size_id) {
+			super();
+			this.product_detail_id= new ProductDetailId(product_id, size_id);
+			this.customer_order_id = customer_order_id;
+			
+		}
 		
 		
 	}
@@ -77,8 +86,9 @@ public class CustomerOrderItem {
 		return id;
 	}
 
-	public void setId(CustomerOrderItemId id) {
-		this.id = id;
+	public void setId(Long product_id, Long size_id) {
+		this.id = new CustomerOrderItemId(product_id, this.customer_order.getId(), size_id);
+		
 	}
 
 	public int getQuantity() {
@@ -140,5 +150,7 @@ public class CustomerOrderItem {
 	public CustomerOrderItem() {
 		super();
 	}
+
+
 
 }

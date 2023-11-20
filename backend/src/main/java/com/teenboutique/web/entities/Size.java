@@ -52,5 +52,4 @@ public class Size {
 	public Size() {
 		super();
 	}
-
 }

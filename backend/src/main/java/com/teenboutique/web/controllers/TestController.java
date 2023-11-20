@@ -14,6 +14,6 @@ public class TestController {
 	@GetMapping("/hi")
 	public String test() {
 		proSer.getAll();
-		return "/home";
+		return "/checkout";
 	}
 }
