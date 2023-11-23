@@ -50,6 +50,8 @@ public class ProductDetail {
 			this.product_id=product_id;
 			this.size_id=size_id;
 		}
+		private Long product_id;
+		private Long size_id;
 		public Long getProduct_id() {
 			return product_id;
 		}
@@ -62,8 +64,7 @@ public class ProductDetail {
 		public void setSize_id(Long size_id) {
 			this.size_id = size_id;
 		}
-		private Long product_id;
-		private Long size_id;
+		
 	}
 
 	public ProductDetailId getId() {
