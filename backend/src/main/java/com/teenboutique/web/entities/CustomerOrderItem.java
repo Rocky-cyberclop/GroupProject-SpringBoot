@@ -16,6 +16,7 @@ import jakarta.persistence.JoinColumns;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Positive;
 
 @Entity
 @Table(name = "CustomerOrderItem")
@@ -24,12 +25,17 @@ public class CustomerOrderItem {
 	private CustomerOrderItemId id;
 	
 	//extra column
+	@Positive(message = "Số lượng phải là số dương")
 	private int quantity;
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private LocalDate rate_date;
 	@Column(length = 5000)
 	private String rate_content;
+	
+	@Positive(message = "Điểm phải là số dương")
 	private int point;
+	
+	@Positive(message = "Giá tiền phải là số dương")
 	private long price;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -48,16 +54,41 @@ public class CustomerOrderItem {
 	
 	@Embeddable
 	public static class CustomerOrderItemId {
+		
 		private ProductDetailId product_detail_id;
 		private Long customer_order_id;
+		public ProductDetailId getProduct_detail_id() {
+			return product_detail_id;
+		}
+		public void setProduct_detail_id(ProductDetailId product_detail_id) {
+			this.product_detail_id = product_detail_id;
+		}
+		public Long getCustomer_order_id() {
+			return customer_order_id;
+		}
+		public void setCustomer_order_id(Long customer_order_id) {
+			this.customer_order_id = customer_order_id;
+		}
+		public CustomerOrderItemId() {
+			super();
+		}
+		public CustomerOrderItemId(Long product_id, Long customer_order_id, Long size_id) {
+			super();
+			this.product_detail_id= new ProductDetailId(product_id, size_id);
+			this.customer_order_id = customer_order_id;
+			
+		}
+		
+		
 	}
 
 	public CustomerOrderItemId getId() {
 		return id;
 	}
 
-	public void setId(CustomerOrderItemId id) {
-		this.id = id;
+	public void setId(Long product_id, Long size_id) {
+		this.id = new CustomerOrderItemId(product_id, this.customer_order.getId(), size_id);
+		
 	}
 
 	public int getQuantity() {
@@ -119,5 +150,7 @@ public class CustomerOrderItem {
 	public CustomerOrderItem() {
 		super();
 	}
+
+
 
 }
