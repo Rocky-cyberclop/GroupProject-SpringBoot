@@ -69,23 +69,6 @@ public class ProductDetailService {
 	}
 
 	public CartItem createCartItem(Long customer_id, Long size, Long productid, int quantity) {
-//		CartItem cartitem = new CartItem ();
-//		
-//		
-//		cartitem.setCustomer(cusRepo.findById(customer_id).get());
-//		System.out.println(cartitem.getCustomer().getId());
-//		
-//		cartitem.setQuantity(quantity);
-//		System.out.println(cartitem.getQuantity());
-//		
-//		cartitem.setProduct_detail(proDeRepo.findById(productid).get());	
-//		System.out.println(cartitem.getProduct_detail().getProduct().getId());
-//		
-//		cartitem.setProduct_detail(null);
-//		
-//		cartitem.setProduct_detail(proDeRepo.findById(size).get());		
-//		System.out.println(cartitem.getProduct_detail().getSize().getId()); 
-
 		cartRepo.createCartItem(customer_id, quantity, productid, size);
 
 		

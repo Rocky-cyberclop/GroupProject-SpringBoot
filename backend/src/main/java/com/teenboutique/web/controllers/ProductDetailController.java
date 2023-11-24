@@ -33,9 +33,9 @@ public class ProductDetailController {
 	private SizeService sizeSer;
 
 	private long iduser = 392;
-	//private long sizeid = 4;
 
-	@GetMapping("/ProductDetail/{id}")
+
+	@GetMapping("/productdetail/{id}")
 	public String showDetailProductForm(Model model, @PathVariable("id") Long id) {
 		Product p = proSer.findById(id);
 		model.addAttribute("product", p);
@@ -43,19 +43,14 @@ public class ProductDetailController {
 
 		List<Size> sizes = sizeSer.findAll();
 		model.addAttribute("sizes", sizes);
-		return "ProductDetail";
+		return "productdetail";
 	}
 
-	@GetMapping("/ProductDetail/AddToCart/{id}")
+	@GetMapping("/productdetail/AddToCart/{id}")
 	public String addToCart(Model model, @PathVariable("id") Long id, @RequestParam("quantity") int quantity,
 			@RequestParam("size") Long s) {
 
 		CartItem c = proDeSer.findById(iduser, id, s);
-
-//		System.out.println(s);
-//		System.out.println(quantity);
-//		System.out.println(iduser);
-//		System.out.println(id);
 		
 		if (c != null) {
 			proDeSer.addtoCart(iduser, s, id, quantity);

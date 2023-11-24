@@ -110,7 +110,7 @@
 							<div class="col-md-12 grid-margin stretch-card">
 								<div class="card">
 									<div class="card-body">
-										<form th:action="@{/ProductDetail/AddToCart/{id}(id=${product.id})}"
+										<form th:action="@{/productdetail/AddToCart/{id}(id=${product.id})}"
 											th:method="get" class="forms-sample">
 											<div class="product-size">
 												<span>Size:</span>
@@ -148,7 +148,7 @@
 							</ul>
 							<div class="tab-content patternbg">
 								<div id="details" class="tab-pane fade active in">
-									<h4>Product Description</h4>
+									<h4>Mô tả sản phẩm</h4>
 									<p th:text="${product.description}"></p>
 
 								</div>
