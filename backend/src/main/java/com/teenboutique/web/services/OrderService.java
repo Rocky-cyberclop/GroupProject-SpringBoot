@@ -50,30 +50,36 @@ public class OrderService {
 		return res;
 	}
 	
+	public CustomerOrder save(CustomerOrder customerOrder) {
+		return orRepo.save(customerOrder);
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	public CustomerOrder lastItem() {
+		return orRepo.customerOrderLast();
+	}
 }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
