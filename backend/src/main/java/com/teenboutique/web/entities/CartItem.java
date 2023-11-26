@@ -114,5 +114,11 @@ public class CartItem {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	@Override
+	public String toString() {
+		return "CartItem [id=" + id + ", quantity=" + quantity + ", customer=" + customer + ", product_detail="
+				+ product_detail + "]";
+	}
 
 }
