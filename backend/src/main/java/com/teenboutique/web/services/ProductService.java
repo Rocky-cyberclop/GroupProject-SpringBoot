@@ -33,10 +33,6 @@ public class ProductService {
 	@Autowired
 	private ProductImageRepository proImgRepo;
 	
-	public List<Product> getAll(){
-		return proRepo.findAll();
-	}
-	
 	public Page<Product> findPage(int pageNumber) {
 		Pageable pageable = PageRequest.of(pageNumber - 1, 10);
 		return proRepo.findAllProductStillSell(pageable);

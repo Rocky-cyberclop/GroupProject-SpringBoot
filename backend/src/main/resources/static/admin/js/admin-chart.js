@@ -44,7 +44,7 @@ document.querySelector(".btn-statistic").addEventListener("click", function(even
 
 	/*document.querySelector(".end_date")*/
 	event.preventDefault()
-	fetch("http://localhost:8080/api/admin/statistic/all/" +
+	fetch("http://localhost:8080/admin/api/statistic/all/" +
 		document.querySelector(".start-date").value + "/" +
 		document.querySelector(".end-date").value, { method: "get" })
 		.then(response => response.json())
