@@ -42,7 +42,7 @@ public class CartController {
 		this.customerRepository = customerRepository;
 	}
 
-	@GetMapping("/cart")
+	@GetMapping("/main/cart")
 	public String viewCart(Model model) {
 		List<CartItem> cartItems = cartService.getCartItemsByCustomer();
 		double totalPrice = cartService.calculateTotalPrice();
@@ -51,13 +51,13 @@ public class CartController {
 		return "cart";
 	}
 
-	@GetMapping("/cart/remove/{id}")
+	@GetMapping("/main/cart/remove/{id}")
 	public String removeCartItem(@PathVariable("id") Long productId) {
 		cartService.deleteCartItemByCustomerAndProduct(productId);
 		return "redirect:/cart";
 	}
 
-	@GetMapping("/cart/checkout")
+	@GetMapping("/main/cart/checkout")
 	public String checkoutCart(Model model) {
 		Customer customer = customerRepository.findById(cartService.getCustomerId()).orElse(null);
 		List<CartItem> cartItems = cartService.getCartItemsByCustomer();
@@ -69,7 +69,7 @@ public class CartController {
 		return "/checkout";
 	}
 
-	@GetMapping("/cart/thanhToan")
+	@GetMapping("/main/cart/thanhToan")
 	public String thanhToan(Model model) {
 		float totalPrice = cartService.calculateTotalPrice();
 		Customer customer = customerRepository.findById(cartService.getCustomerId()).orElse(null);

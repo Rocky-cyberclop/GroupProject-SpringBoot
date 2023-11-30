@@ -17,7 +17,7 @@ public class CartService {
 
 	private final CartRepository cartRepository;
 
-    private Long customerId = 3314L;
+    private Long customerId = 6076L;
 
     @Autowired
     public CartService(CartRepository cartRepository, CustomerRepository customerRepository) {
