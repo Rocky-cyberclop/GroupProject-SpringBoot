@@ -28,7 +28,7 @@ public class LoginController {
 		Customer c = cusSer.getCusByEmail(email);
 		BCryptPasswordEncoder cryptPassword = new BCryptPasswordEncoder();
 		if (cryptPassword.matches(password, c.getPassword()))
-			return "main";
+			return "redirect:/";//return "main";
 		model.addAttribute("error", "Bạn đã nhập sai email hoặc mật khẩu");
 		return "login";
 	}
