@@ -90,17 +90,17 @@ public class FormLoginSecurityConfig {
 				.authorizeHttpRequests((authorizeRequests) -> authorizeRequests
 						.requestMatchers("/main/css/**", "/main/images/**", "/main/js/**", "/main/plugins/**").permitAll()
 						.requestMatchers("/uploads/**").permitAll()
-						.requestMatchers("/", "/main/signin").permitAll()
+						.requestMatchers("/", "/login", "/forget", "/register").permitAll()
 						.requestMatchers("/main/**").hasAuthority("User")
 						.anyRequest().authenticated())
 				.formLogin((formLogin) -> formLogin
-						.usernameParameter("username")
+						.usernameParameter("email")
 						.passwordParameter("password")
-						.loginPage("/main/signin")
+						.loginPage("/login")
 						.defaultSuccessUrl("/").permitAll()
-						.failureUrl("/main/signin?error=true").permitAll())
+						.failureUrl("/login?error=true").permitAll())
 				.logout((logout) -> logout.invalidateHttpSession(true).clearAuthentication(true)
-						.logoutRequestMatcher(new AntPathRequestMatcher("/main/logout"))
+						.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 						.logoutSuccessUrl("/").permitAll());
 		httpSecurity.authenticationProvider(daoAuthenticationProvider());
 		return httpSecurity.build();

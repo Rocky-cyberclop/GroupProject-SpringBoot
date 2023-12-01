@@ -137,31 +137,10 @@ public class ProductService {
 		}
 		return proRepo.save(p);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+	public List<Product> getTrendyProduct(){
+		return proRepo.findTrendyProduct();
+	}
+
 	
 }

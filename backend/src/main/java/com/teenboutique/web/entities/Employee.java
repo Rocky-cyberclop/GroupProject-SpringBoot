@@ -16,6 +16,10 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "Employee")
@@ -24,15 +28,27 @@ public class Employee {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotBlank(message = "Tên không được trống")
 	private String name;
+	
+	@Email(message = "Email không hợp lệ")
 	private String email;
+	
+	@NotBlank(message = "Số điện thoại không được trống")
+    @Pattern(regexp = "^[0-9]*$", message = "Số điện thoại không hợp lệ")
 	private String phone;
+	
+	@NotBlank(message = "Địa chỉ không được trống")
 	private String address;
+	
 	private String img;
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private LocalDate dob;
 	private boolean gender;
+	
+	@Size(min = 8, message = "Mật khẩu phải có ít nhất 8 ký tự")
 	private String password;
+	
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private LocalDate starting_date;
 	@DateTimeFormat(pattern="yyyy-MM-dd")

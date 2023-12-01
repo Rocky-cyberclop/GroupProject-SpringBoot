@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+
+<!--
+ // WEBSITE: https://themefisher.com
+ // TWITTER: https://twitter.com/themefisher
+ // FACEBOOK: https://www.facebook.com/themefisher
+ // GITHUB: https://github.com/themefisher/
+-->
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en"
+	th:fragment="mainLayout(css, content, script)">
+
+
+
+
+
+
+<head>
+
+	<div th:replace="~{fragments/components/header :: meta}"></div>
+
+	<div th:replace="~{fragments/components/header :: css}"></div>
+
+	<div th:replace="~{fragments/components/header :: sundry-css}"></div>
+
+	<div th:replace="~{fragments/components/header :: style-css}"></div>
+
+
+</head>
+
+<body id="body">
+
+	<div th:replace="~{fragments/components/header :: header}"></div>
+	<div th:replace="~{fragments/components/header :: menu}"></div>
+
+
+	<section class="page-header">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="content">
+						<h1 class="page-name">Bảng điều khiển</h1>
+						<ol class="breadcrumb">
+							<li><a th:href="@{/}">Trang chủ</a></li>
+							<li class="active">Tài khoản của tôi</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+	<section class="user-dashboard page-wrapper">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<ul class="list-inline dashboard-menu text-center">
+						<li><a class="active" th:href="@{/account}">Bảng điều khiển</a></li>
+						<li><a th:href="@{/account/order}">Đơn đặt hàng</a></li>
+						<li><a th:href="@{/account/profileDetails}">Chi Tiết hồ sơ</a></li>
+					</ul>
+					<div class="dashboard-wrapper user-dashboard">
+						<div class="media">
+							<div class="pull-left">
+								<img class="media-object user-img" th:src="@{/main/images/channels4_profile.jpg}" alt="Hình ảnh">
+							</div>
+							<div class="media-body">
+								<h2 class="media-heading" style="display: inline-block;">Chào mừng </h2>
+								<h2 style="display: inline-block;" th:text="${user.name}"></h2>
+								<p>Điều rất quan trọng là khách hàng phải chú ý đến quá trình tiêu thụ. Vì vậy, theo
+									luật, nó là như vậy. Khả năng phục hồi là nhất! Mong muốn của họ trong thời gian,
+									mọi lúc. Điều rất quan trọng là khách hàng phải chú ý đến quá trình tiêu thụ. Chẳng
+									để làm gì.</p>
+							</div>
+						</div>
+						<div class="total-order mt-20">
+							<h4>Tổng số đặt hàng</h4>
+							<div class="table-responsive">
+								<table class="table">
+									<thead>
+										<tr>
+											<th>ID Đơn Hàng</th>
+											<th>Ngày</th>
+											<th>Các Mặt Hàng</th>
+											<th>Tổng Giá</th>
+											<th></th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="customerOrder, viTri: ${customerOrders}">
+											<td><a th:text="'#' + ${customerOrder.id}"></a></td>
+											<td th:text="${customerOrder.date}"></td>
+											<td th:text="${sl[viTri.index]}"></td>
+											<td
+												th:text="${#numbers.formatDecimal(customerOrder.total, 0, 'COMMA', 0, 'POINT')+' VNĐ'}">
+
+											</td>
+										</tr>
+
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+
+
+
+	<div th:replace="~{fragments/components/footer :: footer}"></div>
+
+	<div th:replace="~{fragments/components/footer :: script}"></div>
+</body>
+
+</html>

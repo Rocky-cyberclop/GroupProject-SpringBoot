@@ -36,7 +36,7 @@ public class LoginEntityDetailServiceImpl implements UserDetailsService {
 					.orElseThrow(() -> new UsernameNotFoundException("Employee id " + empLong + " not found!"));
 			return new User(employee.getId().toString(), employee.getPassword(), getEmployeeAuthorities(employee));
 		} catch (NumberFormatException e) {
-			Customer customer = customerRepository.findByEmail(username)
+			Customer customer = customerRepository.findByEmailOpt(username)
 					.orElseThrow(() -> new UsernameNotFoundException("Customer email " + username + "not found"));
 			return new User(customer.getEmail(), customer.getPassword(), getUserAuthorities());
 		}
