@@ -30,7 +30,7 @@ public class ProductDetailService {
 	
 	public ProductDetail exportDetail(Long id, Long size, int quantity) {
 		ProductDetail pd = this.findByIdAndSize(id, size);
-		pd.setInventory(pd.getInventory()-quantity);
+		if(pd.getInventory()>0)pd.setInventory(pd.getInventory()-quantity);
 		return proDeRepo.save(pd);
 	}
 	

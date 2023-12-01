@@ -20,4 +20,8 @@ public class SizeService {
 	public List<Size> findAll() {
 		return sizeRepo.findAll();
 	}
+	
+	public Size findById(Long id) {
+		return sizeRepo.findById(id).get();
+	}
 }
