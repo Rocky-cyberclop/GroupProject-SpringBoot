@@ -177,30 +177,8 @@ public class ProductService {
 		return result;
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	public List<Product> getTrendyProduct(){
+		return proRepo.findTrendyProduct();
+	}
 	
 }

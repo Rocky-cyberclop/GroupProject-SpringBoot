@@ -35,4 +35,9 @@ public class CategoryService {
 	public Category findById(Long id) {
 		return cateRepo.findById(id).get();
 	}
+
+	public List<Category> findAllCategory(){
+		return cateRepo.findAll();
+	}
+
 }
