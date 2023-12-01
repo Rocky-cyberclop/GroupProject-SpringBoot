@@ -42,7 +42,6 @@
                                     <table class="table">
                                         <thead>
                                             <tr>
-												<th></th>
                                                 <th class="">Tên Sản Phẩm</th>
                                                 <th class="">Số lượng</th>
                                                 <th class="">Giá</th>
@@ -51,7 +50,6 @@
                                         </thead>
                                         <tbody>
 							                <tr th:each="item : ${cartItems}">
-												<td th:text="${item.product_detail.product.images[0].url}"></td>
 							                    <td th:text="${item.product_detail.product.name}"></td>
 							                    <td th:text="${item.quantity}"></td>
 							                    <td th:text="${item.product_detail.product.price}"></td>
@@ -66,7 +64,7 @@
                                     <div class="row panel-body">
                                         <!-- Hiển thị tổng giá trị -->
                                         <h5 th:text="@{'Tổng tiền: '+ ${#numbers.formatDecimal(totalPrice, 0, 'COMMA', 0, 'POINT')+' VNĐ'}}"></h5>
-                                        <a th:href="@{/cart/checkout}" class="col-md-2">
+                                        <a th:href="@{/main/cart/checkout}" class="col-md-2">
                                             <button class="btn btn-info">Thanh toán</button>
                                         </a>
                                     </div>
