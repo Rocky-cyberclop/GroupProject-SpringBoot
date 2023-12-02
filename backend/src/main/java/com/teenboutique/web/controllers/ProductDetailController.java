@@ -32,10 +32,10 @@ public class ProductDetailController {
 	@Autowired
 	private SizeService sizeSer;
 
-	private long iduser = 392;
+	private long iduser = 857;
 
 
-	@GetMapping("/productdetail/{id}")
+	@GetMapping("/main/productdetail/{id}")
 	public String showDetailProductForm(Model model, @PathVariable("id") Long id) {
 		Product p = proSer.findById(id);
 		model.addAttribute("product", p);
@@ -46,7 +46,7 @@ public class ProductDetailController {
 		return "productdetail";
 	}
 
-	@GetMapping("/productdetail/AddToCart/{id}")
+	@GetMapping("/main/productdetail/AddToCart/{id}")
 	public String addToCart(Model model, @PathVariable("id") Long id, @RequestParam("quantity") int quantity,
 			@RequestParam("size") Long s) {
 
