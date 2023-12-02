@@ -1,5 +1,5 @@
 //Layouts
-import MainLayout from '../layouts/MainLayout';
+import MainLayoutAdmin from '../layouts/MainLayoutAdmin';
 
 //Pages
 import Main from '../pages/Main';

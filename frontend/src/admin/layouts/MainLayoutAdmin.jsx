@@ -2,7 +2,7 @@ import React from 'react';
 import Header from './fragments/Header';
 import Sidebar from './fragments/Sidebar';
 
-function MainLayout({ children }) {
+function MainLayoutAdmin({ children }) {
   return (
     <div>
       <div className="container-scroller">
@@ -18,4 +18,4 @@ function MainLayout({ children }) {
   );
 }
 
-export default MainLayout;
+export default MainLayoutAdmin;
