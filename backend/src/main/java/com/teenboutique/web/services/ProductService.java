@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 
@@ -17,7 +18,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-
+import com.teenboutique.web.dto.ProductDto;
+import com.teenboutique.web.dto.ProductsDto;
 import com.teenboutique.web.entities.Product;
 import com.teenboutique.web.entities.ProductImage;
 import com.teenboutique.web.helpers.Helper;
@@ -37,6 +39,10 @@ public class ProductService {
 		return proRepo.findAll();
 	}
 	
+	public Long getLatsId(){
+		return proRepo.count();
+	}
+	
 	public Page<Product> findPage(int pageNumber) {
 		Pageable pageable = PageRequest.of(pageNumber - 1, 10);
 		return proRepo.findAllProductStillSell(pageable);
@@ -46,41 +52,51 @@ public class ProductService {
 		return proRepo.findById(id).get();
 	}
 	
+	public Product save(Product product) {
+		return proRepo.save(product);
+	}
+	
 //	If avatar or not_avatars is null this function will fail, need constrain on those data
 	public Product createProduct(Product p, MultipartFile avatar, MultipartFile[] not_avatars) {
 		String path = System.getProperty("user.dir") + "/src/main/resources/static/uploads/images/";
-		String fileName = Helper.generateRandomString(20)+avatar.getOriginalFilename().substring(avatar.getOriginalFilename().lastIndexOf('.'));
-		Path uploadPath = Paths.get(path+fileName);
-		Path filePath = uploadPath.resolve(uploadPath);
-		try {
-			Files.copy(avatar.getInputStream(), filePath);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		ProductImage pi1 = new ProductImage();
-		pi1.setAvatar(true);
-		pi1.setUrl(fileName);
-		pi1.setProduct(p);
-		List<ProductImage> pis = new ArrayList<ProductImage>();
-		pis.add(pi1);
-		
-		for(MultipartFile not_avatar : not_avatars) {
-			fileName = Helper.generateRandomString(20)+not_avatar.getOriginalFilename().substring(not_avatar.getOriginalFilename().lastIndexOf('.'));
+		Path uploadPath;
+		Path filePath;
+		List<ProductImage> pis = p.getImages();
+		String fileName;
+		if(avatar!=null) {
+			fileName = Helper.generateRandomString(20)+avatar.getOriginalFilename().substring(avatar.getOriginalFilename().lastIndexOf('.'));
 			uploadPath = Paths.get(path+fileName);
 			filePath = uploadPath.resolve(uploadPath);
 			try {
-				Files.copy(not_avatar.getInputStream(), filePath);
+				Files.copy(avatar.getInputStream(), filePath);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			ProductImage pii = new ProductImage();
-			pii.setAvatar(false);
-			pii.setUrl(fileName);;
-			pii.setProduct(p);
-			pis.add(pii);
+			
+			ProductImage pi1 = new ProductImage();
+			pi1.setAvatar(true);
+			pi1.setUrl(fileName);
+			pi1.setProduct(p);
+			pis.add(pi1);
+		}
+		if(not_avatars!=null) {
+			for(MultipartFile not_avatar : not_avatars) {
+				fileName = Helper.generateRandomString(20)+not_avatar.getOriginalFilename().substring(not_avatar.getOriginalFilename().lastIndexOf('.'));
+				uploadPath = Paths.get(path+fileName);
+				filePath = uploadPath.resolve(uploadPath);
+				try {
+					Files.copy(not_avatar.getInputStream(), filePath);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				ProductImage pii = new ProductImage();
+				pii.setAvatar(false);
+				pii.setUrl(fileName);;
+				pii.setProduct(p);
+				pis.add(pii);
+			}
 		}
 		p.setImages(pis);
 		return proRepo.save(p);
@@ -92,7 +108,7 @@ public class ProductService {
 		existed.setCategory(p.getCategory());
 		existed.setPrice(p.getPrice());
 		existed.setDescription(p.getDescription());
-		if(file.getSize()!=0) {
+		if(file!=null&&file.getSize()!=0) {
 			String path = System.getProperty("user.dir") + "/src/main/resources/static/uploads/images/";
 			String fileName = Helper.generateRandomString(20)+file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf('.'));
 			Path uploadPath = Paths.get(path+fileName);
@@ -141,10 +157,28 @@ public class ProductService {
 		}
 		return proRepo.save(p);
 	}
-
+	
+	public ProductsDto findPageProductDto(int page){
+		ProductsDto result = new ProductsDto();
+		Page<Product> products = findPage(page);
+		result.setCurrentPage(page);
+		result.setTotalPage(products.getTotalPages());
+		List<ProductDto> productDtos = new ArrayList<ProductDto>();
+		for(Product product : products.getContent()) {
+			productDtos.add(new ProductDto(product));
+		}
+		result.setProducts(productDtos);
+		return result;
+	}
+	
+	public ProductDto findProductDto(Long id){
+		Product product = findById(id);
+		ProductDto result = new ProductDto(product);
+		return result;
+	}
+	
 	public List<Product> getTrendyProduct(){
 		return proRepo.findTrendyProduct();
 	}
-
 	
 }
