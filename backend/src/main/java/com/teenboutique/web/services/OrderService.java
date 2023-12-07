@@ -50,6 +50,10 @@ public class OrderService {
 		return res;
 	}
 	
+
+	public CustomerOrder findById(Long id) {
+		return orRepo.findById(id).get();
+	}
 	public CustomerOrder save(CustomerOrder customerOrder) {
 		return orRepo.save(customerOrder);
 	}

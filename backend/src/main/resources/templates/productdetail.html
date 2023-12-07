@@ -102,7 +102,7 @@
 				<div class="col-md-7">
 					<div class="single-product-details" th:object="${product}">
 						<h3 th:text="${product.name}"></h3>
-						<p class="product-price" th:text="${product.price}"></p>
+						<h4 class="product-price" th:text="${product.price}"></h4>
 
 						<p class="product-description mt-20" th:text="${product.description}"></p>
 
@@ -110,7 +110,7 @@
 							<div class="col-md-12 grid-margin stretch-card">
 								<div class="card">
 									<div class="card-body">
-										<form th:action="@{/productdetail/AddToCart/{id}(id=${product.id})}"
+										<form th:action="@{/main/productdetail/AddToCart/{id}(id=${product.id})}"
 											th:method="get" class="forms-sample">
 											<div class="product-size">
 												<span>Size:</span>
@@ -142,9 +142,7 @@
 						<div class="tabCommon mt-20">
 							<ul class="nav nav-tabs">
 								<li class="active"><a data-toggle="tab" href="#details" aria-expanded="true">Details</a>
-								</li>
-								<li class=""><a data-toggle="tab" href="#reviews" aria-expanded="false">Reviews (3)</a>
-								</li>
+								</li>								
 							</ul>
 							<div class="tab-content patternbg">
 								<div id="details" class="tab-pane fade active in">

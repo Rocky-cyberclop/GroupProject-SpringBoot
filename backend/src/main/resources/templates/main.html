@@ -112,7 +112,7 @@
 								</div>
 							</div>
 							<div class="product-content">
-								<h4><a th:text="${product.name}" th:href="@{/productdetail/{id}(id=${product.id})}"></a></h4>
+								<h4><a th:text="${product.name}" th:href="@{/main/productdetail/{id}(id=${product.id})}"></a></h4>
 								<p th:inline="text" class="price">[[${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')}]] VNĐ</p>
 							</div>
 						</div>

@@ -1,7 +1,10 @@
 package com.teenboutique.web.entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -14,7 +17,7 @@ import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "Size")
-public class Size {
+public class Size implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -22,6 +25,7 @@ public class Size {
 	@NotBlank(message = "Tên không được trống")
 	private String name;
 
+	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "size", orphanRemoval = true)
 	private List<ProductDetail> product_details = new ArrayList<>();
 

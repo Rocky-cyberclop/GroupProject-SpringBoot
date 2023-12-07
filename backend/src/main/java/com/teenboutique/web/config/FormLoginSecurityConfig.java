@@ -6,26 +6,35 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.teenboutique.web.entities.Role;
 import com.teenboutique.web.repositories.RoleRepository;
+import com.teenboutique.web.services.JwtAuthentication;
 import com.teenboutique.web.services.LoginEntityDetailServiceImpl;
 
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity
 public class FormLoginSecurityConfig {
 	@Autowired
 	private LoginEntityDetailServiceImpl loginEntityDetailServiceImpl;
 	
 	@Autowired
 	private RoleRepository roleRepository;
+	
+	@Autowired
+	private JwtAuthentication jwtAuthentication;
 
 	public String[] allRole() {
 		String[] roleStrings = new String[roleRepository.findAll().size()];
@@ -56,11 +65,27 @@ public class FormLoginSecurityConfig {
 		return authenticationConfiguration.getAuthenticationManager();
 	}
 
-	// This part will be for apis
-	// API will get the order 1 and push all the rest filters down
-
 	@Bean
 	@Order(1)
+	public SecurityFilterChain filterChainApis(HttpSecurity http) throws Exception {
+		http.securityMatcher(AntPathRequestMatcher.antMatcher("/api/**"))
+			.authorizeHttpRequests(req -> 
+				req.requestMatchers("/api/admin/auth/**")
+						.permitAll()
+						.anyRequest()
+						.authenticated()
+			)
+			.cors(Customizer.withDefaults())
+			.csrf(csrf -> csrf.disable())
+			.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+			.authenticationProvider(daoAuthenticationProvider())
+			.addFilterBefore(jwtAuthentication, UsernamePasswordAuthenticationFilter.class);
+		return http.build();
+	}
+
+
+	@Bean
+	@Order(2)
 	SecurityFilterChain filterChainAdmin(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity.securityMatcher(AntPathRequestMatcher.antMatcher("/admin/**"))
 				.authorizeHttpRequests((authorizeRequests) -> authorizeRequests
@@ -84,7 +109,7 @@ public class FormLoginSecurityConfig {
 	}
 
 	@Bean
-	@Order(2)
+	@Order(3)
 	SecurityFilterChain filterChainUser(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity
 				.authorizeHttpRequests((authorizeRequests) -> authorizeRequests

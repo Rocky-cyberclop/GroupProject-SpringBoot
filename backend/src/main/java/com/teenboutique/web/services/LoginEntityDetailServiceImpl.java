@@ -42,13 +42,13 @@ public class LoginEntityDetailServiceImpl implements UserDetailsService {
 		}
 	}
 
-	private static Collection<? extends GrantedAuthority> getUserAuthorities() {
+	public static Collection<? extends GrantedAuthority> getUserAuthorities() {
 		Collection<SimpleGrantedAuthority> authorities = new ArrayList<SimpleGrantedAuthority>();
 		authorities.add(new SimpleGrantedAuthority("User"));
 		return authorities;
 	}
 
-	private static Collection<? extends GrantedAuthority> getEmployeeAuthorities(Employee e) {
+	public static Collection<? extends GrantedAuthority> getEmployeeAuthorities(Employee e) {
 		Collection<SimpleGrantedAuthority> authorities = new ArrayList<SimpleGrantedAuthority>();
 		authorities.add(new SimpleGrantedAuthority(e.getRole().getName()));
 		return authorities;
