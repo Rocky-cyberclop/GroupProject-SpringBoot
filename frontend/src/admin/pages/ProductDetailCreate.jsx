@@ -10,10 +10,15 @@ const ProductDetailCreate = () => {
     const [size, setSize] = useState(1);
     const [quantity, setQuantity] = useState(0);
     const navigate = useNavigate();
+	let token = localStorage.getItem('token')
 
     useEffect(() => {
 		
-        fetch("http://localhost:8080/api/admin/management/sizes")
+        fetch("http://localhost:8080/api/admin/management/sizes",{
+            headers:{
+                'Authorization': 'Bearer ' + token
+            }
+        })
             .then((response) => response.json())
             .then((data) => {
                 setSizes(data)
@@ -39,6 +44,7 @@ const ProductDetailCreate = () => {
 				method: 'POST',
 				headers: {
 				'Content-Type': 'application/json',
+				'Authorization': 'Bearer ' + token
 				// Add any other headers if needed
 				},
 				body: JSON.stringify({id: id, size: size, quantity: quantity}),

@@ -12,6 +12,7 @@ const Employees = () => {
     const [totalPages, setTotalPages] = useState(0);
     const navigate = useNavigate();
 
+    let token = localStorage.getItem('token')
     useEffect(() => {
         if (!document.getElementById('admin-style-employee')) {
             const style1 = document.createElement('link');
@@ -24,7 +25,11 @@ const Employees = () => {
             const adminChart = document.getElementById('admin-script-chart');
             document.body.removeChild(adminChart);
         }
-        fetch("http://localhost:8080/api/admin/management/employees")
+        fetch("http://localhost:8080/api/admin/management/employees", {
+            headers:{
+                'Authorization': 'Bearer ' + token
+            }
+        })
             .then((response) => response.json())
             .then((data) => {
                 setEmployees(data.employees)
@@ -38,7 +43,11 @@ const Employees = () => {
 
     function onPageChange(page){
         if(page>0&&page<=totalPages){
-            fetch("http://localhost:8080/api/admin/management/employees/"+page)
+            fetch("http://localhost:8080/api/admin/management/employees/"+page, {
+                headers:{
+                    'Authorization': 'Bearer ' + token
+                }
+            })
             .then((response) => response.json())
             .then((data) => {
                 setEmployees(data.employees)
@@ -54,10 +63,12 @@ const Employees = () => {
     const deleteEmployee = async (e)=>{
         console.log(e.target.getAttribute('data'))
         try{
+            
 			const response = await fetch('http://localhost:8080/api/admin/management/employee', {
 				method: 'DELETE',
 				headers: {
 				'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token
 				// Add any other headers if needed
 				},
 				body: JSON.stringify(e.target.getAttribute('data')),

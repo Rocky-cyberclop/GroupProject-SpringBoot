@@ -9,6 +9,7 @@ const Receipts = () => {
     const [orders, setOrders] = useState([]);
     const [currentPage, setCurrentPage] = useState(0);
     const [totalPages, setTotalPages] = useState(0);
+    let token = localStorage.getItem('token')
 
     useEffect(() => {
         if (!document.getElementById('admin-style-employee')) {
@@ -18,7 +19,11 @@ const Receipts = () => {
             style1.href = '/admin_resources/css/management-employee.css';
             document.head.appendChild(style1);
         }
-        fetch("http://localhost:8080/api/admin/receipts")
+        fetch("http://localhost:8080/api/admin/receipts",{
+            headers:{
+                'Authorization': 'Bearer ' + token
+            }
+        })
             .then((response) => response.json())
             .then((data) => {
                 setOrders(data.orderDtos)
@@ -32,7 +37,11 @@ const Receipts = () => {
 
     function onPageChange(page){
         if(page>0&&page<=totalPages){
-            fetch("http://localhost:8080/api/admin/receipts/"+page)
+            fetch("http://localhost:8080/api/admin/receipts/"+page,{
+                headers:{
+                    'Authorization': 'Bearer ' + token
+                }
+            })
             .then((response) => response.json())
             .then((data) => {
                 setOrders(data.orderDtos)

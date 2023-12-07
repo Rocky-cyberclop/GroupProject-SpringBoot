@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
+    const navigate = useNavigate();
     useEffect(() => {
         if(!document.getElementById('admin-style1')){
             const style1 = document.createElement('link');
@@ -22,6 +24,11 @@ const Header = () => {
             document.head.appendChild(style4);
         }
     })
+    const handleLogout = function(){
+        localStorage.removeItem("token")
+        
+        navigate('/admin');
+    }
     return (
         <nav className="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
             <div className="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
@@ -98,7 +105,7 @@ const Header = () => {
                         </div>
                     </li> */}
                     <li className="nav-item nav-logout d-none d-lg-block">
-                        <a className="nav-link" href="/admin/logout">
+                        <a className="nav-link" href="#" onClick={handleLogout}>
                             <i className="mdi mdi-power"></i>
                         </a>
                     </li>

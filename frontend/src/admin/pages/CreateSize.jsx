@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 const CreateSize = () => {
     const [size, setSize] = useState({});
     const navigate = useNavigate();
+	let token = localStorage.getItem('token')
 
     const handleInputChange = (e) => {
 		const { name, value } = e.target;
@@ -20,6 +21,7 @@ const CreateSize = () => {
 				method: 'POST',
 				headers: {
 				'Content-Type': 'application/json',
+				'Authorization': 'Bearer ' + token
 				// Add any other headers if needed
 				},
 				body: size.name,

@@ -8,6 +8,7 @@ const ProductEdit = () => {
 	const [file, setFile] = useState(null);
 	const [categories, setCategories] = useState([]);
     const navigate = useNavigate();
+	let token = localStorage.getItem('token')
 
     useEffect(() => {
         if (document.getElementById('admin-script-chart')) {
@@ -15,7 +16,11 @@ const ProductEdit = () => {
             document.body.removeChild(adminChart);
         }
 		const adminChart = document.createElement('script');
-        fetch(`http://localhost:8080/api/admin/management/product/edit/${id}`)
+        fetch(`http://localhost:8080/api/admin/management/product/edit/${id}`,{
+            headers:{
+                'Authorization': 'Bearer ' + token
+            }
+        })
 		.then((response) => response.json())
 		.then((data) => {
 			setProduct(data.productDto);
@@ -36,6 +41,7 @@ const ProductEdit = () => {
 				method: 'PUT',
 				headers: {
 					'Content-Type': 'application/json',
+					'Authorization': 'Bearer ' + token
 					// Add any other headers if needed
 					},
 				body: JSON.stringify(product),
@@ -50,6 +56,9 @@ const ProductEdit = () => {
 			formData.append("file", file);
 			try{
 				const response = await fetch('http://localhost:8080/api/admin/management/product/update/image', {
+					headers:{
+						'Authorization': 'Bearer ' + token
+					},
 					method: 'POST',
 					body: formData,
 				});

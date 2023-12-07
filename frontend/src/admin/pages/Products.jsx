@@ -11,6 +11,7 @@ const Products = () => {
     const [currentPage, setCurrentPage] = useState(0);
     const [totalPages, setTotalPages] = useState(0);
     const navigate = useNavigate();
+    let token = localStorage.getItem('token')
 
     useEffect(() => {
         if (!document.getElementById('admin-style-employee')) {
@@ -24,7 +25,11 @@ const Products = () => {
             const adminChart = document.getElementById('admin-script-chart');
             document.body.removeChild(adminChart);
         }
-        fetch("http://localhost:8080/api/admin/management/products")
+        fetch("http://localhost:8080/api/admin/management/products",{
+            headers:{
+                'Authorization': 'Bearer ' + token
+            }
+        })
             .then((response) => response.json())
             .then((data) => {
                 setProducts(data.productDtos)
@@ -38,7 +43,11 @@ const Products = () => {
 
     function onPageChange(page){
         if(page>0&&page<=totalPages){
-            fetch("http://localhost:8080/api/admin/management/products/"+page)
+            fetch("http://localhost:8080/api/admin/management/products/"+page,{
+                headers:{
+                    'Authorization': 'Bearer ' + token
+                }
+            })
             .then((response) => response.json())
             .then((data) => {
                 setProducts(data.productDtos)
@@ -58,6 +67,7 @@ const Products = () => {
 				method: 'DELETE',
 				headers: {
 				'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token
 				// Add any other headers if needed
 				},
 				body: JSON.stringify(e.target.getAttribute('data')),

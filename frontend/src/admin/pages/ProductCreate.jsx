@@ -15,15 +15,24 @@ const ProductCreate = () => {
 	const [files, setFiles] = useState(null);
 	const [categories, setCategories] = useState([]);
     const navigate = useNavigate();
+	let token = localStorage.getItem('token')
 
     useEffect(() => {
-        fetch(`http://localhost:8080/api/admin/management/categories`)
+        fetch(`http://localhost:8080/api/admin/management/categories`,{
+            headers:{
+                'Authorization': 'Bearer ' + token
+            }
+        })
 		.then((response) => response.json())
 		.then((data) => {
 			setCategories(data);
           })
           .catch((error) => console.error(error));
-		fetch(`http://localhost:8080/api/admin/management/product/id`)
+		fetch(`http://localhost:8080/api/admin/management/product/id`,{
+            headers:{
+                'Authorization': 'Bearer ' + token
+            }
+        })
 		  .then((response) => response.json())
 		  .then((data) => {
 			  setId(data);
@@ -38,6 +47,7 @@ const ProductCreate = () => {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
+					'Authorization': 'Bearer ' + token
 					// Add any other headers if needed
 					},
 				body: JSON.stringify(product),
@@ -52,6 +62,9 @@ const ProductCreate = () => {
 			formData.append("file", file);
 			try{
 				const response = await fetch('http://localhost:8080/api/admin/management/product/create/image', {
+					headers:{
+						'Authorization': 'Bearer ' + token
+					},
 					method: 'POST',
 					body: formData,
 				});
@@ -71,6 +84,9 @@ const ProductCreate = () => {
 			}
 			try{
 				const response = await fetch('http://localhost:8080/api/admin/management/product/create/images', {
+					headers:{
+						'Authorization': 'Bearer ' + token
+					},
 					method: 'POST',
 					body: formData,
 				});

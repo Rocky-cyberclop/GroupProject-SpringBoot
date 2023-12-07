@@ -1,7 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { publicRoutes, privateRoutes } from './admin/routes';
+import { publicRoutes as publicAdminRoutes, privateRoutes as privateAdminRoutes } from './admin/routes';
 import MainLayoutAdmin from './admin/layouts/MainLayoutAdmin';
+import PrivateRouter from './admin/routes/PrivateRouter';
 
 function App() {
   
@@ -9,7 +10,7 @@ function App() {
     <Router>
       <div className='App'>
         <Routes>
-          {publicRoutes.map((route, index)=>{
+          {publicAdminRoutes.map((route, index)=>{
             const Page = route.component;
             let Layout = MainLayoutAdmin;
             if(route.layout!==null){
@@ -28,6 +29,27 @@ function App() {
               </Route>
             )
           })}
+          {privateAdminRoutes.map((route, index) => {
+            const Page = route.component;
+            let Layout = MainLayoutAdmin;
+
+            if(route.layout!==null){
+              Layout = route.layout;
+            }
+            return (
+              <Route
+                  key={index}
+                  path={route.path}
+                  element={
+                      <PrivateRouter>
+                          <Layout>
+                              <Page />
+                          </Layout>
+                      </PrivateRouter>
+                  }
+              />
+            );            
+            })}
         </Routes>
       </div>
     </Router>
