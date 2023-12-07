@@ -2,7 +2,13 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { publicRoutes as publicAdminRoutes, privateRoutes as privateAdminRoutes } from './admin/routes';
 import MainLayoutAdmin from './admin/layouts/MainLayoutAdmin';
+
 import PrivateRouter from './admin/routes/PrivateRouter';
+
+import { AuthRoutes } from './routes';
+import AuthenticationLayout from './layouts/AuthenticationLayout';
+
+
 
 function App() {
   
@@ -29,6 +35,7 @@ function App() {
               </Route>
             )
           })}
+
           {privateAdminRoutes.map((route, index) => {
             const Page = route.component;
             let Layout = MainLayoutAdmin;
@@ -50,6 +57,23 @@ function App() {
               />
             );            
             })}
+
+
+          {AuthRoutes.map((route, index)=>{
+            const Page = route.component;
+            return (
+              <Route 
+                key={index}
+                path={route.path}
+                element={
+                  <AuthenticationLayout>
+                    <Page/>
+                  </AuthenticationLayout>
+                }>
+
+              </Route>
+            )
+          })}
         </Routes>
       </div>
     </Router>
