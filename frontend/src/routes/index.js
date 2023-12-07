@@ -1,4 +1,6 @@
 //Pages
+import MainLayout from '../layouts/MainLayout';
+import Main from '../pages/Main';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
 import Forget from '../pages/Forget';
@@ -10,4 +12,8 @@ const AuthRoutes = [
     { path: '/forget', component: Forget}
 ];
 
-export { AuthRoutes };
+const MainRoutes = [
+    { path: '/', component: Main},
+];
+
+export { AuthRoutes, MainRoutes };
