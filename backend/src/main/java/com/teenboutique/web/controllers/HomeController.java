@@ -21,6 +21,12 @@ public class HomeController {
 	@Autowired
 	private ProductService proSer;
 	
+	 @Autowired
+	 public HomeController(CategoryService cateSer, ProductService proSer) {
+	    this.cateSer = cateSer;
+	    this.proSer = proSer;
+	 }
+	
 	@GetMapping
 	public String showMainPage(Model model) {
 		List<Category> categories = cateSer.findAllCategory();
