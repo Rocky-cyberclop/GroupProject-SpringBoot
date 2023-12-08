@@ -4,6 +4,8 @@ import Main from '../pages/Main';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
 import Forget from '../pages/Forget';
+import Cart from '../pages/Cart';
+import Checkout from '../pages/Checkout';
 
 //Routes
 const AuthRoutes = [
@@ -16,4 +18,12 @@ const MainRoutes = [
     { path: '/', component: Main},
 ];
 
-export { AuthRoutes, MainRoutes };
+const CartRoutes = [
+    { path: '/main/cart', component: Cart},
+];
+
+const CheckoutRoutes = [
+    { path: '/main/checkout', component: Checkout},
+];
+
+export { AuthRoutes, MainRoutes, CartRoutes, CheckoutRoutes };
