@@ -18,8 +18,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.teenboutique.web.dto.CategoryDto;
 import com.teenboutique.web.dto.ProductDto;
 import com.teenboutique.web.dto.ProductsDto;
+import com.teenboutique.web.entities.Category;
 import com.teenboutique.web.entities.Product;
 import com.teenboutique.web.entities.ProductImage;
 import com.teenboutique.web.helpers.Helper;
@@ -179,6 +181,15 @@ public class ProductService {
 	
 	public List<Product> getTrendyProduct(){
 		return proRepo.findTrendyProduct();
+	}
+	
+	public List<ProductDto> findTrendyDto() {
+		List<ProductDto> trendyProductDtos= new ArrayList<ProductDto>();
+		for(Product product : proRepo.findTrendyProduct()) {
+			ProductDto productDto = new ProductDto(product);
+			trendyProductDtos.add(productDto);
+		}
+		return trendyProductDtos;
 	}
 	
 }

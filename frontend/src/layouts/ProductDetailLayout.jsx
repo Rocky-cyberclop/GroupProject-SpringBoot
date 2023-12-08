@@ -1,5 +1,6 @@
 import React from 'react';
-import Header from './fragments/Header';
+import Header from './fragments/components/Header';
+import Footer from './fragments/components/Footer';
 
 function ProductDetailLayout({ children }) {
   return (
@@ -8,8 +9,11 @@ function ProductDetailLayout({ children }) {
       <div>
       {children}
       </div>
+      <Footer/>
     </div>
   );
 }
 
 export default ProductDetailLayout;
+
+
