@@ -70,8 +70,7 @@ public class FormLoginSecurityConfig {
 	public SecurityFilterChain filterChainApis(HttpSecurity http) throws Exception {
 		http.securityMatcher(AntPathRequestMatcher.antMatcher("/api/**"))
 			.authorizeHttpRequests(req -> 
-				req.requestMatchers("/api/admin/auth/**")
-						.permitAll()
+				req.requestMatchers("/api/admin/auth/**", "/api/login/**").permitAll()
 						.anyRequest()
 						.authenticated()
 			)

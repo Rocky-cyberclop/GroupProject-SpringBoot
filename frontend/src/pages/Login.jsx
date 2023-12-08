@@ -24,6 +24,8 @@ const Login = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
+      }).then(response=>response.json()).then(data=>{
+        console.log(data.jwt)
       });
   
       if (response.ok) {
