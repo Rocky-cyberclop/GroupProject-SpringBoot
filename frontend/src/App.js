@@ -2,11 +2,10 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { publicRoutes as publicAdminRoutes, privateRoutes as privateAdminRoutes } from './admin/routes';
 import MainLayoutAdmin from './admin/layouts/MainLayoutAdmin';
-
 import PrivateRouter from './admin/routes/PrivateRouter';
-
-import { AuthRoutes } from './routes';
+import { AuthRoutes, MainRoutes } from './routes';
 import AuthenticationLayout from './layouts/AuthenticationLayout';
+import MainLayout from './layouts/MainLayout';
 
 
 
@@ -69,6 +68,23 @@ function App() {
                   <AuthenticationLayout>
                     <Page/>
                   </AuthenticationLayout>
+                }>
+
+              </Route>
+            )
+          })}
+
+          {MainRoutes.map((route, index)=>{
+            const Page = route.component;
+            let Layout = MainLayout;            
+            return (
+              <Route 
+                key={index}
+                path={route.path}
+                element={
+                  <Layout>
+                    <Page/>
+                  </Layout>
                 }>
 
               </Route>

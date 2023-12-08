@@ -1,14 +1,7 @@
-/**
- * WEBSITE: https://themefisher.com
- * TWITTER: https://twitter.com/themefisher
- * FACEBOOK: https://www.facebook.com/themefisher
- * GITHUB: https://github.com/themefisher/
- */
+import $ from './jquery';
 
-(function ($) {
-  'use strict';
-
-  // Preloader
+console.log($);
+// Preloader
   $(window).on('load', function () {
     $('#preloader').fadeOut('slow', function () {
       $(this).remove();
@@ -92,6 +85,3 @@
     pauseOnHover: false
   });
   $('.hero-slider').slickAnimation();
-
-
-})(jQuery);
