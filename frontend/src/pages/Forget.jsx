@@ -16,28 +16,32 @@ const Forget = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-            const response = await fetch('http://localhost:8080/api/forget', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData),
-            });
+        const data = formData.email;
+        console.log(data);
+        if (data != "") {
+            try {
+                const response = await fetch('http://localhost:8080/api/forget', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData),
+                });
 
-            if (response.ok) {
-                setSuccessMessage('Một Mail Chứa Mật Khẩu Mới Của Bạn Đã Được Gửi');
-                setErrorMessage('');
-                console.log('Send email succesful')
-            } else {
+                if (response.ok) {
+                    setSuccessMessage('Một Mail Chứa Mật Khẩu Mới Của Bạn Đã Được Gửi');
+                    setErrorMessage('');
+                    console.log('Send email succesful')
+                } else {
+                    setSuccessMessage('');
+                    setErrorMessage('Email Không Tồn Tại Với Tài Khoản Nào');
+                    console.log('Email is incorrect')
+                }
+            } catch (error) {
+                console.error('Error sending email:', error);
                 setSuccessMessage('');
-                setErrorMessage('Email Không Tồn Tại Với Tài Khoản Nào');
-                console.log('Email is incorrect')
+                setErrorMessage('Không thể gửi email. Vui lòng thử lại');
             }
-        } catch (error) {
-            console.error('Error sending email:', error);
-            setSuccessMessage('');
-            setErrorMessage('Không thể gửi email. Vui lòng thử lại');
         }
     };
 
