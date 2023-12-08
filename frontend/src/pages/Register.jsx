@@ -23,27 +23,6 @@ const Register = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-            const response = await fetch('http://localhost:8080/api/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData),
-            });
-            if (response.ok) {
-                navigate('/login');
-                console.log('Register successful');
-            } else {
-                setError(true);
-                console.error('Register failed');
-            } 
-        } catch (error) {
-            setError(true);
-            navigate(-1);
-            console.error('Error:', error);
-        }
-
         const newErrors = {};
 
         if (!formData.name) {
@@ -78,7 +57,27 @@ const Register = () => {
 
         if (Object.keys(newErrors).length === 0) {
             console.log('Form submitted:', formData);
+            try {
+                const response = await fetch('http://localhost:8080/api/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData),
+                });
+                if (response.ok) {
+                    navigate("/login");
+                    console.log('Register successful');
+                } else {
+                    setError(true);
+                    console.error('Register failed');
+                } 
+            } catch (error) {
+                setError(true);
+                console.error('Error:', error);
+            }
         }
+
     }
 
     return (
