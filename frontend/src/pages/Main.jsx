@@ -240,16 +240,11 @@ const Main = () => {
               </div>
               <div className="col-lg-6 col-md-offset-3">
                 <div className="input-group subscription-form">
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Enter Your Email Address"
-                  />
-                  <span className="input-group-btn">
+                  <a className="input-group-btn" href="/register">
                     <button className="btn btn-main" type="button">
                       Đăng Ký!
                     </button>
-                  </span>
+                  </a>
                 </div>
               </div>
             </div>

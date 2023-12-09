@@ -30,7 +30,7 @@ const TopHeader = () => {
                         </div>
                         <div className="col-md-4 col-xs-12 col-sm-4">
                             <div className="logo text-center">
-                            <a href="index.html">
+                            <a href="/">
                                 <svg width="435px" height="35px" viewBox="0 0 155 29" version="1.1"
                                 xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
                                 <g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd"
@@ -91,7 +91,7 @@ const TopHeader = () => {
                             </div>
                             <div className="col-md-4 col-xs-12 col-sm-4">
                                 <div className="logo text-center">
-                                <a href="index.html">
+                                <a href="/">
                                     <svg width="435px" height="35px" viewBox="0 0 155 29" version="1.1"
                                     xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
                                     <g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd"
