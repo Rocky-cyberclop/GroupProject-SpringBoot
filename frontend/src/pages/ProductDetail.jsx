@@ -9,6 +9,8 @@ const ProductDetail = () => {
 	const [size, setSize] = useState(0);
 	const [quantity, setQuantity] = useState(0);
 	const navigate = useNavigate();
+	let token = localStorage.getItem('token')
+
 
 	useEffect(() => {
 		if (document.getElementById('admin-script-chart')) {
@@ -16,7 +18,11 @@ const ProductDetail = () => {
 			document.body.removeChild(adminChart);
 		}
 		const adminChart = document.createElement('script');
-		fetch(`http://localhost:8080/api/admin/management/product/${id}`)
+		fetch(`http://localhost:8080/api/admin/management/product/${id}`,{
+            headers:{
+                'Authorization': 'Bearer ' + token
+            }
+        })
 			.then((response) => response.json())
 			.then((data) => {
 				setProduct(data);
@@ -53,6 +59,7 @@ const ProductDetail = () => {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
+					'Authorization': 'Bearer ' + token
 					// Add any other headers if needed
 				},
 				body: JSON.stringify({ id: id, size: selectedSize, quantity: quantity }),

@@ -50,8 +50,9 @@
 
 									<div class='item' th:if="${!localPic}">
 										<div th:each="product: ${product}">
-											<img class="form-control" th:src="'/uploads/images/'+*{product.images[0].url}"
-												width="200" height="200"
+											<img class="form-control"
+												th:src="'/uploads/images/'+*{product.images[0].url}" width="200"
+												height="200"
 												data-zoom-image="'/uploads/images/'+*{product.images[0].url}" />
 										</div>
 									</div>
@@ -62,8 +63,8 @@
 											th:src="*{product.images[0].url}" width="200" height="200"
 											data-zoom-image="*{product.images[0].url}" />
 									</div>
-									
-								
+
+
 
 								</div>
 
@@ -78,22 +79,23 @@
 
 							<!-- thumb -->
 							<ol class='carousel-indicators mCustomScrollbar meartlab' th:if="${localPic}">
-								<li data-target='#carousel-custom' data-slide-to='0' class='active' th:each="image: ${product.images}">
+								<li data-target='#carousel-custom' data-slide-to='0' class='active'
+									th:each="image: ${product.images}">
 									<img class="form-control " th:src="${image.url}" width="200" />
 
 								</li>
-								
-								
+
+
 
 
 							</ol>
 							<ol class='carousel-indicators mCustomScrollbar meartlab' th:if="${!localPic}">
-								<li data-target='#carousel-custom' data-slide-to='0' class='active' th:each="image: ${product.images}">
-									<img class="form-control " th:src="'/uploads/images/'+*{image.url}"
-										width="200" />
+								<li data-target='#carousel-custom' data-slide-to='0' class='active'
+									th:each="image: ${product.images}">
+									<img class="form-control " th:src="'/uploads/images/'+*{image.url}" width="200" />
 
 								</li>
-								
+
 
 							</ol>
 						</div>
@@ -116,8 +118,15 @@
 												<span>Size:</span>
 												<select class="form-control btn btn-outline-primary dropdown-toggle"
 													name="size">
-													<option class="dropdown-item" th:each="product_detail: ${product.product_details}"
-														th:value="${product_detail.size.id}" th:text="${product_detail.size.name}"></option>
+													<!-- Thêm một lựa chọn mặc định (ví dụ: size đầu tiên) -->
+													<option class="dropdown-item" value="" selected disabled hidden>Chọn
+														size</option>
+
+													<!-- Duyệt qua danh sách các size -->
+													<option class="dropdown-item"
+														th:each="product_detail: ${product.product_details}"
+														th:value="${product_detail.size.id}"
+														th:text="${product_detail.size.name}"></option>
 												</select>
 											</div>
 											<div class="form-group">
@@ -127,7 +136,6 @@
 											</div>
 											<button type="submit" class="btn btn-gradient-primary me-2">Thêm vào giỏ
 												hàng</button>
-
 										</form>
 									</div>
 								</div>
@@ -142,7 +150,7 @@
 						<div class="tabCommon mt-20">
 							<ul class="nav nav-tabs">
 								<li class="active"><a data-toggle="tab" href="#details" aria-expanded="true">Details</a>
-								</li>								
+								</li>
 							</ul>
 							<div class="tab-content patternbg">
 								<div id="details" class="tab-pane fade active in">

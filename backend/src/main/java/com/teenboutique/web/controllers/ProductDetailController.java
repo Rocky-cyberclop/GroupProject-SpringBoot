@@ -1,6 +1,8 @@
 package com.teenboutique.web.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +17,7 @@ import com.teenboutique.web.entities.Product;
 import com.teenboutique.web.entities.ProductDetail;
 import com.teenboutique.web.entities.Size;
 import com.teenboutique.web.helpers.Helper;
+import com.teenboutique.web.services.CustomerService;
 import com.teenboutique.web.services.ProductDetailService;
 import com.teenboutique.web.services.ProductService;
 import com.teenboutique.web.services.SizeService;
@@ -32,7 +35,8 @@ public class ProductDetailController {
 	@Autowired
 	private SizeService sizeSer;
 
-	private long iduser = 857;
+	@Autowired
+	private CustomerService customerService;
 
 
 	@GetMapping("/main/productdetail/{id}")
@@ -48,10 +52,13 @@ public class ProductDetailController {
 
 	@GetMapping("/main/productdetail/AddToCart/{id}")
 	public String addToCart(Model model, @PathVariable("id") Long id, @RequestParam("quantity") int quantity,
-			@RequestParam("size") Long s) {
-
-		CartItem c = proDeSer.findById(iduser, id, s);
+			@RequestParam("size") Long s) {		
 		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String name = authentication.getName();			
+		Long iduser =  customerService.getCusByEmail(name).getId();				
+		CartItem c = proDeSer.findById(iduser, id, s);
+				
 		if (c != null) {
 			proDeSer.addtoCart(iduser, s, id, quantity);
 		}
@@ -60,7 +67,7 @@ public class ProductDetailController {
 		}
 
 
-		return "redirect:/";
+		return "redirect:/main/productdetail/"+id;
 	}
 
 }
