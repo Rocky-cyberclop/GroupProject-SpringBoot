@@ -104,9 +104,17 @@
 				<div class="col-md-7">
 					<div class="single-product-details" th:object="${product}">
 						<h3 th:text="${product.name}"></h3>
-						<h4 class="product-price" th:text="${product.price}"></h4>
-
-						<p class="product-description mt-20" th:text="${product.description}"></p>
+						<br>
+						
+						<span>
+							<h4>Giá tiền:</h4>
+							<p th:text="${product.price}"></p>
+						</span>
+						
+						<span>
+							<h4>Loại sản phẩm:</h4>
+							<p th:text="${product.category.name}"></p>
+						</span>
 
 						<div class="row">
 							<div class="col-md-12 grid-margin stretch-card">
@@ -129,12 +137,13 @@
 														th:text="${product_detail.size.name}"></option>
 												</select>
 											</div>
+											<br>
 											<div class="form-group">
 												<label>Nhập số lượng</label>
 												<input type="number" class="form-control" placeholder="Số lượng"
 													name="quantity">
 											</div>
-											<button type="submit" class="btn btn-gradient-primary me-2">Thêm vào giỏ
+											<button type="submit" class="btn btn-gradient-primary me-2" style="font-size: large;">Thêm vào giỏ
 												hàng</button>
 										</form>
 									</div>

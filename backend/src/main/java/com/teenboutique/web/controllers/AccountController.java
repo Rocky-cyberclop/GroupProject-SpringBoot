@@ -36,7 +36,7 @@ public class AccountController {
 	private CustomerOrderItemRepository customerOderItemRepository;
 	private ProductRepository productRepository;
 	private SizeRepository sizeRepository;
-	private long idus = 293767;
+	//private long idus = 293767;
 
 	@Autowired
 	private CustomerService customerService;
@@ -166,12 +166,8 @@ public class AccountController {
 
 	@GetMapping("/orderItemDetail/{id}")
 	public String shownOrderItemDetail(@PathVariable("id") long id, Model model) {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		String name = authentication.getName();			
-		Long iduser =  customerService.getCusByEmail(name).getId();	
-		
-		
-		List<CustomerOrderItem> customerOrderItems = customerOderItemRepository.findByCustomerOrderId(iduser);
+
+		List<CustomerOrderItem> customerOrderItems = customerOderItemRepository.findByCustomerOrderId(id);
 		List<TemporaryClass> list = new ArrayList<>();
 		float sum = 0;
 		for (CustomerOrderItem customerOrderItem : customerOrderItems) {
@@ -213,13 +209,13 @@ public class AccountController {
 			@RequestParam(value = "ngayThang", required = true) String ngayThang,
 			@RequestParam(value = "diaChi", required = true) String diaChi,
 			@RequestParam(value = "gioiTinh", required = true) boolean gioiTinh) {
-		System.out.println(id);
-		System.out.println(hoTen);
-		System.out.println(email);
-		System.out.println(soDienThoai);
-		System.out.println(ngayThang);
-		System.out.println(diaChi);
-		System.out.println(gioiTinh);
+//		System.out.println(id);
+//		System.out.println(hoTen);
+//		System.out.println(email);
+//		System.out.println(soDienThoai);
+//		System.out.println(ngayThang);
+//		System.out.println(diaChi);
+//		System.out.println(gioiTinh);
 
 		
 		
