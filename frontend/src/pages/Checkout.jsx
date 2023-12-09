@@ -70,7 +70,7 @@ function Checkout() {
                 'Authorization': 'Bearer ' + token
             }
         });
-          navigate('/main/cart');
+          navigate('/');
       } catch (error) {
           console.log(error);
       }
@@ -78,7 +78,11 @@ function Checkout() {
 
    let handleDelete = async (product_id) => {
       try {
-        const confirmDelete = window.confirm("Bạn có muón xóa sản phẩm này: " + product_id + " ?");
+        const confirmDelete = window.confirm("Bạn có muón xóa sản phẩm này: " + product_id + " ?", {
+            headers:{
+               'Authorization': 'Bearer ' + token
+            }
+         });
         if (confirmDelete) {
           await axios.delete(`http://localhost:8080/api/cart/items/${product_id}`);
           getCart();
