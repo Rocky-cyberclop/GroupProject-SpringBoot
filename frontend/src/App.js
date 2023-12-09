@@ -4,8 +4,9 @@ import { publicRoutes as publicAdminRoutes, privateRoutes as privateAdminRoutes 
 import MainLayoutAdmin from './admin/layouts/MainLayoutAdmin';
 
 import PrivateRouter from './admin/routes/PrivateRouter';
+import Privates  from './routes/PrivateRoutes';
 
-import { AuthRoutes, MainRoutes, CartRoutes, CheckoutRoutes } from './routes';
+import { AuthRoutes, MainRoutes, PrivateRoutes  } from './routes';
 
 import AuthenticationLayout from './layouts/AuthenticationLayout';
 import MainLayout from './layouts/MainLayout';
@@ -94,7 +95,25 @@ function App() {
             )
           })}
 
-          {CartRoutes.map((route, index)=>{
+          {PrivateRoutes.map((route, index)=>{
+            const Page = route.component;
+            let Layout = MainLayout;            
+            return (
+              <Route
+                  key={index}
+                  path={route.path}
+                  element={
+                      <Privates>
+                          <Layout>
+                              <Page />
+                          </Layout>
+                      </Privates>
+                  }
+              />
+            );            
+          })}
+
+          {/* {CartRoutes.map((route, index)=>{
             const Page = route.component;
             let Layout = MainLayout;          
             return (
@@ -126,7 +145,7 @@ function App() {
 
               </Route>
             )
-          })}
+          })} */}
         </Routes>
       </div>
     </Router>

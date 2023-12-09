@@ -17,15 +17,21 @@ const AuthRoutes = [
 
 const MainRoutes = [
     { path: '/', component: Main},
-    {path: '/productdetail/:id', component: ProductDetail, layout: null},
+    // { path: '/productdetail/:id', component: ProductDetail, layout: null},
 ];
 
-const CartRoutes = [
+const PrivateRoutes = [
     { path: '/main/cart', component: Cart},
-];
-
-const CheckoutRoutes = [
     { path: '/main/checkout', component: Checkout},
-];
+    { path: '/productdetail/:id', component: ProductDetail, layout: null},
+]
 
-export { AuthRoutes, MainRoutes, CartRoutes, CheckoutRoutes };
+// const CartRoutes = [
+//     { path: '/main/cart', component: Cart},
+// ];
+
+// const CheckoutRoutes = [
+//     { path: '/main/checkout', component: Checkout},
+// ];
+
+export { AuthRoutes, MainRoutes, PrivateRoutes };
