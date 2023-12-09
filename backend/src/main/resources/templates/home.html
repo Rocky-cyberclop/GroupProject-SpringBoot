@@ -11,7 +11,7 @@
 	th:replace="~{layouts/main-layout :: mainLayout(~{::link.main-main}, ~{::section.main-main}, ~{::script.main-main})}">
 
 <head>
-	<link class="main-main" rel="stylesheet" th:href="@{main/css/style.css}">
+	<link class="main-main" rel="stylesheet" th:href="@{/main/css/style.css}">
 </head>
 <section class="main-main" th:remove="tag">
 	<section class="page-header">
@@ -101,7 +101,7 @@
 </section>
 
 <body>
-	<script class="main-main" th:src="@{main/js/script.js}" }></script>
+	<script class="main-main" th:src="@{/main/js/script.js}"></script>
 </body>
 
 </html>

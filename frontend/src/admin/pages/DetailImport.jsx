@@ -6,6 +6,7 @@ const DetailImport = () => {
 	const { id, size } = useParams();
     const [quantity, setQuantity] = useState(0);
     const navigate = useNavigate();
+	let token = localStorage.getItem('token')
 
     const handleInputChange = (e) => {
 		const { name, value } = e.target;
@@ -19,6 +20,7 @@ const DetailImport = () => {
 				method: 'PUT',
 				headers: {
 				'Content-Type': 'application/json',
+				'Authorization': 'Bearer ' + token
 				// Add any other headers if needed
 				},
 				body: JSON.stringify({id: id, size: size, quantity: quantity}),

@@ -6,6 +6,7 @@ const ProductDetail = () => {
     const { id } = useParams();
     const [product, setProduct] = useState({});
     const navigate = useNavigate();
+	let token = localStorage.getItem('token')
 
     useEffect(() => {
         if (document.getElementById('admin-script-chart')) {
@@ -13,7 +14,11 @@ const ProductDetail = () => {
             document.body.removeChild(adminChart);
         }
 		const adminChart = document.createElement('script');
-        fetch(`http://localhost:8080/api/admin/management/product/${id}`)
+        fetch(`http://localhost:8080/api/admin/management/product/${id}`,{
+            headers:{
+                'Authorization': 'Bearer ' + token
+            }
+        })
 		.then((response) => response.json())
 		.then((data) => {
 			setProduct(data);

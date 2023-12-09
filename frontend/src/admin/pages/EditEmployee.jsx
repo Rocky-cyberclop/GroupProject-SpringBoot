@@ -7,6 +7,7 @@ const EditEmployee = () => {
     const [employee, setEmployee] = useState({});
     const [roles, setRoles] = useState([]);
 	const navigate = useNavigate();
+	let token = localStorage.getItem('token')
 
     useEffect(() => {
         if (document.getElementById('admin-script-chart')) {
@@ -14,7 +15,11 @@ const EditEmployee = () => {
             document.body.removeChild(adminChart);
         }
 		
-        fetch("http://localhost:8080/api/admin/management/employeeAndRoles/" + id)
+        fetch("http://localhost:8080/api/admin/management/employeeAndRoles/" + id,{
+            headers:{
+                'Authorization': 'Bearer ' + token
+            }
+        })
             .then((response) => response.json())
             .then((data) => {
                 setEmployee(data.employeeDto)
@@ -31,6 +36,7 @@ const EditEmployee = () => {
 				method: 'PUT',
 				headers: {
 				'Content-Type': 'application/json',
+				'Authorization': 'Bearer ' + token
 				// Add any other headers if needed
 				},
 				body: JSON.stringify(employee),

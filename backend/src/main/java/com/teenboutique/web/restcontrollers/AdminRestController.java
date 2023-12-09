@@ -1,7 +1,9 @@
 package com.teenboutique.web.restcontrollers;
 
 import java.time.LocalDate;
+
 import java.util.ArrayList;
+
 import java.util.List;
 
 import org.json.JSONObject;
@@ -9,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -24,7 +28,12 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+
+import com.teenboutique.web.entities.Employee;
+
 import com.teenboutique.web.dto.OrderDetailDto;
+import com.teenboutique.web.dto.AuthAdminDto;
+import com.teenboutique.web.dto.AuthResponseAdminDto;
 import com.teenboutique.web.dto.EmployeeAndRoles;
 import com.teenboutique.web.dto.EmployeeDto;
 import com.teenboutique.web.dto.EmployeesDto;
@@ -45,12 +54,15 @@ import com.teenboutique.web.entities.Role;
 import com.teenboutique.web.entities.Size;
 import com.teenboutique.web.helpers.Helper;
 import com.teenboutique.web.services.CategoryService;
+
 import com.teenboutique.web.services.EmployeeService;
 import com.teenboutique.web.services.OrderService;
 import com.teenboutique.web.services.ProductDetailService;
 import com.teenboutique.web.services.ProductService;
 import com.teenboutique.web.services.RoleService;
 import com.teenboutique.web.services.SizeService;
+
+import jakarta.validation.constraints.Null;
 
 @RestController
 @RequestMapping("/api/admin")
@@ -76,11 +88,29 @@ public class AdminRestController {
 	@Autowired
 	private ProductDetailService productDetailService;
 	
+	@PostMapping("/auth")
+	public ResponseEntity<AuthResponseAdminDto> login(@RequestBody AuthAdminDto authAdminDto){
+		AuthResponseAdminDto authResponseAdminDto = new AuthResponseAdminDto();
+		String res = employeeService.loginEncr(Long.parseLong(authAdminDto.getId()), authAdminDto.getPass());
+		if("Not found".equals(res)) {
+			authResponseAdminDto.setJwt("Fail");
+			return new ResponseEntity<AuthResponseAdminDto>(authResponseAdminDto, HttpStatus.NON_AUTHORITATIVE_INFORMATION);
+		}
+		if("Wrong pass".equals(res)) {
+			authResponseAdminDto.setJwt("Fail");
+			return new ResponseEntity<AuthResponseAdminDto>(authResponseAdminDto, HttpStatus.NOT_ACCEPTABLE);
+		}
+		authResponseAdminDto.setJwt(res);
+		return new ResponseEntity<AuthResponseAdminDto>(authResponseAdminDto, HttpStatus.OK);
+	}
+	
 	//**Management part
 	// *Employee
 	
 	@GetMapping("/management/employees")
 	public ResponseEntity<EmployeesDto> showAllEmployee() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		System.out.println(authentication.getName());
 		return showAllEmployeeOnePage(1);
 	}
 
@@ -327,7 +357,6 @@ public class AdminRestController {
 	public ResponseEntity<String> getAllStatistic(@PathVariable("start") LocalDate start, @PathVariable("end") LocalDate end) {
 		return new ResponseEntity<String>(orSer.findOrderInRange(start, end).toString(), HttpStatus.OK);
 	}
-	
 	
 	
 	

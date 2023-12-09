@@ -6,6 +6,7 @@ const CreateEmployee = () => {
     const [employee, setEmployee] = useState({});
     const [roles, setRoles] = useState([]);
 	const navigate = useNavigate();
+	let token = localStorage.getItem('token')
 
     useEffect(() => {
         if (document.getElementById('admin-script-chart')) {
@@ -13,7 +14,11 @@ const CreateEmployee = () => {
             document.body.removeChild(adminChart);
         }
 		
-        fetch("http://localhost:8080/api/admin/management/employeeAndRoles/98047")
+        fetch("http://localhost:8080/api/admin/management/employeeAndRoles/98047",{
+            headers:{
+                'Authorization': 'Bearer ' + token
+            }
+        })
             .then((response) => response.json())
             .then((data) => {
                 setRoles(data.roles)
@@ -29,6 +34,7 @@ const CreateEmployee = () => {
 				method: 'POST',
 				headers: {
 				'Content-Type': 'application/json',
+				'Authorization': 'Bearer ' + token
 				// Add any other headers if needed
 				},
 				body: JSON.stringify(employee),

@@ -44,12 +44,17 @@ var areaChart = new Chart(areaChartCanvas, {
 });
 
 document.querySelector(".btn-statistic").addEventListener("click", function(event) {
-
+	let token = localStorage.getItem('token')
 	/*document.querySelector(".end_date")*/
 	event.preventDefault()
 	fetch("http://localhost:8080/api/admin/statistic/all/" +
 		document.querySelector(".start-date").value + "/" +
-		document.querySelector(".end-date").value, { method: "get" })
+		document.querySelector(".end-date").value, { 
+			method: "get", 
+			headers:{
+			'Authorization': 'Bearer ' + token
+			} 
+		})
 		.then(response => response.json())
 		.then(json_statistic => {
 			areaData.labels = json_statistic['labels']

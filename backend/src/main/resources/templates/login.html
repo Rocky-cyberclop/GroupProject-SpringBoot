@@ -27,7 +27,7 @@
 	            <div class="text-center">
 	              <button type="submit" class="btn btn-main text-center" >Đăng Nhập</button>
 	            </div>
-	            <span class="text-danger" th:if="${error}">Bạn đã nhập sai email hoặc mật khẩu</span>
+	            <span class="text-danger" th:if="${param.error}">Bạn đã nhập sai email hoặc mật khẩu</span>
 	          </form>
 	          <p class="mt-20">Lần đầu vào trang ?<a th:href="@{/register}"> Tạo Tài Khoản Mới</a></p>
 	          <p><a th:href="@{/forget}"> Quên Mật Khẩu?</a></p>

@@ -1,5 +1,6 @@
 //Layouts
 import MainLayoutAdmin from '../layouts/MainLayoutAdmin';
+import LoginLayout from '../layouts/LoginLayout';
 
 //Pages
 import Main from '../pages/Main';
@@ -20,9 +21,14 @@ import CreateSize from '../pages/CreateSize';
 import ProductCreate from '../pages/ProductCreate';
 import Receipts from '../pages/Receipts';
 import ReceiptDetail from '../pages/ReceiptDetail';
+import Login from '../pages/Login';
 
 //Public routes
 const publicRoutes = [
+    { path: '/admin/login', component: Login, layout: LoginLayout}
+];
+
+const privateRoutes = [
     { path: '/admin', component: Main, layout: null},
     { path: '/admin/management/employees', component: Employees, layout: null},
     { path: '/admin/management/role/create', component: CreateRole, layout: null},
@@ -41,10 +47,6 @@ const publicRoutes = [
     { path: '/admin/receipts', component: Receipts, layout: null},
     { path: '/admin/receipt/take/:id', component: ReceiptDetail, layout: null},
     { path: '/admin/statistic/all', component: Statistic, layout: null}
-];
-
-const privateRoutes = [
-    // { path: '/admin/**', component: Main, layout: MainLayout}
 ];
 
 export { publicRoutes, privateRoutes };

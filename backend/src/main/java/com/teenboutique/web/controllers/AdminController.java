@@ -5,6 +5,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -63,6 +66,8 @@ public class AdminController {
 
 	@GetMapping
 	public String showMainPage() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		System.out.println(authentication.getName());
 		return "admin/main";
 	}
 
@@ -71,23 +76,23 @@ public class AdminController {
 		return "admin/login";
 	}
 
-	@PostMapping("/login")
-	public String login(Model model, @RequestParam("id") String id, @RequestParam("pass") String pass) {
-		if (pass.charAt(0) == 's' && pass.charAt(1) == 'b') {
-			if (empSer.login(Long.parseLong(id), pass) != null)
-				return "admin/main";
-		}
-		Employee e = empSer.getEmpById(Long.parseLong(id));
-		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-		if (bCryptPasswordEncoder.matches(pass, e.getPassword()))
-			return "admin/main";
-		model.addAttribute("error", "Bạn đã nhập sai mã nhân viên hoặc mật khẩu");
-		return "admin/login";
-	}
+//	@PostMapping("/login")
+//	public String login(Model model, @RequestParam("id") String id, @RequestParam("pass") String pass) {
+//		if (pass.charAt(0) == 's' && pass.charAt(1) == 'b') {
+//			if (empSer.login(Long.parseLong(id), pass) != null)
+//				return "admin/main";
+//		}
+//		Employee e = empSer.getEmpById(Long.parseLong(id));
+//		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+//		if (bCryptPasswordEncoder.matches(pass, e.getPassword()))
+//			return "admin/main";
+//		model.addAttribute("error", "Bạn đã nhập sai mã nhân viên hoặc mật khẩu");
+//		return "admin/login";
+//	}
 
 	// **Management part
 	// *Employee
-
+	
 	@GetMapping("/management/employees")
 	public String showAllEmployee(Model model) {
 		showAllEmployeeOnePage(model, 1);
@@ -174,6 +179,7 @@ public class AdminController {
 		return "admin/role-create";
 	}
 
+//	@PreAuthorize("hasAnyAuthority('Admin')")
 	@PostMapping("/management/role/create")
 	public String showCreateRoleForm(Role role) {
 		roleSer.save(role);

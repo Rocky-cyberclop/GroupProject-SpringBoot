@@ -6,6 +6,7 @@ const ReceiptDetail = () => {
     const {id} = useParams();
     const [orderDetails, setDetails] = useState([]);
     const navigate = useNavigate();
+	let token = localStorage.getItem('token')
 
     useEffect(() => {
         if (!document.getElementById('admin-style-employee')) {
@@ -15,7 +16,11 @@ const ReceiptDetail = () => {
             style1.href = '/admin_resources/css/management-employee.css';
             document.head.appendChild(style1);
         }
-        fetch("http://localhost:8080/api/admin/receipt/"+id)
+        fetch("http://localhost:8080/api/admin/receipt/"+id,{
+            headers:{
+                'Authorization': 'Bearer ' + token
+            }
+        })
             .then((response) => response.json())
             .then((data) => {
                 setDetails(data)
@@ -29,6 +34,7 @@ const ReceiptDetail = () => {
 				method: 'PUT',
 				headers: {
 				'Content-Type': 'application/json',
+				'Authorization': 'Bearer ' + token
 				// Add any other headers if needed
 				},
 				body: JSON.stringify(id),

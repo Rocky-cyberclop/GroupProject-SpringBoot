@@ -1,19 +1,21 @@
 package com.teenboutique.web.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.teenboutique.web.services.ProductService;
 
 @Controller
+@RequestMapping("/main/")
 public class TestController {
-	@Autowired
-	private ProductService proSer;
 	
 	@GetMapping("/hi")
-	public String test() {
-		proSer.getAll();
+	public String cart() {
 		return "/home";
+	}
+	
+	@GetMapping("/signin")
+	public String loginForm() {
+		return "/login";
 	}
 }

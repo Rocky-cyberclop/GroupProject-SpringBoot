@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [error, setError] = useState(false);
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -24,16 +26,16 @@ const Login = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
-      });
-  
-      if (response.ok) {
-        // Successful login, you can redirect or perform other actions here
-        console.log('Login successful');
-      } else {
-        // Unsuccessful login
-        setError(true);
-        console.error('Login failed');
-      }
+      }).then(response=>response.json()).then(data=>{
+				console.log(data.jwt)
+				if(data.jwt!==null){
+					localStorage.setItem("token", data.jwt)
+					navigate('/');
+				}
+				else{
+					setError("Bạn đã nhập sai mã nhân viên hoặc mật khẩu")
+				}
+			});
     } catch (error) {
       setError(true);
       console.error('Error:', error);

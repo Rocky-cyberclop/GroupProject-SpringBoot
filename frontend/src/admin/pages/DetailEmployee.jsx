@@ -6,13 +6,18 @@ const DetailEmployee = () => {
     const { id } = useParams();
     const [employee, setEmployee] = useState({});
     const navigate = useNavigate();
+    let token = localStorage.getItem('token')
 
     useEffect(() => {
         if (document.getElementById('admin-script-chart')) {
             const adminChart = document.getElementById('admin-script-chart');
             document.body.removeChild(adminChart);
         }
-        fetch("http://localhost:8080/api/admin/management/employee/" + id)
+        fetch("http://localhost:8080/api/admin/management/employee/" + id,{
+            headers:{
+                'Authorization': 'Bearer ' + token
+            }
+        })
             .then((response) => response.json())
             .then((data) => {
                 setEmployee(data)
