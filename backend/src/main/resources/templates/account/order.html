@@ -25,7 +25,7 @@
 
 	<div th:replace="~{fragments/components/header :: style-css}"></div>
 
-	
+
 </head>
 
 <body id="body">
@@ -85,9 +85,10 @@
 										<td><span class="label"
 												th:class="${customerOrder.status=='Done'} ? ' label-success' : 'label-warning'"
 												th:text="${customerOrder.status}" style="color: aliceblue;"></span></td>
-										<td><a 
-												class="btn btn-default" th:href="@{'/account/orderItemDetail/'+${customerOrder.id}}">Xem</a></td>
-										
+										<td><a class="btn btn-default"
+												th:href="@{'/account/orderItemDetail/'+${customerOrder.id}}">Xem</a>
+										</td>
+
 									</tr>
 
 								</tbody>
