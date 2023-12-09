@@ -7,6 +7,8 @@ import com.teenboutique.web.repositories.CartRepository;
 import com.teenboutique.web.repositories.CustomerRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,23 +18,32 @@ import java.util.List;
 public class CartService {
 
 	private final CustomerRepository customerRepository;
+	
+	private final CustomerService customerService;
 
 	private final CartRepository cartRepository;
 
-    private Long customerId = 8542L;
+//    private Long customerId = 293915L;
 
     @Autowired
-    public CartService(CartRepository cartRepository, CustomerRepository customerRepository) {
+    public CartService(CartRepository cartRepository, CustomerRepository customerRepository, CustomerService customerService) {
         this.cartRepository = cartRepository;
         this.customerRepository = customerRepository;
+        this.customerService = customerService;
     }
 
     public List<CartItem> getCartItemsByCustomer() {
+    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		System.out.println(authentication.getName());
+		Long customerId =  customerService.getCusByEmail(authentication.getName()).getId();
         // Trả về danh sách các sản phẩm trong giỏ hàng của khách hàng
         return cartRepository.findByCustomer(customerId);
     }
 	
 	public List<CartItemDto> getCartItemsByCustomerId() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		System.out.println(authentication.getName());
+		Long customerId =  customerService.getCusByEmail(authentication.getName()).getId();
         List<CartItem> cartItems = cartRepository.findByCustomer(customerId);
         List<CartItemDto> cartItemDtos = new ArrayList<>();
         for (CartItem cartItem : cartItems) {
@@ -49,15 +60,24 @@ public class CartService {
     }
 
     public void deleteCartItemByCustomerAndProduct(Long productId) {
+    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		System.out.println(authentication.getName());
+		Long customerId =  customerService.getCusByEmail(authentication.getName()).getId();
         cartRepository.deleteCartItemByCustomerAndProduct(customerId, productId);
     }
     
     public void deleteAllCartItemByCustomer() {
+    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		System.out.println(authentication.getName());
+		Long customerId =  customerService.getCusByEmail(authentication.getName()).getId();
         cartRepository.deleteAllCartItemByCustomer(customerId);
     }
 
     public float calculateTotalPrice() {
         // Tính tổng tiền của giỏ hàng
+    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		System.out.println(authentication.getName());
+		Long customerId =  customerService.getCusByEmail(authentication.getName()).getId();
         List<CartItem> cartItems = cartRepository.findByCustomer(customerId);
         float totalPrice = 0L;
         for (CartItem item : cartItems) {
@@ -67,14 +87,16 @@ public class CartService {
 	}
 
 	public Long getCustomerId() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		System.out.println(authentication.getName());
+		Long customerId =  customerService.getCusByEmail(authentication.getName()).getId();
 		return customerId;
-	}
-
-	public void setCustomerId(Long customerId) {
-		this.customerId = customerId;
 	}
 	
 	public Customer getCustomerById() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		System.out.println(authentication.getName());
+		Long customerId =  customerService.getCusByEmail(authentication.getName()).getId();
         return customerRepository.findById(customerId).orElse(null);
     }
 }
