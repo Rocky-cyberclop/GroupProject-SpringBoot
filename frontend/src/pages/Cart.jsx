@@ -50,7 +50,11 @@ function Cart() {
         try {
         const confirmDelete = window.confirm("Bạn có muón xóa sản phẩm này: " + product_id + " ?");
         if (confirmDelete) {
-            await axios.delete(`http://localhost:8080/api/cart/items/${product_id}`);
+            await axios.delete(`http://localhost:8080/api/cart/items/${product_id}`, {
+                headers:{
+                    'Authorization': 'Bearer ' + token
+                }
+            });
             getCart();
         }
         } catch (error) {

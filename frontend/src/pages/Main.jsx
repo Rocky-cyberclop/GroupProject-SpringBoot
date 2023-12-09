@@ -54,7 +54,7 @@ const Main = () => {
                   data-animation-in="fadeInUp"
                   data-delay-in=".8"
                   className="btn"
-                  href="shop.html"
+                  href="/main/cart"
                 >
                   Mua ngay
                 </a>
@@ -88,7 +88,7 @@ const Main = () => {
                   data-animation-in="fadeInUp"
                   data-delay-in=".8"
                   className="btn"
-                  href="shop.html"
+                  href="/main/cart"
                 >
                   Mua ngay
                 </a>
@@ -122,7 +122,7 @@ const Main = () => {
                   data-animation-in="fadeInUp"
                   data-delay-in=".8"
                   className="btn"
-                  href="shop.html"
+                  href="/main/cart"
                 >
                   Mua ngay
                 </a>

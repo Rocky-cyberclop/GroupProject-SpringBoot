@@ -18,7 +18,7 @@ const MainMenu = () => (
                 <div id="navbar" className="navbar-collapse collapse text-center">
                     <ul className="nav navbar-nav">
                         <li className="dropdown ">
-                            <a href="index.html">Home</a>
+                            <a href="/">Home</a>
                         </li>
                         <li className="dropdown dropdown-slide">
                             <a href="#!" className="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
@@ -32,8 +32,8 @@ const MainMenu = () => (
                                     <li className="dropdown-header">Pages</li>
                                     <li role="separator" className="divider"></li>
                                     <li><a href="shop.html">Shop</a></li>
-                                    <li><a href="checkout.html">Checkout</a></li>
-                                    <li><a href="cart.html">Cart</a></li>
+                                    <li><a href="/main/checkout">Checkout</a></li>
+                                    <li><a href="/main/cart">Cart</a></li>
                                     <li><a href="pricing.html">Pricing</a></li>
                                     <li><a href="confirmation.html">Confirmation</a></li>
                                 </ul>

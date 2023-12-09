@@ -54,8 +54,8 @@
 							                    <td th:text="${item.quantity}"></td>
 							                    <td th:text="${item.product_detail.product.price}"></td>
 							                    <td>
-							                        <a th:href="@{'/cart/remove/'+${item.product_detail.product.id}}">
-							                            <button type="submit" class="btn btn-danger">Remove</button>
+							                        <a th:href="@{'/main/cart/remove/'+${item.product_detail.product.id}}">
+							                            <button type="submit" class="btn btn-danger">Xóa</button>
 							                        </a>
 							                    </td>
 							                </tr>
