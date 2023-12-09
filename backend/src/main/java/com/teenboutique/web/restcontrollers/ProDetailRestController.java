@@ -3,6 +3,8 @@ package com.teenboutique.web.restcontrollers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +22,7 @@ import com.teenboutique.web.entities.Product;
 import com.teenboutique.web.entities.ProductDetail;
 import com.teenboutique.web.helpers.Helper;
 import com.teenboutique.web.services.CategoryService;
+import com.teenboutique.web.services.CustomerService;
 import com.teenboutique.web.services.EmployeeService;
 import com.teenboutique.web.services.OrderService;
 import com.teenboutique.web.services.ProductDetailService;
@@ -53,13 +56,18 @@ public class ProDetailRestController {
 	@Autowired
 	private ProductDetailService productDetailService;
 	
-	private long iduser = 857;
+	@Autowired
+	private CustomerService customerService;
+	
+	
 
 	@PostMapping("/productdetail")
 	public ResponseEntity<ThanhThanhProDetailDto> addToCart(@RequestBody ThanhThanhProDetailDto ttProDetailDto) {
-		System.out.println(ttProDetailDto.getSize());		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String name = authentication.getName();			
+		Long iduser =  customerService.getCusByEmail(name).getId();
+		
 		CartItem c = productDetailService.findById(iduser, ttProDetailDto.getId(),ttProDetailDto.getSize());
-	
 		if (c != null) {
 			productDetailService.addtoCart(iduser,ttProDetailDto.getSize(),ttProDetailDto.getId(),ttProDetailDto.getQuantity());
 		}
