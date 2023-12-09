@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -59,9 +61,11 @@ public class Customer {
 	private boolean locked;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "customer", orphanRemoval = true)
+	@JsonIgnore
 	private List<CustomerOrder> orders = new ArrayList<>();
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "customer", orphanRemoval = true)
+	@JsonIgnore
 	private List<CartItem> cart_items = new ArrayList<>();
 
 	public Long getId() {
