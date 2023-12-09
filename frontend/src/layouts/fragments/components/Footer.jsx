@@ -76,7 +76,7 @@ const Footer = () => {
                 <a href="contact.html">CONTACT</a>
               </li>
               <li>
-                <a href="shop.html">SHOP</a>
+                <a href="/">SHOP</a>
               </li>
               <li>
                 <a href="pricing.html">Pricing</a>
@@ -86,8 +86,8 @@ const Footer = () => {
               </li>
             </ul>
             <p className="copyright-text">
-              Copyright &copy;2021, Designed &amp; Developed by{" "}
-              <a href="https://themefisher.com/">Themefisher</a>
+              Copyright &copy;2023, Designed &amp; Developed by{" "}
+              <a href="#">TEAM TEEN BOUTIQUE</a>
             </p>
           </div>
         </div>
