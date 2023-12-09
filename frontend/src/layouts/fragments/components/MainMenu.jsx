@@ -18,7 +18,7 @@ const MainMenu = () => (
                 <div id="navbar" className="navbar-collapse collapse text-center">
                     <ul className="nav navbar-nav">
                         <li className="dropdown ">
-                            <a href="index.html">Home</a>
+                            <a href="/">Home</a>
                         </li>
                         <li className="dropdown dropdown-slide">
                             <a href="#!" className="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
@@ -31,11 +31,9 @@ const MainMenu = () => (
                                 <ul>
                                     <li className="dropdown-header">Pages</li>
                                     <li role="separator" className="divider"></li>
-                                    <li><a href="shop.html">Shop</a></li>
-                                    <li><a href="checkout.html">Checkout</a></li>
-                                    <li><a href="cart.html">Cart</a></li>
-                                    <li><a href="pricing.html">Pricing</a></li>
-                                    <li><a href="confirmation.html">Confirmation</a></li>
+                                    <li><a href="/">Shop</a></li>
+                                    <li><a href="/main/checkout">Checkout</a></li>
+                                    <li><a href="/main/cart">Cart</a></li>
                                 </ul>
                                 </div>
                                 <div className="col-lg-6 col-md-6 mb-sm-3">
@@ -63,8 +61,6 @@ const MainMenu = () => (
                                     <li role="separator" className="divider"></li>
                                     <li><a href="contact.html">Contact Us</a></li>
                                     <li><a href="about.html">About Us</a></li>
-                                    <li><a href="404.html">404 Page</a></li>
-                                    <li><a href="coming-soon.html">Coming Soon</a></li>
                                     <li><a href="faq.html">FAQ</a></li>
                                 </ul>
                                 </div>
@@ -82,14 +78,14 @@ const MainMenu = () => (
                                 <ul>
                                     <li className="dropdown-header">Utility</li>
                                     <li role="separator" className="divider"></li>
-                                    <li><a href="login.html">Login Page</a></li>
-                                    <li><a href="signin.html">Signin Page</a></li>
-                                    <li><a href="forget-password.html">Forget Password</a></li>
+                                    <li><a href="/login">Login Page</a></li>
+                                    <li><a href="/register">Signin Page</a></li>
+                                    <li><a href="/forget">Forget Password</a></li>
                                 </ul>
                                 </div>
 
                                 <div className="col-sm-3 col-xs-12">
-                                    <a href="shop.html">
+                                    <a href="/">
                                         <img className="img-responsive" src="/assets/images/shop/header-img.jpg" alt="menu image" />
                                     </a>
                                 </div>
