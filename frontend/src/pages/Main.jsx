@@ -216,7 +216,7 @@ const Main = () => {
                   </div>
                   <div className="product-content">
                     <h4>
-                      <a href={`/assets/productdetail/${product.id}`}>
+                      <a href={`/productdetail/${product.id}`}>
                         {product.name}
                       </a>
                     </h4>

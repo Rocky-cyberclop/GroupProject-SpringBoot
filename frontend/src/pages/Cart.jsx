@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 function Cart() {
     const [cartList, setCartList] = useState([]);
     const [total, setTotal] = useState([]);
+    let token = localStorage.getItem('token')
 
     const totalAmount = total.totalPrice;
 
@@ -21,7 +22,11 @@ function Cart() {
 
     const getCart = async () => {
         try {
-            const response = await axios.get("http://localhost:8080/api/cart/items");
+            const response = await axios.get("http://localhost:8080/api/cart/items", {
+                headers:{
+                    'Authorization': 'Bearer ' + token
+                }
+            });
             setCartList(response.data);
         } catch (error) {
             console.log(error);
@@ -30,7 +35,11 @@ function Cart() {
 
     const getTotal = async () => {
         try {
-            const response = await axios.get("http://localhost:8080/api/cart/totalPrice");
+            const response = await axios.get("http://localhost:8080/api/cart/totalPrice", {
+                headers:{
+                    'Authorization': 'Bearer ' + token
+                }
+            });
             setTotal(response.data);
         } catch (error) {
             console.log(error);
