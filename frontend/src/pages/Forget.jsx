@@ -52,7 +52,7 @@ const Forget = () => {
             <div className="col-md-6 col-md-offset-3">
                 <div className="block text-center">
                 <a className="logo" href="/">
-                    <img src="/assets/images/logo.png" alt="Logo" />
+                    <img src="/assets/images/teenboutique.png" style={{width: 200}} alt="Your Logo" />
                 </a>
                 <h2 className="text-center">Chào Mừng Trở Lại</h2>
                 <form className="text-left clearfix" onSubmit={handleSubmit}>
