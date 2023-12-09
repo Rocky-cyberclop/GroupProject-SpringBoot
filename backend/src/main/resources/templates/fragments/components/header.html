@@ -23,7 +23,7 @@
 
 	<div th:fragment="css" th:remove="tag">
 		<!-- Favicon -->
-		<link rel="shortcut icon" type="image/x-icon" th:href="@{/main/images/favicon.png}" />
+		<link rel="shortcut icon" type="image/x-icon" th:href="@{/main/images/favicon.ico}" />
 
 		<!-- Themefisher Icon font -->
 		<link rel="stylesheet" th:href="@{/main/plugins/themefisher-font/style.css}">
@@ -79,7 +79,7 @@
 				<div class="col-md-4 col-xs-12 col-sm-4">
 					<!-- Site Logo -->
 					<div class="logo text-center">
-						<a href="main.html">
+						<a th:href="@{/}">
 							<!-- replace logo here -->
 							<svg width="435px" height="35px" viewBox="0 0 155 29" version="1.1"
 								xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -116,12 +116,15 @@
 							</ul>
 						</li><!-- / Search -->
 
-						<!-- Login -->
-						<li class="dropdown login dropdown-slide">
-							<a href="/login" class="dropdown-toggle"><i
-									class="tf-ion-android-person"></i>Đăng nhập</a>
+						<!-- Login/Logout Link -->
+						<li class="dropdown login dropdown-slide"  th:if="${#authorization.expression('isAuthenticated()')}">
+						    <a href="/logout" class="dropdown-toggle"><i class="tf-ion-android-person"></i>Đăng xuất</a>
+						</li>
+						<li class="dropdown login dropdown-slide" th:unless="${#authorization.expression('isAuthenticated()')}">
+						    <a href="/login" class="dropdown-toggle"><i class="tf-ion-android-person"></i>Đăng nhập</a>
+						</li>
+						<!-- /Login/Logout Link -->
 
-						</li><!-- /Login -->
 
 					</ul><!-- / .nav .navbar-nav .navbar-right -->
 				</div>
@@ -152,7 +155,7 @@
 
 						<!-- Home -->
 						<li class="dropdown ">
-							<a href="index.html">Home</a>
+							<a th:href="@{/}">Home</a>
 						</li><!-- / Home -->
 
 
@@ -169,12 +172,9 @@
 										<ul>
 											<li class="dropdown-header">Pages</li>
 											<li role="separator" class="divider"></li>
-											<li><a href="shop.html">Shop</a></li>
-											<li><a href="checkout.html">Checkout</a></li>
-											<li><a href="cart.html">Cart</a></li>
-											<li><a href="pricing.html">Pricing</a></li>
-											<li><a href="confirmation.html">Confirmation</a></li>
-
+											<li><a th:href="@{/}">Shop</a></li>
+											<li><a th:href="@{/main/cart}">Cart</a></li>
+											<li><a th:href="@{/main/cart/checkout}">Checkout</a></li>
 										</ul>
 									</div>
 
@@ -209,8 +209,6 @@
 											<li role="separator" class="divider"></li>
 											<li><a href="contact.html">Contact Us</a></li>
 											<li><a href="about.html">About Us</a></li>
-											<li><a href="404.html">404 Page</a></li>
-											<li><a href="coming-soon.html">Coming Soon</a></li>
 											<li><a href="faq.html">FAQ</a></li>
 										</ul>
 									</div>
@@ -232,9 +230,9 @@
 										<ul>
 											<li class="dropdown-header">Utility</li>
 											<li role="separator" class="divider"></li>
-											<li><a href="login.html">Login Page</a></li>
-											<li><a href="signin.html">Signin Page</a></li>
-											<li><a href="forget-password.html">Forget Password</a></li>
+											<li><a th:href="@{/login}">Login Page</a></li>
+											<li><a th:href="@{/register}">Signin Page</a></li>
+											<li><a th:href="@{/forget}">Forget Password</a></li>
 										</ul>
 									</div>
 
