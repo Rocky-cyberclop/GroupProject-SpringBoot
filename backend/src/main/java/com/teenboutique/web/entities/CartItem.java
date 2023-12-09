@@ -1,6 +1,7 @@
 package com.teenboutique.web.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.teenboutique.web.entities.ProductDetail.ProductDetailId;
 
 import jakarta.persistence.Embeddable;
@@ -27,6 +28,7 @@ public class CartItem {
 	@ManyToOne(fetch = FetchType.LAZY)
 //	@MapsId("customer_id")
 	@JoinColumn(name = "customer_id", insertable=false, updatable=false)
+	@JsonIgnore
 	private Customer customer;
 	
 	
@@ -36,6 +38,7 @@ public class CartItem {
 		@JoinColumn(name = "product_id"),
 		@JoinColumn(name = "size_id")
 	})
+	@JsonIgnore
 	private ProductDetail product_detail;
 	
 	
