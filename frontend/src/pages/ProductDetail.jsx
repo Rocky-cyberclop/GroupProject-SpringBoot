@@ -110,8 +110,8 @@ const ProductDetail = () => {
 						<div className="single-product-details">
 							<h2>{product.name}</h2>
 							<p className="product-price">{product.price} VND</p>
-							<p className="product-description mt-20">
-								{product.description}
+							<p className="product-description mt-20" >
+							Loại sản phẩm: {product.category && product.category.name}
 							</p>
 							<form className="forms-sample" onSubmit={detailSubmit}>
 								<div className="form-group">

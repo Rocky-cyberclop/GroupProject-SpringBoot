@@ -27,13 +27,13 @@ const MainMenu = () => (
                             </a>
                             <div className="dropdown-menu">
                             <div className="row">
-                                <div className="col-lg-6 col-md-6 mb-sm-3">
+                                <div className="col">
                                 <ul>
                                     <li className="dropdown-header">Pages</li>
                                     <li role="separator" className="divider"></li>
                                     <li><a href="/">Shop</a></li>                                    
                                     <li><a href="/main/cart">Cart</a></li>
-                                    <li><a href="/main/checkout">Checkout</a></li>
+                                    <li><a href="/account">Account</a></li>
                                 </ul>
                                 </div>
                             </div>
@@ -52,6 +52,7 @@ const MainMenu = () => (
                                     <li role="separator" className="divider"></li>
                                     <li><a href="/account">User Interface</a></li>
                                     <li><a href="/account/order">Orders</a></li>
+                                    
                                 </ul>
                                 </div>
 
