@@ -62,7 +62,7 @@ const Main = () => {
             </div>
           </div>
         </div>
-        <div
+        {/* <div
           className="slider-item th-fullpage hero-area"
           style={{ backgroundImage: "url(assets/images/slider/slider-3.jpg)" }}
         >
@@ -129,7 +129,7 @@ const Main = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
       <section className="product-category section">
         <div className="container">
@@ -196,7 +196,7 @@ const Main = () => {
                       src={product.image}
                       alt="product-img"
                     />
-                    <div className="preview-meta">
+                    {/* <div className="preview-meta">
                       <ul>
                         <li>
                           <span
@@ -212,7 +212,7 @@ const Main = () => {
                           </a>
                         </li>
                       </ul>
-                    </div>
+                    </div> */}
                   </div>
                   <div className="product-content">
                     <h4>
