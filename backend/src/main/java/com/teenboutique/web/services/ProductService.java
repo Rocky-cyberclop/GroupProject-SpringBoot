@@ -202,5 +202,32 @@ public class ProductService {
 		return proRepo.findAllProductCate(cate_id, pageable);
 	}
 	
+	public ProductsDto findPageDto(int page){
+		ProductsDto result = new ProductsDto();
+		Page<Product> products = findProductPage(page);
+		result.setCurrentPage(page);
+		result.setTotalPage(products.getTotalPages());
+		List<ProductDto> productDtos = new ArrayList<ProductDto>();
+		for(Product product : products.getContent()) {
+			productDtos.add(new ProductDto(product));
+		}
+		result.setProducts(productDtos);
+		return result;
+	}
+		
+	
+	public ProductsDto findCateDto(Long id, int page){
+		ProductsDto result = new ProductsDto();
+		Page<Product> products = findProductCatePage(id, page);
+		result.setCurrentPage(page);
+		result.setTotalPage(products.getTotalPages());
+		List<ProductDto> productDtos = new ArrayList<ProductDto>();
+		for(Product product : products.getContent()) {
+			productDtos.add(new ProductDto(product));
+		}
+		result.setProducts(productDtos);
+		return result;
+	}
+	
 	
 }
