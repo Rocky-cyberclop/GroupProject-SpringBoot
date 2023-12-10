@@ -71,6 +71,7 @@ public class FormLoginSecurityConfig {
 		http.securityMatcher(AntPathRequestMatcher.antMatcher("/api/**"))
 			.authorizeHttpRequests(req -> 
 				req.requestMatchers("/api/admin/auth/**", "/api/login/**", "/api/register", "/api/forget", "/api/main", "/api/admin/statistic/**").permitAll()
+						.requestMatchers("/api/account/**", "/api/cart/**", "/api/account/**", "/api/main/productdetail/**").hasAuthority("User")
 						.anyRequest()
 						.authenticated()
 			)
