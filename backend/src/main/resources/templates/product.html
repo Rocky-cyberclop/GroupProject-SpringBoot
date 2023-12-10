@@ -33,7 +33,7 @@
 							<div class="product-thumb">
 								<img class="img-responsive" th:src="${product.getImages[0].url}"
 									alt="product-img" />
-								<div class="preview-meta">
+								<!--<div class="preview-meta">
 									<ul>
 										<li>
 											<span data-toggle="modal" data-target="#product-modal">
@@ -44,7 +44,7 @@
 											<a href="#!"><i class="tf-ion-android-cart"></i></a>
 										</li>
 									</ul>
-								</div>
+								</div>-->
 							</div>
 							<div class="product-content">
 								<h4><a th:text="${product.name}" th:href="@{/main/productdetail/{id}(id=${product.id})}"></a></h4>

@@ -10,6 +10,8 @@ import Account from '../pages/Account';
 import AccountUpdate from '../pages/AccountUpdate';
 import AccountOrder from '../pages/AccountOrder';
 import AccountOrderDetail from '../pages/AccountOrderDetail';
+import Product from '../pages/Product';
+import ProductCate from '../pages/ProductCate';
 
 //Routes
 const AuthRoutes = [
@@ -30,7 +32,9 @@ const PrivateRoutes = [
     { path: '/account', component: Account, layout: null},
     { path: '/account/order', component: AccountOrder, layout: null},
     { path: '/account/order/:id', component: AccountOrderDetail, layout: null},
-    { path: '/account/update', component: AccountUpdate, layout: null}
+    { path: '/account/update', component: AccountUpdate, layout: null},
+    { path: '/main/product', component: Product, layout: null}, 
+    { path: '/main/product/category/:id', component: ProductCate, layout: null},
 ]
 
 // const CartRoutes = [
