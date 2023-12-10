@@ -141,11 +141,21 @@ const Main = () => {
             </div>
           </div>
           <div className="row">
+          <div className="col-md-8">
+						<div className="category-box col">
+							<a type="button" className="btn btn-outline-secondary" href={`/main/product`}>
+								<img src="/assets/images/shop/category/category-1.jpg" alt="" />
+								<div className="content">
+									<h3>Tất cả</h3>
+								</div>
+							</a>
+						</div>
+					</div>
             {categories &&
               categories.map((category) => (
                 <div key={category.id} className="col-md-4">
                   <div className="category-box col">
-                    <a href="#!">
+                    <a href={`/main/product/category/${category.id}`}>
                       <img
                         src="/assets/images/shop/category/category-2.jpg"
                         alt=""

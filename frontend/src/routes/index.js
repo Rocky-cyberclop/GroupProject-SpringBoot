@@ -6,6 +6,8 @@ import Forget from '../pages/Forget';
 import Cart from '../pages/Cart';
 import Checkout from '../pages/Checkout';
 import ProductDetail from '../pages/ProductDetail';
+import Product from '../pages/Product';
+import ProductCate from '../pages/ProductCate';
 
 //Routes
 const AuthRoutes = [
@@ -22,7 +24,9 @@ const MainRoutes = [
 const PrivateRoutes = [
     { path: '/main/cart', component: Cart},
     { path: '/main/checkout', component: Checkout},
-    { path: '/productdetail/:id', component: ProductDetail, layout: null},    
+    { path: '/productdetail/:id', component: ProductDetail, layout: null}, 
+    { path: '/main/product', component: Product, layout: null}, 
+    { path: '/main/product/category/:id', component: ProductCate, layout: null}, 
 ]
 
 // const CartRoutes = [
