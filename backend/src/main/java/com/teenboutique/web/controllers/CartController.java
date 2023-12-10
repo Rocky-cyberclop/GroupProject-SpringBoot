@@ -48,13 +48,13 @@ public class CartController {
 		double totalPrice = cartService.calculateTotalPrice();
 		model.addAttribute("cartItems", cartItems);
 		model.addAttribute("totalPrice", totalPrice);
-		return "cart";
+		return "/cart";
 	}
 
 	@GetMapping("/main/cart/remove/{id}")
 	public String removeCartItem(@PathVariable("id") Long productId) {
 		cartService.deleteCartItemByCustomerAndProduct(productId);
-		return "redirect:/cart";
+		return "redirect:/main/cart";
 	}
 
 	@GetMapping("/main/cart/checkout")
@@ -86,6 +86,6 @@ public class CartController {
 		
 		orderDetailService.insertItem(cartItem);
 		cartService.deleteAllCartItemByCustomer();
-		return "/main";
+		return "/cart";
 	}
 }

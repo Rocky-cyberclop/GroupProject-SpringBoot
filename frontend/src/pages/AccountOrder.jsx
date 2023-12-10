@@ -25,8 +25,8 @@ function AccountOrder(){
 			<div className="row">
 				<div className="col-md-12">
 					<ul className="list-inline dashboard-menu text-center">
-						<li><a href="/account">Bảng điều khiển</a></li>
 						<li><a className="active" href="/account/order">Đơn đặt hàng</a></li>
+                        <li><a href="/account">Chi Tiết hồ sơ</a></li>
 					</ul>
 
 					<div className="dashboard-wrapper user-dashboard">

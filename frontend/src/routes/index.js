@@ -1,5 +1,4 @@
 //Pages
-import MainLayout from '../layouts/MainLayout';
 import Main from '../pages/Main';
 import Login from '../pages/Login';
 import Register from '../pages/Register';

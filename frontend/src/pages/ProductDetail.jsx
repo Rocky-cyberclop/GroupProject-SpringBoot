@@ -79,17 +79,11 @@ const ProductDetail = () => {
 				<div className="row">
 					<div className="col-md-6">
 						<ol className="breadcrumb">
-							<li><a href="index.html">Home</a></li>
-							<li><a href="shop.html">Shop</a></li>
+							<li><a href="/">Home</a></li>
 							<li className="active">Single Product</li>
 						</ol>
 					</div>
-					<div className="col-md-6">
-						<ol className="product-pagination text-right">
-							<li><a href="blog-left-sidebar.html"><i className="tf-ion-ios-arrow-left"></i> Next </a></li>
-							<li><a href="blog-left-sidebar.html">Preview <i className="tf-ion-ios-arrow-right"></i></a></li>
-						</ol>
-					</div>
+					
 				</div>
 				<div className="row mt-20">
 					<div className="col-md-5">
