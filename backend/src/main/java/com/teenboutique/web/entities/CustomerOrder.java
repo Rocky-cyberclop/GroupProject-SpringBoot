@@ -1,10 +1,13 @@
 package com.teenboutique.web.entities;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -22,7 +25,12 @@ import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "CustomerOrder")
-public class CustomerOrder {
+public class CustomerOrder implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -39,13 +47,16 @@ public class CustomerOrder {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "employee_id")
+	@JsonIgnore
 	private Employee employee;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "customer_id")
+	@JsonIgnore
 	private Customer customer;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "customer_order", orphanRemoval = true)
+	@JsonIgnore
 	private List<CustomerOrderItem> order_items = new ArrayList<>();
 
 	public Long getId() {

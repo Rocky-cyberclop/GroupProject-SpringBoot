@@ -70,7 +70,6 @@ const MainMenu = () => (
                                     <li role="separator" className="divider"></li>
                                     <li><a href="/account">User Interface</a></li>
                                     <li><a href="/account/order">Orders</a></li>
-                                    <li><a href="/account/profileDetails">Profile Details</a></li>
                                 </ul>
                                 </div>
 
