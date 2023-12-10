@@ -72,9 +72,19 @@
 					</div>
 				</div>
 				<div class="row">
+					<div class="col-md-8">
+						<div class="category-box col">
+							<a type="button" th:href="@{/main/product/1}" class="btn btn-outline-secondary">
+								<img th:src="@{/main/images/shop/category/category-1.jpg}" alt="" />
+								<div class="content">
+									<h3>Tất cả</h3>
+								</div>
+							</a>
+						</div>
+					</div>
 					<div th:each="category: ${categories}" class="col-md-4">
 						<div class="category-box col">
-							<a href="#!">
+							<a th:href="@{/main/product/{category}/{page}(category=${category.id}, page=1)}">
 								<img th:src="@{/main/images/shop/category/category-2.jpg}" alt="" />
 								<div class="content">
 									<h3 th:text="${category.name}"></h3>
@@ -83,6 +93,8 @@
 							</a>
 						</div>
 					</div>
+					
+					
 				</div>
 			</div>
 		</section>

@@ -1,5 +1,4 @@
 //Pages
-import MainLayout from '../layouts/MainLayout';
 import Main from '../pages/Main';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
@@ -23,7 +22,7 @@ const MainRoutes = [
 const PrivateRoutes = [
     { path: '/main/cart', component: Cart},
     { path: '/main/checkout', component: Checkout},
-    { path: '/productdetail/:id', component: ProductDetail, layout: null},
+    { path: '/productdetail/:id', component: ProductDetail, layout: null},    
 ]
 
 // const CartRoutes = [
