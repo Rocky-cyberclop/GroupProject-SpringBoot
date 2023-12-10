@@ -1,9 +1,11 @@
 package com.teenboutique.web.entities;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.teenboutique.web.entities.ProductDetail.ProductDetailId;
 
 import jakarta.persistence.Column;
@@ -20,7 +22,12 @@ import jakarta.validation.constraints.Positive;
 
 @Entity
 @Table(name = "CustomerOrderItem")
-public class CustomerOrderItem {
+public class CustomerOrderItem implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@EmbeddedId
 	private CustomerOrderItemId id;
 	
@@ -41,6 +48,7 @@ public class CustomerOrderItem {
 	@ManyToOne(fetch = FetchType.LAZY)
 //	@MapsId("customer_order_id")
 	@JoinColumn(name = "customer_order_id", insertable=false, updatable=false)
+	@JsonIgnore
 	private CustomerOrder customer_order;
 	
 	
@@ -50,6 +58,7 @@ public class CustomerOrderItem {
 		@JoinColumn(name = "product_id"),
 		@JoinColumn(name = "size_id")
 	})
+	@JsonIgnore
 	private ProductDetail product_detail;
 	
 	

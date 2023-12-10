@@ -54,7 +54,7 @@ const Main = () => {
                   data-animation-in="fadeInUp"
                   data-delay-in=".8"
                   className="btn"
-                  href="shop.html"
+                  href="/main/cart"
                 >
                   Mua ngay
                 </a>
@@ -62,7 +62,7 @@ const Main = () => {
             </div>
           </div>
         </div>
-        <div
+        {/* <div
           className="slider-item th-fullpage hero-area"
           style={{ backgroundImage: "url(assets/images/slider/slider-3.jpg)" }}
         >
@@ -88,7 +88,7 @@ const Main = () => {
                   data-animation-in="fadeInUp"
                   data-delay-in=".8"
                   className="btn"
-                  href="shop.html"
+                  href="/main/cart"
                 >
                   Mua ngay
                 </a>
@@ -122,14 +122,14 @@ const Main = () => {
                   data-animation-in="fadeInUp"
                   data-delay-in=".8"
                   className="btn"
-                  href="shop.html"
+                  href="/main/cart"
                 >
                   Mua ngay
                 </a>
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
       <section className="product-category section">
         <div className="container">
@@ -196,7 +196,7 @@ const Main = () => {
                       src={product.image}
                       alt="product-img"
                     />
-                    <div className="preview-meta">
+                    {/* <div className="preview-meta">
                       <ul>
                         <li>
                           <span
@@ -212,11 +212,11 @@ const Main = () => {
                           </a>
                         </li>
                       </ul>
-                    </div>
+                    </div> */}
                   </div>
                   <div className="product-content">
                     <h4>
-                      <a href={`/assets/productdetail/${product.id}`}>
+                      <a href={`/productdetail/${product.id}`}>
                         {product.name}
                       </a>
                     </h4>
@@ -240,16 +240,11 @@ const Main = () => {
               </div>
               <div className="col-lg-6 col-md-offset-3">
                 <div className="input-group subscription-form">
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Enter Your Email Address"
-                  />
-                  <span className="input-group-btn">
+                  <a className="input-group-btn" href="/register">
                     <button className="btn btn-main" type="button">
                       Đăng Ký!
                     </button>
-                  </span>
+                  </a>
                 </div>
               </div>
             </div>

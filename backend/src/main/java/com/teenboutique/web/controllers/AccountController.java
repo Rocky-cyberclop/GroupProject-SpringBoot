@@ -5,6 +5,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
@@ -21,6 +24,7 @@ import com.teenboutique.web.repositories.CustomerOrderItemRepository;
 import com.teenboutique.web.repositories.CustomerRepository;
 import com.teenboutique.web.repositories.ProductRepository;
 import com.teenboutique.web.repositories.SizeRepository;
+import com.teenboutique.web.services.CustomerService;
 import com.teenboutique.web.services.CustomerSevices;
 
 @Controller
@@ -32,7 +36,10 @@ public class AccountController {
 	private CustomerOrderItemRepository customerOderItemRepository;
 	private ProductRepository productRepository;
 	private SizeRepository sizeRepository;
-	private long idus = 293767;
+	//private long idus = 293767;
+
+	@Autowired
+	private CustomerService customerService;
 
 	public AccountController(CustomerRepository customerRepository, CustomerSevices customerSevices,
 			CustomerOrderItemRepository customerOderItemRepository, ProductRepository productRepository,
@@ -47,7 +54,11 @@ public class AccountController {
 
 	@GetMapping()
 	public String shownDashboard(Model model) {
-		Customer customer = customerRepository.findById(idus).orElse(null);
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String name = authentication.getName();			
+		Long iduser =  customerService.getCusByEmail(name).getId();	
+		
+		Customer customer = customerRepository.findById(iduser).orElse(null);
 
 		if (customer != null) {
 			model.addAttribute("user", customer);
@@ -66,8 +77,12 @@ public class AccountController {
 	@GetMapping("/order")
 	public String shownOrder(Model model) {
 
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String name = authentication.getName();			
+		Long iduser =  customerService.getCusByEmail(name).getId();	
+		
 //Lấy khách hàng thông qua id
-		Customer customer = customerRepository.findById(idus).orElse(null);
+		Customer customer = customerRepository.findById(iduser).orElse(null);
 
 		if (customer != null) {
 			List<CustomerOrder> customerOrders = customer.getOrders();
@@ -85,7 +100,11 @@ public class AccountController {
 
 	@GetMapping("/profileDetails")
 	public String shownProfileDetails(Model model) {
-		Customer customer = customerRepository.findById(idus).orElse(null);
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String name = authentication.getName();			
+		Long iduser =  customerService.getCusByEmail(name).getId();	
+		
+		Customer customer = customerRepository.findById(iduser).orElse(null);
 		model.addAttribute("user", customer);
 		return "account/profiledetails";
 	}
@@ -190,13 +209,13 @@ public class AccountController {
 			@RequestParam(value = "ngayThang", required = true) String ngayThang,
 			@RequestParam(value = "diaChi", required = true) String diaChi,
 			@RequestParam(value = "gioiTinh", required = true) boolean gioiTinh) {
-		System.out.println(id);
-		System.out.println(hoTen);
-		System.out.println(email);
-		System.out.println(soDienThoai);
-		System.out.println(ngayThang);
-		System.out.println(diaChi);
-		System.out.println(gioiTinh);
+//		System.out.println(id);
+//		System.out.println(hoTen);
+//		System.out.println(email);
+//		System.out.println(soDienThoai);
+//		System.out.println(ngayThang);
+//		System.out.println(diaChi);
+//		System.out.println(gioiTinh);
 
 		
 		

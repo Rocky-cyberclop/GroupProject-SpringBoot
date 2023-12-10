@@ -192,4 +192,15 @@ public class ProductService {
 		return trendyProductDtos;
 	}
 	
+	public Page<Product> findProductPage(int pageNumber) {
+		Pageable pageable = PageRequest.of(pageNumber - 1, 9);
+		return proRepo.findAllProductStillSell(pageable);
+	}
+	
+	public Page<Product> findProductCatePage(Long cate_id, int pageNumber) {
+		Pageable pageable = PageRequest.of(pageNumber - 1, 9);
+		return proRepo.findAllProductCate(cate_id, pageable);
+	}
+	
+	
 }

@@ -1004,7 +1004,7 @@ input[type=email]:focus, input[type=password]:focus, input[type=text]:focus, inp
   transition: 0.2s all;
   width: 50px;
 }
-.product-item .product-thumb .preview-meta li a:hover, .product-item .product-thumb .preview-meta li span:hover {
+/* .product-item .product-thumb .preview-meta li a:hover, .product-item .product-thumb .preview-meta li span:hover {
   background: #000;
   color: #fff;
 }
@@ -1014,7 +1014,7 @@ input[type=email]:focus, input[type=password]:focus, input[type=text]:focus, inp
 .product-item:hover .preview-meta {
   opacity: 1;
   transform: translateY(-20px);
-}
+} */
 .product-item .product-content {
   text-align: center;
 }

@@ -7,6 +7,7 @@ function Checkout() {
    const [cartList, setCartList] = useState([]);
    const [total, setTotal] = useState([]);
    const navigate = useNavigate();
+   let token = localStorage.getItem('token')
 
    const totalAmount = total.totalPrice;
 
@@ -25,7 +26,11 @@ function Checkout() {
 
    const getCustomer = async () => {
       try {
-         const response = await axios.get("http://localhost:8080/api/cart/customers");
+         const response = await axios.get("http://localhost:8080/api/cart/customers", {
+            headers:{
+                'Authorization': 'Bearer ' + token
+            }
+        });
          setCustomer(response.data);
       } catch (error) {
          console.log(error);
@@ -34,7 +39,11 @@ function Checkout() {
 
    const getCart = async () => {
       try {
-          const response = await axios.get("http://localhost:8080/api/cart/items");
+          const response = await axios.get("http://localhost:8080/api/cart/items", {
+            headers:{
+                'Authorization': 'Bearer ' + token
+            }
+        });
           setCartList(response.data);
       } catch (error) {
           console.log(error);
@@ -43,7 +52,11 @@ function Checkout() {
 
    const getTotal = async () => {
       try {
-          const response = await axios.get("http://localhost:8080/api/cart/totalPrice");
+          const response = await axios.get("http://localhost:8080/api/cart/totalPrice", {
+            headers:{
+                'Authorization': 'Bearer ' + token
+            }
+        });
           setTotal(response.data);
       } catch (error) {
           console.log(error);
@@ -52,8 +65,12 @@ function Checkout() {
 
    const handleCheckout = async () => {
       try {
-          const response = await axios.get("http://localhost:8080/api/cart/checkout");
-          navigate('/main/cart');
+          const response = await axios.get("http://localhost:8080/api/cart/checkout", {
+            headers:{
+                'Authorization': 'Bearer ' + token
+            }
+        });
+          navigate('/');
       } catch (error) {
           console.log(error);
       }
@@ -61,7 +78,11 @@ function Checkout() {
 
    let handleDelete = async (product_id) => {
       try {
-        const confirmDelete = window.confirm("Bạn có muón xóa sản phẩm này: " + product_id + " ?");
+        const confirmDelete = window.confirm("Bạn có muón xóa sản phẩm này: " + product_id + " ?", {
+            headers:{
+               'Authorization': 'Bearer ' + token
+            }
+         });
         if (confirmDelete) {
           await axios.delete(`http://localhost:8080/api/cart/items/${product_id}`);
           getCart();

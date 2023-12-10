@@ -9,6 +9,8 @@ const ProductDetail = () => {
 	const [size, setSize] = useState(0);
 	const [quantity, setQuantity] = useState(0);
 	const navigate = useNavigate();
+	let token = localStorage.getItem('token')
+
 
 	useEffect(() => {
 		if (document.getElementById('admin-script-chart')) {
@@ -16,7 +18,11 @@ const ProductDetail = () => {
 			document.body.removeChild(adminChart);
 		}
 		const adminChart = document.createElement('script');
-		fetch(`http://localhost:8080/api/admin/management/product/${id}`)
+		fetch(`http://localhost:8080/api/admin/management/product/${id}`,{
+            headers:{
+                'Authorization': 'Bearer ' + token
+            }
+        })
 			.then((response) => response.json())
 			.then((data) => {
 				setProduct(data);
@@ -53,6 +59,7 @@ const ProductDetail = () => {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
+					'Authorization': 'Bearer ' + token
 					// Add any other headers if needed
 				},
 				body: JSON.stringify({ id: id, size: selectedSize, quantity: quantity }),
@@ -72,17 +79,11 @@ const ProductDetail = () => {
 				<div className="row">
 					<div className="col-md-6">
 						<ol className="breadcrumb">
-							<li><a href="index.html">Home</a></li>
-							<li><a href="shop.html">Shop</a></li>
+							<li><a href="/">Home</a></li>
 							<li className="active">Single Product</li>
 						</ol>
 					</div>
-					<div className="col-md-6">
-						<ol className="product-pagination text-right">
-							<li><a href="blog-left-sidebar.html"><i className="tf-ion-ios-arrow-left"></i> Next </a></li>
-							<li><a href="blog-left-sidebar.html">Preview <i className="tf-ion-ios-arrow-right"></i></a></li>
-						</ol>
-					</div>
+					
 				</div>
 				<div className="row mt-20">
 					<div className="col-md-5">

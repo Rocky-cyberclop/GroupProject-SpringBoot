@@ -7,11 +7,11 @@ const Header = () => {
             const style1 = document.createElement('link');
             style1.id = 'main-style'
             style1.rel = 'stylesheet'
-            style1.href = '/assets/images/favicon.png';
+            style1.href = '/assets/plugins/themefisher-font/style.css';
             document.head.appendChild(style1);
             const style2 = document.createElement('link');
-            style2.rel = 'stylesheet'
-            style2.href = '/assets/plugins/themefisher-font/style.css';
+            style2.rel = 'shortcut icon'
+            style2.href = '/assets/images/favicon.ico';
             document.head.appendChild(style2);
             const style3 = document.createElement('link');
             style3.rel = 'stylesheet'
