@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+
+<!--
+ // WEBSITE: https://themefisher.com
+ // TWITTER: https://twitter.com/themefisher
+ // FACEBOOK: https://www.facebook.com/themefisher
+ // GITHUB: https://github.com/themefisher/
+-->
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en"
+	th:replace="~{layouts/main-layout :: mainLayout(~{::link.main-main}, ~{::section.main-main}, ~{::script.main-main})}">
+
+<head>
+	<link class="main-main" rel="stylesheet" th:href="@{/main/css/style.css}">
+	<link class="main-main" rel="stylesheet" th:href="@{/main/css/slick.css}">
+	<link class="main-main" rel="stylesheet" th:href="@{/main/css/slick-theme.css}">
+</head>
+
+<section class="main-main" th:remove="tag">
+	<section class="single-product">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6">
+					<ol class="breadcrumb">
+						<li><a th:href="@{/}">Home</a></li>
+						<li class="active">Single Product</li>
+					</ol>
+				</div>
+				
+			</div>
+			<div class="row mt-20">
+				<div class="col-md-5">
+					<div class="single-product-slider">
+						<div id='carousel-custom' class='carousel slide' data-ride='carousel'>
+							<div class='carousel-outer'>
+								<!-- me art lab slider -->
+								<div class='carousel-inner '>
+									<div class='item active' th:if="${!localPic}">
+										<img class="form-control admin-product-img-first"
+											th:src="'/uploads/images/'+*{product.images[0].url}" width="200"
+											height="200"
+											data-zoom-image="'/uploads/images/'+*{product.images[0].url}" />
+									</div>
+
+									<div class='item' th:if="${!localPic}">
+										<div th:each="product: ${product}">
+											<img class="form-control"
+												th:src="'/uploads/images/'+*{product.images[0].url}" width="200"
+												height="200"
+												data-zoom-image="'/uploads/images/'+*{product.images[0].url}" />
+										</div>
+									</div>
+
+
+									<div class="item active" th:if="${localPic}">
+										<img class="form-control admin-product-img-first"
+											th:src="*{product.images[0].url}" width="200" height="200"
+											data-zoom-image="*{product.images[0].url}" />
+									</div>
+
+
+
+								</div>
+
+								<!-- sag sol -->
+								<a class='left carousel-control' href='#carousel-custom' data-slide='prev'>
+									<i class="tf-ion-ios-arrow-left"></i>
+								</a>
+								<a class='right carousel-control' href='#carousel-custom' data-slide='next'>
+									<i class="tf-ion-ios-arrow-right"></i>
+								</a>
+							</div>
+
+							<!-- thumb -->
+							<ol class='carousel-indicators mCustomScrollbar meartlab' th:if="${localPic}">
+								<li data-target='#carousel-custom' data-slide-to='0' class='active'
+									th:each="image: ${product.images}">
+									<img class="form-control " th:src="${image.url}" width="200" />
+
+								</li>
+
+
+
+
+							</ol>
+							<ol class='carousel-indicators mCustomScrollbar meartlab' th:if="${!localPic}">
+								<li data-target='#carousel-custom' data-slide-to='0' class='active'
+									th:each="image: ${product.images}">
+									<img class="form-control " th:src="'/uploads/images/'+*{image.url}" width="200" />
+
+								</li>
+
+
+							</ol>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-7">
+					<div class="single-product-details" th:object="${product}">
+						<h3 th:text="${product.name}"></h3>
+						<br>
+						
+						<span>
+							<h4>Giá tiền:</h4>
+							<p th:text="${product.price}"></p>
+						</span>
+						
+						<span>
+							<h4>Loại sản phẩm:</h4>
+							<p th:text="${product.category.name}"></p>
+						</span>
+
+						<div class="row">
+							<div class="col-md-12 grid-margin stretch-card">
+								<div class="card">
+									<div class="card-body">
+										<form th:action="@{/main/productdetail/AddToCart/{id}(id=${product.id})}"
+											th:method="get" class="forms-sample">
+											<div class="product-size">
+												<span>Size:</span>
+												<select class="form-control btn btn-outline-primary dropdown-toggle"
+													name="size">
+													<!-- Thêm một lựa chọn mặc định (ví dụ: size đầu tiên) -->
+													<option class="dropdown-item" value="" selected disabled hidden>Chọn
+														size</option>
+
+													<!-- Duyệt qua danh sách các size -->
+													<option class="dropdown-item"
+														th:each="product_detail: ${product.product_details}"
+														th:value="${product_detail.size.id}"
+														th:text="${product_detail.size.name}"></option>
+												</select>
+											</div>
+											<br>
+											<div class="form-group">
+												<label>Nhập số lượng</label>
+												<input type="number" class="form-control" placeholder="Số lượng"
+													name="quantity">
+											</div>
+											<button type="submit" class="btn btn-gradient-primary me-2" style="font-size: large;">Thêm vào giỏ
+												hàng</button>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="tabCommon mt-20">
+							<ul class="nav nav-tabs">
+								<li class="active"><a data-toggle="tab" href="#details" aria-expanded="true">Details</a>
+								</li>
+							</ul>
+							<div class="tab-content patternbg">
+								<div id="details" class="tab-pane fade active in">
+									<h4>Mô tả sản phẩm</h4>
+									<p th:text="${product.description}"></p>
+
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+	</section>
+
+</section>
+
+<body>
+	<script class="main-main" th:src="@{/main/js/script.js}" }></script>
+	<script class="main-main" th:src="@{/main/plugins/slick/slick-animation.min.js}" }></script>
+	<script class="main-main" th:src="@{/main/plugins/slick/slick.min.js}" }></script>
+
+</body>
+
+</html>

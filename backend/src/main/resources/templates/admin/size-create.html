@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en"
+	th:replace="~{admin/layouts/admin-layout :: mainLayoutAdmin(~{::link.css-admin}, ~{::div.main-admin}, ~{::script.admin-js})}">
+
+<head>
+	<link class="css-admin" rel="stylesheet" th:href="@{/admin/css/style.css}">
+</head>
+
+<body>
+	<div class="container-scroller">
+
+		<div class="container-fluid page-body-wrapper">
+
+			<!-- partial -->
+			<div class="main-panel main-admin">
+				<div class="content-wrapper">
+					<div class="page-header">
+						<h3 class="page-title">Chi tiết nhân viên</h3>
+					</div>
+					<div class="row">
+						<div class="col-md-12 grid-margin stretch-card">
+							<div class="card">
+								<div class="card-body">
+									<form th:action="@{/admin/management/size/create}" th:method="post"
+										th:object="${size}" class="forms-sample">
+										<div class="form-group">
+											<label>Tên Size</label>
+											<input type="text" class="form-control" th:field="*{name}"
+												placeholder="Name">
+										</div>
+										<button type="submit" class="btn btn-gradient-primary me-2">Thêm size</button>
+
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- partial -->
+	</div>
+	<!-- main-panel ends -->
+	</div>
+	<!-- page-body-wrapper ends -->
+	</div>
+	<!-- container-scroller -->
+	<script class="admin-js" th:src="@{/admin/js/admin.js}"></script>
+</body>
+
+</html>

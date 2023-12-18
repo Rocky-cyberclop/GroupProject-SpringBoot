@@ -1,0 +1,7 @@
+.card{
+	overflow: auto;
+}
+
+td.prouduct_name, td.prouduct_description{
+	overflow: auto;
+}

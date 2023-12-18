@@ -45,7 +45,7 @@
 										class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn">SIGN
 										IN</button>
 								</div>
-								<span class="text-danger" th:if="${error}">Bạn đã nhập sai mã nhân viên hoặc mật khẩu</span>
+								<span class="text-danger" th:if="${param.error}">Bạn đã nhập sai mã nhân viên hoặc mật khẩu</span>
 							</form>
 						</div>
 					</div>
@@ -62,9 +62,9 @@
 	<!-- Plugin js for this page -->
 	<!-- End plugin js for this page -->
 	<!-- inject:js -->
-	<script src="@{/admin/js/off-canvas.js}"></script>
-	<script src="@{/admin/js/hoverable-collapse.js}"></script>
-	<script src="@{/admin/js/misc.js}"></script>
+	<script th:src="@{/admin/js/off-canvas.js}"></script>
+	<script th:src="@{/admin/js/hoverable-collapse.js}"></script>
+	<script th:src="@{/admin/js/misc.js}"></script>
 	<!-- endinject -->
 </body>
 

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+
+<!--
+ // WEBSITE: https://themefisher.com
+ // TWITTER: https://twitter.com/themefisher
+ // FACEBOOK: https://www.facebook.com/themefisher
+ // GITHUB: https://github.com/themefisher/
+-->
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en"
+	th:fragment="mainLayout(css, content, script)">
+
+
+
+
+
+
+<head>
+
+	<div th:replace="~{fragments/components/header :: meta}"></div>
+
+	<div th:replace="~{fragments/components/header :: css}"></div>
+
+	<div th:replace="~{fragments/components/header :: sundry-css}"></div>
+
+	<div th:replace="~{fragments/components/header :: style-css}"></div>
+
+
+</head>
+
+<body id="body">
+
+	<div th:replace="~{fragments/components/header :: header}"></div>
+	<div th:replace="~{fragments/components/header :: menu}"></div>
+
+
+	<section class="page-header">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="content">
+						<h1 class="page-name">Bảng điều khiển</h1>
+						<ol class="breadcrumb">
+							<li><a th:href="@{/}">Trang chủ</a></li>
+							<li class="active">Tài khoản của tôi</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+	<section class="user-dashboard page-wrapper">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<ul class="list-inline dashboard-menu text-center">
+						<li><a th:href="@{/account}">Bảng điều khiển</a></li>
+						<li><a class="active" th:href="@{/account/order}">Đơn đặt hàng</a></li>
+						<li><a th:href="@{/account/profileDetails}">Chi tiết hồ sơ</a></li>
+					</ul>
+
+					<div class="dashboard-wrapper user-dashboard">
+						<div class="table-responsive">
+							<table class="table">
+								<thead>
+									<tr>
+										<th>ID Đơn Hàng</th>
+										<th>Ngày</th>
+										<th>Các Mặt Hàng</th>
+										<th>Tổng Giá</th>
+										<th>Trạng Thái</th>
+										<th></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="customerOrder, viTri: ${customerOrders}">
+										<td><a th:text="'#' + ${customerOrder.id}"></a></td>
+										<td th:text="${customerOrder.date}"></td>
+										<td th:text="${sl[viTri.index]}"></td>
+										<td
+											th:text="${#numbers.formatDecimal(customerOrder.total, 0, 'COMMA', 0, 'POINT')+' VNĐ'}">
+										</td>
+										<td><span class="label"
+												th:class="${customerOrder.status=='Done'} ? ' label-success' : 'label-warning'"
+												th:text="${customerOrder.status}" style="color: aliceblue;"></span></td>
+										<td><a class="btn btn-default"
+												th:href="@{'/account/orderItemDetail/'+${customerOrder.id}}">Xem</a>
+										</td>
+
+									</tr>
+
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+
+
+
+
+	<div th:replace="~{fragments/components/footer :: footer}"></div>
+
+	<div th:replace="~{fragments/components/footer :: script}"></div>
+</body>
+
+</html>
